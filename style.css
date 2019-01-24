@@ -43,7 +43,9 @@ body{
     border-bottom-right-radius: 30px;
     border-radius : 100px;
 }
+
 #hero .profile img{
+    -webkit-transition: 0.4s ease;
     width: 400px;
     margin: 0px 0px 50 -100px;
     border-radius: 100px;
@@ -52,7 +54,7 @@ body{
     border-bottom-left-radius: 30px;*/
 }
 #hero .profile img:hover{
-    -webkit-animation: 1s;
+    -webkit-transition: 0.3s ease;
     width: 420px;
 }
 #work{
@@ -60,23 +62,23 @@ body{
     float: left;
     margin: 5vh 0 0 0;
 }
-#work .left{
+#work .left {
     width: 30%;
     float: left;
 }
-#work .right{
+#work .right {
     width: 30%;
     float: left;
     margin: 0 0 0 10%;
 }
-#work .border-red{
+#work .border-red {
     width: 20%;
     height: 10px;
     background: #d63031;
     display: block;
     margin: 0 0 10px 0;
 }
-#work .border-blue{
+#work .border-blue {
     width: 20%;
     height: 10px;
     background: #0984e3;

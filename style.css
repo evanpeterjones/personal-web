@@ -53,13 +53,13 @@ body{
 }
 #hero .profile:hover {
     -webkit-transition: 0.4s ease;
-    border-radius : 20px;
+    border-radius : 60px;
     width: 210px;
 }
 #hero .profile img:hover{
     -webkit-transition: 0.15s ease;
     width: 420px;
-    border-radius : 0px;
+    border-radius : 60px;
 }
 #work{
     width: 100%;

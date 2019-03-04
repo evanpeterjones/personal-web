@@ -19,10 +19,8 @@
     
     <!-- Style -->
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   </head>
-  <script type="text/javascript">
-    
-  </script>
   <style>
     .black-font, .black-font:hover, .black-font:active, .black-font:focus {
 	color: #000000;
@@ -34,17 +32,16 @@
     }
   </style>
   <body>
-
     <div id="hero">
       <div class="container">
 	<div class="profile"><a href="https://en.wikipedia.org/wiki/Special:Random"><img src="resources/drarm.JPG" alt="picture of Evan Jones"/></a></div>
-	<h1>Hello,<br />I'm Evan.</h1>
+	<h1>Hello,<br />I'm {{ name }}.</h1>
 	<p>Developer, Creator,</p>
 	<p>~ this is a Haiku ~</p>
       </div>
     </div>
-
-    <div id="work">
+    
+    <div id="work">      
       <div class="container">
 	<div class="left">
           <span class="border-red"></span>
@@ -69,11 +66,11 @@
     </div>
 
     <div>
-      <p></p>
+      <!-- put your vue github components here when you finish that -->
     </div>
 
     <footer>
       <p>© 2019 <b>Design by Evan Jones</b></p>
     </footer>
-
+    <script src="index.js"></script>
 </html>

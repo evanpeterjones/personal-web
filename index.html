@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Evan Jones</title>
+    <link rel="icon" href="https://cdn3.iconfinder.com/data/icons/weather-emojis/513/emoji-emoticon-weather-face-smiley-happy_15-512.png"/>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
@@ -30,14 +31,17 @@
 	text-align: center;
 	margin-bottom: 0;
     }
+    .animate {
+	transition : all .5s;
+    }
   </style>
   <body>
     <div id="hero">
       <div class="container">
 	<div class="profile"><a href="https://en.wikipedia.org/wiki/Special:Random"><img src="resources/drarm.JPG" alt="picture of Evan Jones"/></a></div>
-	<h1>Hello,<br />I'm {{ name }}.</h1>
-	<p>Developer, Creator,</p>
-	<p>~ this is a Haiku ~</p>
+	<div v-html="welcomeHaiku"
+	     @click="newHaiku">
+	</div>
       </div>
     </div>
     

@@ -36,45 +36,47 @@
     }
   </style>
   <body>
-    <div id="hero" @click="newHaiku">
-      <div class="container">
-	<div class="profile"><a v-bind:href="wikilink"><img src="resources/drarm.JPG" alt="picture of Evan Jones"/></a></div>
-	<div v-html="welcomeHaiku">
+    <div id="app">
+      <div id="hero" @click="newHaiku">
+	<div class="container">
+	  <div class="profile"><a v-bind:href="wikilink"><img src="resources/drarm.JPG" alt="picture of Evan Jones"/></a></div>
+	  <div v-html="welcomeHaiku">
+	  </div>
 	</div>
       </div>
-    </div>
-    
-    <div id="work">      
-      <div class="container">
-	<div class="left">
-          <span class="border-red"></span>
-          <h2>Work</h2>
-          <ul>
-            <li><span class="new">New</span><a href="https://internetizens.net" target="_blank">Internetizens</a></li>
-            <li><a href="https://relaxidaisical.blogspot.com" target="_blank">Relaxidaisical Blog</a></li>
-	    <li><a href="http://www.github.com/evanpeterjones" target="_blank">GitHub</a></li>
-          </ul>
-	</div>
-	<div class="right">
-	  <span class="border-blue"></span>
-	  <h2>Play</h2>
-	  <ul>
-            <li><a href="https://twitter.com/evanpeterjones" target="_blank">Twitter</a></li>
-            <li><a href="https://www.linkedin.com/in/evanpeterjones/" target="_blank">LinkedIn</a></li>
-            <li><a href="https://instagram.com/evanpeterjones" target="_blank">Instagram</a></li>
-	    <li><a class="bmc-btn black-font" href="https://www.buymeacoff.ee/0TLiqkfWG" style="height: 37px;">Buy Me a Coffee<img class="bmc-logo" alt="BMC logo" src="https://www.buymeacoffee.com/assets/img/BMC-btn-logo.svg" onerror="this.onerror=null;pagespeed.lazyLoadImages.loadIfVisibleAndMaybeBeacon(this);"><span id="rect" class="m-l-5"></span></a></li>
-	  </ul>
+      
+      <div id="work">      
+	<div class="container">
+	  <div class="left">
+            <span class="border-red"></span>
+            <h2>Work</h2>
+            <ul>
+              <li><span class="new">New</span><a href="https://internetizens.net" target="_blank">Internetizens</a></li>
+              <li><a href="https://relaxidaisical.blogspot.com" target="_blank">Relaxidaisical Blog</a></li>
+	      <li><a href="http://www.github.com/evanpeterjones" target="_blank">GitHub</a></li>
+            </ul>
+	  </div>
+	  <div class="right">
+	    <span class="border-blue"></span>
+	    <h2>Play</h2>
+	    <ul>
+              <li><a href="https://twitter.com/evanpeterjones" target="_blank">Twitter</a></li>
+              <li><a href="https://www.linkedin.com/in/evanpeterjones/" target="_blank">LinkedIn</a></li>
+              <li><a href="https://instagram.com/evanpeterjones" target="_blank">Instagram</a></li>
+	      <li><a class="bmc-btn black-font" href="https://www.buymeacoff.ee/0TLiqkfWG" style="height: 37px;">Buy Me a Coffee<img class="bmc-logo" alt="BMC logo" src="https://www.buymeacoffee.com/assets/img/BMC-btn-logo.svg" onerror="this.onerror=null;pagespeed.lazyLoadImages.loadIfVisibleAndMaybeBeacon(this);"><span id="rect" class="m-l-5"></span></a></li>
+	    </ul>
+	  </div>
 	</div>
       </div>
-    </div>
 
-    <div>
-      <!-- put your vue github components here when you finish that -->
-    </div>
+      <div>
+	<!-- put your vue github components here when you finish that -->
+      </div>
 
-    <footer>
-      <p>© 2019 <b>Design by Evan Jones</b></p>
-    </footer>
+      <footer>
+	<p>© {{ year }} <b>Design by Evan Jones</b></p>
+      </footer>
+    </div>
     <script>
       function callGithub() {
 	  return 'this will actually have a function at some point';
@@ -95,10 +97,11 @@
       };
 
       var app = new Vue({
-	  el : '#hero',
+	  el : '#app',
 	  data : {
 	      welcomeHaiku : haikus[0],
 	      wikilink : newRandomWiki(),
+	      year : (new Date()).getFullYear(),	      
 	      github : callGithub()
 	  },
 	  methods : {
@@ -108,6 +111,6 @@
 	      },	      
 	  }
       });
-      </script>
+    </script>    
   </body>
 </html>

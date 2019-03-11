@@ -36,11 +36,10 @@
     }
   </style>
   <body>
-    <div id="hero">
+    <div id="hero" @click="newHaiku">
       <div class="container">
 	<div class="profile"><a v-bind:href="wikilink"><img src="resources/drarm.JPG" alt="picture of Evan Jones"/></a></div>
-	<div v-html="welcomeHaiku"
-	     @click="newHaiku">
+	<div v-html="welcomeHaiku">
 	</div>
       </div>
     </div>

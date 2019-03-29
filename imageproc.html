@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <!-- stuff I have no idea what it's for -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,43 +17,44 @@
 
     <!-- Styles & Icons -->
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,600,700" rel="stylesheet">
-    
+
     <!-- Style -->
     <link rel="stylesheet" type="text/css" href="style2.css">
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>    
-  </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
 
-  <body>
+<body>
     <div id="app">
-      <input type="file" id="loadFile"/>
-      <button onclick="loadFile()">Encrypt Loaded Image</button>
-      <img :src="picture"/>
+        <input type="file" id="imgload" >
+        <img src="#" id="imgshow" align="left">
 
-      <footer>
-	<p>© {{ year }} <b>Design by Evan Jones</b></p>
-      </footer>
+        <footer>
+            <p>© {{ year }} <b>Design by Evan Jones</b></p>
+        </footer>
     </div>
-  </body>
-  
-  <script>
-    var app = new Vue({
+</body>
+
+<script>
+var app = new Vue({
     el : '#app',
     data : {
-    year : (new Date()).getFullYear(),
-    picture : "resources/drarm.JPG",
-    file : ""
+        year : (new Date()).getFullYear(),
+        picture : "resources/drarm.JPG",
+        file : ""
     }
-    });
+});
 
-    function loadFile(){
-        var fileToLoad = document.getElementById("loadFile").files[0];
-    
-        var fileReader = new FileReader();
-    
-        fileReader.onload = function(fileLoadedEvent){
-            var textFromFileLoaded = fileLoadedEvent.target.result;
-            app.picture= textFromFileLoaded;
-        };        
-    }
-  </script>
+$('document').ready(function () {
+    $("#imgload").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imgshow').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+});
+</script>
 </html>

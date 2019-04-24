@@ -82,6 +82,9 @@
       </footer>
     </div>
     <script>
+      if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+          window.alert("Sorry this looks wonky, the page isn't mobile optimized yet");
+      }
       function callGithub() {
 	  return 'this will actually have a function at some point';
       }

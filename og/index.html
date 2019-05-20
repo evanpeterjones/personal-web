@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- stuff I have no idea what it's for -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Evan Jones</title>
+    <link rel="icon" href="https://cdn3.iconfinder.com/data/icons/weather-emojis/513/emoji-emoticon-weather-face-smiley-happy_15-512.png"/>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <meta name="robots" content="all" />
+    <meta name="description" content="Evan Jones is a Software Developer, tech enthusiast, podcaster, and blogger" />
+    <link rel="canonical" href="https://evanpeterjones.com" />
+
+    <!-- Styles & Icons -->
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,600,700" rel="stylesheet">
+    
+    <!-- Style -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <style>
+    .black-font, .black-font:hover, .black-font:active, .black-font:focus {
+	color: #000000;
+    }
+    .custom-btn {
+	margin-top: 50px;
+	text-align: center;
+	margin-bottom: 0;
+    }
+    .animate {
+	transition : all .5s;
+    }
+  </style>
+  <body>
+    <div id="app">
+      <div id="hero" @click="newHaiku">
+	<div class="container">
+	  <div class="profile"><a v-bind:href="wikilink"><img src="drarm.JPG" alt="picture of Evan Jones"/></a>
+	    <br><br><br><br>
+	    <!--iframe src="https://anchor.fm/evan-jones8/embed" height="102px" width="400px" frameborder="0" scrolling="no"></iframe-->
+	  </div>
+	  <div v-html="welcomeHaiku">
+	  </div>
+	</div>
+      </div>
+      
+      <div id="work">      
+	<div class="container">
+	  <div class="left">
+            <span class="border-red"></span>
+            <h2>Work</h2>
+            <ul>
+              <li><span class="new">New</span><a href="https://internetizens.net" target="_blank">Internetizens</a></li>
+              <li><a href="https://relaxidaisical.blogspot.com" target="_blank">Relaxidaisical Blog</a></li>
+	      <li><a href="http://www.github.com/evanpeterjones" target="_blank">GitHub</a></li>
+            </ul>
+	  </div>
+	  <div class="right">
+	    <span class="border-blue"></span>
+	    <h2>Play</h2>
+	    <ul>
+              <li><a href="https://twitter.com/evanpeterjones" target="_blank">Twitter</a></li>
+              <li><a href="https://www.linkedin.com/in/evanpeterjones/" target="_blank">LinkedIn</a></li>
+              <li><a href="https://instagram.com/evanpeterjones" target="_blank">Instagram</a></li>
+	      <li><a class="bmc-btn black-font" href="https://www.buymeacoff.ee/0TLiqkfWG" style="height: 37px;">Buy Me a Coffee<img class="bmc-logo" alt="BMC logo" src="https://www.buymeacoffee.com/assets/img/BMC-btn-logo.svg" onerror="this.onerror=null;pagespeed.lazyLoadImages.loadIfVisibleAndMaybeBeacon(this);"><span id="rect" class="m-l-5"></span></a></li>
+	      <li><a href="imageproc.html" target="_blank">image-test</a></li>
+	    </ul> 	    
+	  </div>
+	</div>
+      </div>
+
+      <div>
+	<!-- put your vue github components here when you finish that -->
+      </div>
+
+
+    </div>
+    <script>
+      if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+          window.alert("Sorry this looks wonky, the page isn't mobile optimized yet");
+      }
+      function callGithub() {
+	  return 'this will actually have a function at some point';
+      }
+
+      var haikus = [
+	  "<h1>Hello,<br />I'm Evan.</h1><p>Developer, Creator,</p><p><i>~ this is a Haiku ~</i></p><br/></div>",
+	  "<p><b>I write, erase, rewrite,<p/><p>erase again, and then</p><p>a poppy blooms</p></b><p><br/><i>~ Hokushi ~</i></p>",
+	  "<p><b>What a strange thing!</p><p>to be alive</p><p>beneath cherry blossoms.</b></p><p><br/><i>~ Kobayashi Issa ~</i></p>",
+      ]
+      var savemeh = "<p><b>The wren</p><p>earns his living </p><p>Noiselessly.</b><br/><p><br /><i>~ Kobayashi Issa ~</p></i>"
+
+      var index = 0
+
+      function newRandomWiki() {
+	  //will add functionality later
+	  return 'https://en.wikipedia.org/wiki/Special:Random';
+      };
+
+      var app = new Vue({
+	  el : '#app',
+	  data : {
+                welcomeHaiku : haikus[0],
+                wikilink : newRandomWiki(),
+                year : (new Date()).getFullYear(),
+                github : callGithub()
+	  },
+	  methods : {
+	      newHaiku() {
+		  this.welcomeHaiku = haikus[index%(haikus.length)]
+		  index++;
+	      },	      
+	  }
+      });
+    </script>    
+  </body>
+</html>

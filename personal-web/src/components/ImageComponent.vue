@@ -22,16 +22,18 @@
 
 <style scope='local'>
 img {
-    -webkit-transition: 0.4s ease;
-    width : 400px;
-    float : right;
-    margin-right: 10px;    
-    border-radius : 100px;
+  -webkit-transition: 0.4s ease;
+  width : 400px;
+  margin-right: 10px;
+  border-radius : 100px;
+  padding: 20px;
+  background: pink;
+  margin: 0px 0 0 -35px;
 }
 
 img:hover {
-    -webkit-transition: 0.4s ease;
-    border-radius : 60px;
-    width: 410px;
+  -webkit-transition: 0.15s ease;
+  width: 420px;
+  border-radius : 60px;
 }
 </style>

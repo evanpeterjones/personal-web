@@ -1,25 +1,37 @@
 <template>
   <div id="app">
-    <div>
+    <div id="left-block">
       <ImageComponent />
+      <Haiku />
     </div>
-    <Footer />
+    <div>
+      <Footer />
+    </div>
   </div>
 </template>
 
 <script>
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+  window.alert("Sorry this looks wonky, the page isn't mobile optimized yet");
+}
+
+import Haiku from './components/Haiku.vue'
 import ImageComponent from './components/ImageComponent.vue'
 import Footer from './components/Footer.vue'
 
 export default {
   name: 'app',
   components: {
-    ImageComponent, Footer
+    Footer, Haiku, ImageComponent
   }
 }
 </script>
 
 <style>
+#left-block{
+  float : left;
+}
+
 #app{
     margin: 0;
     padding: 0;

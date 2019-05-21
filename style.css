@@ -1,9 +1,9 @@
 body{
-    margin: 0;
-    padding: 0;
-    font-size: 0.9em;
-    font-family: 'Work Sans', sans-serif;
-    background: #ffffff;
+  margin: 0;
+  padding: 0;
+  font-size: 0.9em;
+  font-family: 'Work Sans', sans-serif;
+  background: #ffffff;
 }
 .container{
     width: 65%;
@@ -28,17 +28,15 @@ body{
     overflow: hidden;
     animation: type 3s steps(60, end);
 }
-#hero p:nth-child(2n+0){
-    animation: type2 6s steps(60, end);
-}
+float: right;
 #hero .profile{
-    -webkit-transition: 0.4s ease;    
-    float: right;
-    padding: 20px;
-    background: pink;
-    width: 200px;
-    height: 200px;    
-    border-radius : 100px;
+  -webkit-transition: 0.4s ease;
+
+  padding: 20px;
+  background: pink;
+  width: 200px;
+  height: 200px;
+  border-radius : 100px;
 }
 
 #hero .profile img{
@@ -57,9 +55,9 @@ body{
     width: 210px;
 }
 #hero .profile img:hover{
-    -webkit-transition: 0.15s ease;
-    width: 420px;
-    border-radius : 60px;
+  -webkit-transition: 0.15s ease;
+  width: 420px;
+  border-radius : 60px;
 }
 #work{
     width: 100%;
@@ -110,9 +108,9 @@ body{
 }
 #work ul li:hover{
     -webkit-transition: 0.07s ease;
-    padding: 0 0 0 10px;    
+    padding: 0 0 0 10px;
     border-left: 5px solid grey;
-    opacity: .8;    
+    opacity: .8;
 }
 #work .new{
     background: #ffc0cb;
@@ -128,17 +126,17 @@ body{
     margin: 2px 5px 0 0;
 }
 footer{
-    width: 20%;
-    float: right;
-    bottom: 0;
-    right: 0;
-    margin: 5vh 14% 0 0;
+  width: 20%;
+  float: right;
+  bottom: 0;
+  right: 0;
+  margin: 5vh 14% 0 0;
 }
 footer p{
-    font-size: 0.9em;
-    color: #1c1c1c;
-    opacity: 0.4;
-    letter-spacing: -0.3px;
+  font-size: 0.9em;
+  color: #1c1c1c;
+  opacity: 0.4;
+  letter-spacing: -0.3px;
 }
 @media (max-width: 425px) {
     .container{

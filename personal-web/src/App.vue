@@ -28,19 +28,21 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,600,700&display=swap');
+
 #left-block{
   float : left;
+  margin-left: 100px;
 }
 
 #app{
-    margin: 0;
-    padding: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-size: 0.9em;
-    font-family: 'Work Sans', sans-serif;
-    background: #ffffff;
-    text-align: center;
-    margin-top: 60px;
+  margin: 15vh 0 0 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 0.9em;
+  font-family: 'Work Sans', sans-serif;
+  background: #ffffff;
+  text-align: left;
+  margin-top: 60px;
 }
 </style>

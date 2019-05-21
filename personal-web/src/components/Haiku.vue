@@ -27,6 +27,8 @@
   }
 </script>
 
-<style scope='local'>
-
+<style scoped>
+span {
+  font-size : 1.5em;
+}
 </style>

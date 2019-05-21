@@ -24,11 +24,10 @@
 img {
   -webkit-transition: 0.4s ease;
   width : 400px;
-  margin-right: 10px;
   border-radius : 100px;
   padding: 20px;
-  background: pink;
-  margin: 0px 0 0 -35px;
+  margin: 0px 0 30px 0px;
+  box-shadow: 8px 20px 38px rgba(45, 39, 49, .2),1px 3px 8px rgba(39,44,49,.1);
 }
 
 img:hover {

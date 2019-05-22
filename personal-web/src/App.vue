@@ -4,7 +4,10 @@
       <ImageComponent />
       <Haiku />
     </div>
-    <div>
+    <div id="right-block">
+      <LinkList />
+    </div>
+    <div id="footer">
       <Footer />
     </div>
   </div>
@@ -17,12 +20,13 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
 
 import Haiku from './components/Haiku.vue'
 import ImageComponent from './components/ImageComponent.vue'
+import LinkList from './components/LinkList.vue'
 import Footer from './components/Footer.vue'
 
 export default {
   name: 'app',
   components: {
-    Footer, Haiku, ImageComponent
+    Haiku, ImageComponent, LinkList, Footer
   }
 }
 </script>
@@ -32,7 +36,12 @@ export default {
 
 #left-block{
   float : left;
-  margin-left: 100px;
+  margin-left: 10%;
+}
+
+#right-block {
+  float : right;
+  margin-right: 20%;
 }
 
 #app{
@@ -44,5 +53,12 @@ export default {
   background: #ffffff;
   text-align: left;
   margin-top: 60px;
+}
+#footer {
+  width: 100%;
+  float: right;
+  bottom: 0;
+  text-align: right;
+  margin: 5vh 14% 0 0;
 }
 </style>

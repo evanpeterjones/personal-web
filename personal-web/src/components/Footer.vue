@@ -15,8 +15,8 @@
 
 <style scoped>
 footer {
-  width: 20%;
   float: right;
+  position:absolute;
   bottom: 0;
   right: 0;
   margin: 5vh 14% 0 0;

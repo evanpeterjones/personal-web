@@ -1,20 +1,33 @@
 <template>
 <div id="link">
-    <h1>Link List Template</h1>
+    <h1>{{ head }}</h1>
     <ul>
-        <li>Link</li>
-        <li>Link</li>
-        <li>Link</li>
+        <ul> 
+            <div v-for="link in links" v-bind:key="link.name" v-bind:value="link.url">
+                <ListItem :itemName="link.name" :url="link.url" />
+            </div>
+        </ul>
     </ul>
 </div>
 </template>
+
 <script>
-    export default {
-            name : 'LinkList',
-    }
+var ListItem = require('./components/ListItem.vue');
+
+export default {
+    name : 'LinkList',
+    components : {
+        'ListItem' : ListItem
+    },
+    props : ['links', 'head']
+}
 </script>
+
 <style scoped>
-    #link {
-        float : right;
-    }
+h1 {
+    color : var(--grey);
+}
+li {
+    color : var(--grey);
+}
 </style>

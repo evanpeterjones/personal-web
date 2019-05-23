@@ -27,7 +27,7 @@ img {
   border-radius : 100px;
   padding: 20px;
   margin: 0px 0 30px 0px;
-  box-shadow: 8px 20px 38px rgba(45, 39, 49, .2),1px 3px 8px rgba(39,44,49,.1);
+  box-shadow: 8px 20px 38px var(--shadow), 1px 3px 8px var(--penumbra); 
 }
 
 img:hover {

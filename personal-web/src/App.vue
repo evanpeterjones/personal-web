@@ -2,20 +2,23 @@
   <div id="app">
     <div id="left-block">
       <ImageComponent />
-      <Haiku />
+      <Haiku />    
+      <div v-if="mobile">
+        <LinkList v-bind:links="first" head="Play"/>
+        <LinkList v-bind:links="second" head="Work"/>
+      </div>      
     </div>
-    <div id="right-block">
-      <LinkList />
+    <div v-if="!mobile" id="side-panel">
+       <LinkList v-bind:links="first" head="Play"/>
+       <LinkList v-bind:links="second" head="Work"/>
     </div>
-    <div id="footer">
-      <Footer />
-    </div>
+    <Footer />    
   </div>
 </template>
 
 <script>
-if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
-  window.alert("Sorry this looks wonky, the page isn't mobile optimized yet");
+function isMobile () {
+  return ( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) );
 }
 
 import Haiku from './components/Haiku.vue'
@@ -26,7 +29,22 @@ import Footer from './components/Footer.vue'
 export default {
   name: 'app',
   components: {
-    Haiku, ImageComponent, LinkList, Footer
+    Haiku, ImageComponent, Footer, LinkList
+  },
+  data : function () {
+    return {
+      first : {
+    "Internetizens" : "https://internetizens.net",
+    "Relaxidaisical Blog" : "https://relaxidaisical.blogspot.com/",
+    "Github" : "http://github.com/evanpeterjones"
+      },       
+      second : {
+    "Twitter" : "https://twitter.com/evanpeterjones",
+    "LinkedIn" : "https://www.linkedin.com/in/evanpeterjones/",
+    "Instagram" : "https://www.instagram.com/evanpeterjones",
+      },      
+      mobile : isMobile()
+    }
   }
 }
 </script>
@@ -34,9 +52,15 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,600,700&display=swap');
 
+:root {
+  --grey : #3a3a3a;
+  --shadow :   rgba(45, 39, 49, .2);
+  --penumbra : rgba(39, 44, 49, .1);
+}
+
 #left-block{
-  float : left;
-  margin-left: 10%;
+  float : left;  
+  padding-left: 10%;
 }
 
 #right-block {
@@ -54,11 +78,7 @@ export default {
   text-align: left;
   margin-top: 60px;
 }
-#footer {
-  width: 100%;
+#side-panel {
   float: right;
-  bottom: 0;
-  text-align: right;
-  margin: 5vh 14% 0 0;
 }
 </style>

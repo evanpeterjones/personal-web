@@ -1,14 +1,14 @@
 <template>
 <div id="link">
-  <span class="border" :style="style">
+  <span class="border" :style="style"></span>
     <h1>{{ head }}</h1>
-  </span>
     <ul>
-      <ListItem
-      v-for="item in links"
-      :key="item"
-      :object="item"
-      />
+        <list-item 
+            v-for="item in links" 
+            :key="item.name" 
+            :itemName="item.name"
+            :url="item.url">
+        </list-item>
     </ul>
 </div>
 </template>
@@ -35,17 +35,18 @@ export default {
 </script>
 
 <style scoped>
+#link {
+    width: 30%;
+}
 h1 {
   font-size: 2.2em;
   letter-spacing: -0.5px;
-  color : var(--grey);
-  float : left;
-}
-li {
-  color : var(--grey);
+  color: var(--grey);
 }
 #link .border {
-  width: 100%;
+  height : 10px;
+  margin: 0 0 10px 0;
+  width: 20%;
   display: block;
 }
 </style>

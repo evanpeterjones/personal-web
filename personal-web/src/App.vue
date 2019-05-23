@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <div id="left-block">
-      <ImageComponent />
-      <Haiku />
-      <div v-if="mobile">
-        <LinkList v-bind:links="first" head="Play"/>
-        <LinkList v-bind:links="second" head="Work"/>
+      <div id="left-block">
+        <ImageComponent />
+        <Haiku />
+        <div v-if="mobile">
+          <LinkList v-bind:links="first" head="Work"/>
+          <LinkList v-bind:links="second" head="Play"/>
+        </div>
       </div>
-    </div>
-    <div v-if="!mobile" id="right-block">
-      <LinkList links="first" head="Play" color="pink"/>
-      <LinkList links="second" head="Work" color="blue"/>
-    </div>
+      <div v-if="!mobile" id="right-block">
+        <LinkList :links="first" head="Work" color="pink"/>
+        <LinkList :links="second" head="Play" color="#add8e6"/>
+      </div>
     <Footer />
   </div>
 </template>
@@ -25,13 +25,6 @@ import Haiku from './components/Haiku.vue'
 import ImageComponent from './components/ImageComponent.vue'
 import LinkList from './components/LinkList.vue'
 import Footer from './components/Footer.vue'
-var te = [
-  {name : "Internetizens",
-  url : "https://internetizens.net" },
-  { name : "Relaxidaisical Blog",
-    url : "https://relaxidaisical.blogspot.com/" },
-  { name : "Github", url : "http://github.com/evanpeterjones" }
-];
 
 export default {
   name: 'app',
@@ -40,12 +33,16 @@ export default {
   },
   data : function () {
     return {
-      first : te,
-      second : {
-        "Twitter" : "https://twitter.com/evanpeterjones",
-        "LinkedIn" : "https://www.linkedin.com/in/evanpeterjones/",
-        "Instagram" : "https://www.instagram.com/evanpeterjones",
-      },
+      first : [
+        { name : "Internetizens", url : "https://internetizens.net" },
+        { name : "Relaxidaisical Blog", url : "https://relaxidaisical.blogspot.com/" },
+        { name : "Github", url : "http://github.com/evanpeterjones" }
+      ],
+      second : [
+        { name : "Twitter", url : "https://twitter.com/evanpeterjones", },
+        { name : "LinkedIn", url : "https://www.linkedin.com/in/evanpeterjones/" },
+        { name : "Instagram", url : "https://www.instagram.com/evanpeterjones", }
+      ],
       mobile : isMobile()
     }
   }
@@ -69,8 +66,7 @@ export default {
 }
 
 #right-block {
-  float : right;
-  margin-right: 20%;
+  
 }
 
 #app{

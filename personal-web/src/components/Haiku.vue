@@ -28,20 +28,21 @@
 </script>
 
 <style scoped>
+#Haiku {
+  align-content: right;
+}
 >>> h1 {
-  text-align: center;
   text-shadow: 1px 1px 2px lavender;
   color: var(--grey);
   margin: 0 0 15px 0;
   font-size : 4em;
-  line-height: 60px;  
+  line-height: 60px;
 }
 >>> p {
-  text-align: center;
   color: var(--grey);
-  width:100%;  
+  width:100%;
   font-size: 1.8em;
-  margin: 2px 0 0 0;  
+  margin: 2px 0 0 0;
   line-height: 30px;
   white-space: nowrap;
   overflow: hidden;

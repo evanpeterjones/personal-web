@@ -28,10 +28,8 @@
 </script>
 
 <style scoped>
-#Haiku {
-  align-content: right;
-}
 >>> h1 {
+  text-align: left;
   text-shadow: 1px 1px 2px lavender;
   color: var(--grey);
   margin: 0 0 15px 0;
@@ -39,6 +37,7 @@
   line-height: 60px;
 }
 >>> p {
+  text-align: left;
   color: var(--grey);
   width:100%;
   font-size: 1.8em;

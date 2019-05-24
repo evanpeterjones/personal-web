@@ -24,7 +24,7 @@ li {
 li:hover {
   -webkit-transition: 0.07s ease;
   padding: 0 0 0 10px;
-  border-left: 5px solid grey;
+  border-left: 5px solid pink;
   opacity: .8;
 }
 a {

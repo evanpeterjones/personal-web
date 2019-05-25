@@ -7,7 +7,8 @@
             v-for="item in links" 
             :key="item.name" 
             :itemName="item.name"
-            :url="item.url">
+            :url="item.url"
+            :color="color">
         </list-item>
     </ul>
 </div>

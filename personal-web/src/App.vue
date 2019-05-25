@@ -9,11 +9,8 @@
         </div>
       </div>
       <div v-if="!mobile" id="right-block">
-        <multipane layout="horizontal">
-          <div><LinkList :links="first" head="Work" color="pink"/></div>
-        <multipane-resizer></multipane-resizer>
-          <div><LinkList :links="second" head="Play" color="#add8e6"/></div>
-        </multipane>
+        <LinkList :links="first" head="Work" color="pink"/>
+        <LinkList :links="second" head="Play" color="#add8e6"/>
       </div>
     <Footer />
   </div>
@@ -25,7 +22,6 @@ function isMobile () {
 }
 
 import Haiku from './components/Haiku.vue'
-import { Multipane, MultipaneResizer } from 'vue-multipane'
 import ImageComponent from './components/ImageComponent.vue'
 import LinkList from './components/LinkList.vue'
 import Footer from './components/Footer.vue'
@@ -33,8 +29,7 @@ import Footer from './components/Footer.vue'
 export default {
   name: 'app',
   components: {
-    Haiku, ImageComponent, LinkList, 
-    Footer, Multipane, MultipaneResizer
+    Haiku, ImageComponent, LinkList, Footer,
   },
   data : function () {
     return {
@@ -71,8 +66,9 @@ export default {
 }
 
 #right-block {
- float: right;
- padding-right: 10%;
+  float: right;
+  width: 30%;
+  padding-left: 5%;
 }
 
 #app{
@@ -84,7 +80,5 @@ export default {
   text-align: left;
   margin-top: 60px;
 }
-#right-block {
-  padding-right: 20%;
-}
+
 </style>

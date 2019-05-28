@@ -53,8 +53,8 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,600,700&display=swap');
 
 :root {
-  --primary : aquamarine;
-  --accent : pink;
+  --primary : pink;
+  --accent : white;
   --grey : #3a3a3a;
   --shadow :   rgba(45, 39, 49, .2);
   --penumbra : rgba(39, 44, 49, .1);
@@ -79,6 +79,9 @@ export default {
   font-family: 'Work Sans', sans-serif;
   text-align: left;
   margin-top: 60px;
+}
+body{
+  background-color: var(--accent);
 }
 
 </style>

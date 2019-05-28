@@ -25,6 +25,7 @@ img {
   -webkit-transition: 0.4s ease;
   width : 400px;
   border-radius : 100px;
+  border: 10px var(--accent) solid;
   padding: 20px;
   margin: 0px 0 30px 0px;
   box-shadow: 8px 20px 38px var(--shadow), 1px 3px 8px var(--penumbra); 

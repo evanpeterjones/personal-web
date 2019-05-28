@@ -1,5 +1,5 @@
 <template>
-<footer><p>© {{ year }} <b>Designed by Evan Jones</b> w/Vue</p></footer>
+<footer><p>© {{ year }} <b>Design by Evan Jones</b> made w/Vue</p></footer>
 </template>
 
 <script>

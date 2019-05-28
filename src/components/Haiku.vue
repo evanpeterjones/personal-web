@@ -1,5 +1,5 @@
 <template>
-<a v-on:click="newHaiku"><span v-html="current"></span></a>
+<a v-on:click="newHaiku"><span v-html="this.$store.state.haiku"></span></a>
 </template>
 
 <script>
@@ -20,7 +20,7 @@
     },
     methods : {
       newHaiku() {
-        this.current = haikus[ count % haikus.length ];
+        this.$store.commit('update', haikus[ count % haikus.length ]);
         count++;
       }
     }

@@ -1,30 +1,32 @@
 <template>
   <div id="app">
-      <div id="left-block">
-        <ImageComponent />
-        <Haiku />
-        <div v-if="mobile">
-          <LinkList v-bind:links="first" head="Work"/>
-          <LinkList v-bind:links="second" head="Play"/>
-        </div>
-      </div>
-      <div v-if="!mobile" id="right-block">
+    <div id="left-block">
+      <ImageComponent />
+      <Haiku />
+      <div v-if="mobile">
         <LinkList :links="first" head="Work" color="pink"/>
         <LinkList :links="second" head="Play" color="#add8e6"/>
       </div>
+    </div>
+    <div v-if="!mobile" id="right-block">
+      <LinkList :links="first" head="Work" color="pink"/>
+      <LinkList :links="second" head="Play" color="#add8e6"/>
+    </div>
     <Footer />
   </div>
 </template>
 
 <script>
 function isMobile () {
-  return ( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) );
+  return (window.innerWidth < 900) || 
+    (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent));
 }
 
 import Haiku from './components/Haiku.vue'
 import ImageComponent from './components/ImageComponent.vue'
 import LinkList from './components/LinkList.vue'
 import Footer from './components/Footer.vue'
+// import '@zeit-ui/style'
 
 export default {
   name: 'app',
@@ -45,6 +47,13 @@ export default {
       ],
       mobile : isMobile()
     }
+  },
+  mounted () {
+    this.$nextTick( () => {
+      window.addEventListener('resize', () => {
+        this.$store.state.mobile = (window.innerWidth < 900)
+      });
+    })
   }
 }
 </script>

@@ -1,5 +1,12 @@
 <template>
-<footer><p>© {{ year }} <b>Design by Evan Jones</b> made w/Vue</p></footer>
+<div>
+  <div v-if="this.$store.state.mobile">
+    <footer style="text-align:center;"><p>© {{ year }} <b>Design by Evan Jones</b> made w/Vue</p></footer>
+  </div>
+  <div v-else>
+    <footer class="footer-style"><p>© {{ year }} <b>Design by Evan Jones</b> made w/Vue</p></footer>
+  </div>
+</div>
 </template>
 
 <script>
@@ -14,7 +21,7 @@
 </script>
 
 <style scoped>
-footer {
+.footer-style {
   float: right;
   position:absolute;
   bottom: 0;

@@ -1,6 +1,11 @@
 <template>
 <a v-bind:href="wikilink">
-    <img alt="image of Evan Jones" src="../assets/evan.jpg">
+    <div v-if="this.$store.state.mobile">
+        <img alt="image of Evan Jones" src="../assets/evan.jpg" class="mobileimg">
+    </div>
+    <div v-else>
+        <img alt="image of Evan Jones" src="../assets/evan.jpg" class="desktop">
+    </div>
 </a>
 </template>
 
@@ -21,19 +26,26 @@
 </script>
 
 <style scope='local'>
-img {
+.desktop {
   -webkit-transition: 0.4s ease;
-  width : 400px;
+  width : 80%;
   border-radius : 100px;
-  border: 10px var(--accent) solid;
-  padding: 20px;
   margin: 0px 0 30px 0px;
-  box-shadow: 8px 20px 38px var(--shadow), 1px 3px 8px var(--penumbra); 
+  box-shadow: 8px 20px 38px var(--shadow), 1px 3px 8px var(--penumbra);
 }
 
-img:hover {
+.desktop:hover {
   -webkit-transition: 0.15s ease;
-  width: 420px;
-  border-radius : 60px;
+  width: 82%;
+  border-radius : 80px;
+}
+
+.mobileimg {
+    -webkit-transition: 0.4s ease;
+    box-shadow: 8px 20px 38px var(--shadow), 1px 3px 8px var(--penumbra);
+    margin: 0px 0 30px 0px;
+    border-radius: 10px;
+    border: 0px var(--accent) solid;
+    width: 90%;
 }
 </style>

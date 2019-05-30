@@ -3,12 +3,12 @@
     <div id="left-block">
       <ImageComponent />
       <Haiku />
-      <div v-if="mobile">
+      <div v-if="this.$store.state.mobile">
         <LinkList :links="first" head="Work" color="pink"/>
         <LinkList :links="second" head="Play" color="#add8e6"/>
       </div>
     </div>
-    <div v-if="!mobile" id="right-block">
+    <div v-if="!this.$store.state.mobile" id="right-block">
       <LinkList :links="first" head="Work" color="pink"/>
       <LinkList :links="second" head="Play" color="#add8e6"/>
     </div>
@@ -17,11 +17,6 @@
 </template>
 
 <script>
-function isMobile () {
-  return (window.innerWidth < 900) || 
-    (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent));
-}
-
 import Haiku from './components/Haiku.vue'
 import ImageComponent from './components/ImageComponent.vue'
 import LinkList from './components/LinkList.vue'
@@ -44,16 +39,12 @@ export default {
         { name : "Twitter", url : "https://twitter.com/evanpeterjones", },
         { name : "LinkedIn", url : "https://www.linkedin.com/in/evanpeterjones/" },
         { name : "Instagram", url : "https://www.instagram.com/evanpeterjones", }
-      ],
-      mobile : isMobile()
+      ]
     }
   },
-  mounted () {
-    this.$nextTick( () => {
-      window.addEventListener('resize', () => {
-        this.$store.state.mobile = (window.innerWidth < 900)
-      });
-    })
+  beforeMount () {
+    this.$store.state.mobile = (window.innerWidth < 900) || 
+      (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent));
   }
 }
 </script>

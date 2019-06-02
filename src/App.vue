@@ -68,7 +68,6 @@ export default {
 #right-block {
   float: right;
   width: 30%;
-  padding-left: 5%;
 }
 
 #app{

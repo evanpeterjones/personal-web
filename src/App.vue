@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <div id="left-block">
-      <ImageComponent />
-      <Haiku />
+    <div id="left-block" >
+    <ImageComponent />
+    <Haiku />
       <div v-if="this.$store.state.mobile">
         <LinkList :links="first" head="Work" color="pink"/>
         <LinkList :links="second" head="Play" color="#add8e6"/>
@@ -17,10 +17,10 @@
 </template>
 
 <script>
-import Haiku from './components/Haiku.vue'
-import ImageComponent from './components/ImageComponent.vue'
-import LinkList from './components/LinkList.vue'
-import Footer from './components/Footer.vue'
+const Haiku = () => import('./components/Haiku.vue');
+const ImageComponent = () => import('./components/ImageComponent.vue');
+const LinkList = () => import('./components/LinkList.vue');
+const Footer = () => import('./components/Footer.vue');
 // import '@zeit-ui/style'
 
 export default {
@@ -67,7 +67,7 @@ export default {
 
 #right-block {
   float: right;
-  width: 30%;
+  width: 30%; 
 }
 
 #app{

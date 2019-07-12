@@ -1,10 +1,10 @@
 <template>
 <a v-bind:href="wikilink">
     <div v-if="this.$store.state.mobile">
-        <img alt="image of Evan Jones" src="../assets/evan.jpg" class="mobileimg">
+        <img alt="image of Evan Jones" src="../assets/evan.png" class="mobileimg">
     </div>
     <div v-else>
-        <img alt="image of Evan Jones" src="../assets/evan.jpg" class="desktop">
+        <img alt="image of Evan Jones" src="../assets/evan.png" class="desktop">
     </div>
 </a>
 </template>

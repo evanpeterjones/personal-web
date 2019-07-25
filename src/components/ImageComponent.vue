@@ -28,7 +28,7 @@
 <style scope='local'>
 .desktop {
   -webkit-transition: 0.3s ease;
-  width : 80%;
+  height : 30em;
   border-radius : 100px;
   margin: 0px 0 30px 0px;
   box-shadow: 8px 20px 38px var(--shadow), 1px 3px 8px var(--penumbra);
@@ -36,7 +36,7 @@
 
 .desktop:hover {
   -webkit-transition: 0.2s ease;
-  width: 82%;
+  height: 31em;
   border-radius : 80px;
 }
 

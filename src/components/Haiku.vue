@@ -1,5 +1,5 @@
 <template>
-<a v-on:click="newHaiku"><span v-html="this.$store.state.haiku"></span></a>
+  <a v-on:click="newHaiku"><span v-html="this.$store.state.haiku"></span><br></a>
 </template>
 
 <script>

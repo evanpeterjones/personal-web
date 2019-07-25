@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    <div id="left-block" >
-    <ImageComponent />
-    <Haiku />
-      <div v-if="this.$store.state.mobile">
-        <LinkList :links="first" head="Work" color="pink"/>
-        <LinkList :links="second" head="Play" color="#add8e6"/>
-      </div>
+    <div id="left-block" v-if="this.$store.state.mobile">
+      <Haiku />
+      <ImageComponent />
     </div>
-    <div v-if="!this.$store.state.mobile" id="right-block">
+    <div id="left-block" v-else>
+      <ImageComponent />
+      <Haiku />
+    </div>
+    <div id="right-block" v-if="!this.$store.state.mobile">
       <LinkList :links="first" head="Work" color="pink"/>
       <LinkList :links="second" head="Play" color="#add8e6"/>
     </div>

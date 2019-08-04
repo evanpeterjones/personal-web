@@ -11,6 +11,7 @@
     <div id="right-block" v-if="!this.$store.state.mobile">
       <LinkList :links="first" head="Work" color="pink"/>
       <LinkList :links="second" head="Play" color="#add8e6"/>
+      <Dialog />
     </div>
     <Footer />
   </div>
@@ -21,12 +22,14 @@ const Haiku = () => import('./components/Haiku.vue');
 const ImageComponent = () => import('./components/ImageComponent.vue');
 const LinkList = () => import('./components/LinkList.vue');
 const Footer = () => import('./components/Footer.vue');
+//const Overlay = () => import('./components/Overlay.vue');
+const Dialog = () => import('./components/Dialog.vue');
 // import '@zeit-ui/style'
 
 export default {
   name: 'app',
   components: {
-    Haiku, ImageComponent, LinkList, Footer,
+    Haiku, ImageComponent, LinkList, Footer, Dialog
   },
   data : function () {
     return {

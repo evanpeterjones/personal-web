@@ -46,8 +46,17 @@ export default {
     }
   },
   beforeMount () {
-    this.$store.state.mobile = (window.innerWidth < 900) || 
+    this.$store.state.mobile = (window.innerWidth < 900) ||
       (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent));
+  },
+  mounted () {
+    this.$nextTick( () => {
+      var req = new XMLHttpRequest()
+      console.log(req.open('GET', 'localhost:5001/api', false).send()
+                  .then({
+
+                  }))
+    })
   }
 }
 </script>
@@ -70,7 +79,7 @@ export default {
 
 #right-block {
   float: right;
-  width: 30%; 
+  width: 30%;
 }
 
 #app{

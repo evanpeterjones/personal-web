@@ -7,6 +7,7 @@
   "<h1>Hello,<br />I'm Evan.</h1><p>Developer, Creator,</p><p><i>~ this is a Haiku ~</i></p><br/></div>",
   "<p id='test'><b>I write, erase, rewrite,<p/><p>erase again, and then</p><p>a poppy blooms</p></b><p><br/><i>~ Hokushi ~</i></p>",
   "<p><b>What a strange thing!</p><p>to be alive</p><p>beneath cherry blossoms.</b></p><p><br/><i>~ Kobayashi Issa ~</i></p>",
+//  "<p><b>Sleep lingers <br/>all our lifetime <br/>about our eyes,<br/>as night hovers all day <br/>in the boughs of the fir tree</b><br/><br/> <i>~ Ralph Waldo Emerson ~</p>"
   ];
 
   var count = 0;

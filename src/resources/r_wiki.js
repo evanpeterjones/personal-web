@@ -1,0 +1,3 @@
+query_wiki = function() {
+
+};

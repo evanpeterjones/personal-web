@@ -2,15 +2,13 @@
 <div id="link">
   <span class="border" :style="style"></span>
     <h1>{{ head }}</h1>
-    <ul>
-        <list-item 
-            v-for="item in links" 
-            :key="item.name" 
-            :itemName="item.name"
-            :url="item.url"
-            :color="color">
-        </list-item>
-    </ul>
+      <list-item
+          v-for="item in links"
+          :key="item.name"
+          :itemName="item.name"
+          :url="item.url"
+          :color="color">
+      </list-item>
 </div>
 </template>
 

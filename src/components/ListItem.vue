@@ -1,6 +1,6 @@
 <template>
 <div>
-  <li><a v-bind:href="url">{{ itemName }}</a></li>
+  <p><a v-bind:href="url">{{ itemName }}</a></p>
 </div>
 </template>
 
@@ -16,13 +16,13 @@ export default {
 </script>
 
 <style>
-li {
+p {
   -webkit-transition: 0.3s ease;
   list-style-type: none;
   margin: 15px 0;
   font-size: 1.3em;
 }
-li:hover {
+p:hover {
   -webkit-transition: 0.07s ease;
   padding: 0 0 0 10px;
   border-left: 5px solid green;

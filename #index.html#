@@ -34,7 +34,8 @@
       <div class="container">
         <div class="profile">
 	  <a href="https://en.wikipedia.org/wiki/Special:Random">
-	    <img src="evan.png" alt="picture of Evan Jones"/></a></div>
+	    <img src="evan.png" alt="picture of Evan Jones"/>
+	</a></div>
         <h1>Hello,<br />I'm Evan.</h1>
         <p>Developer, Creator,</p>
         <p>~ this is a Haiku ~</p>

@@ -64,7 +64,6 @@ body{
     border-radius: 100px;
     margin: 0px 0px 50 -100px;
     border: 5px solid #FFF;
-    
 }
 #hero .profile:hover {
     -webkit-transition: 0.4s ease;
@@ -89,14 +88,14 @@ body{
     margin: 0 0 0 10%;
 }
 #work .border-red {
-    width: 20%;
+    width: 80px;
     height: 10px;
     background: var(--primary);
     display: block;
     margin: 0 0 10px 0;
 }
 #work .border-blue {
-    width: 20%;
+    width: 65px;
     height: 10px;
     background: var(--secondary);
     display: block;
@@ -154,4 +153,73 @@ footer p{
     color: var(--grey);
     opacity: 0.4;
     letter-spacing: -0.3px;
+}
+
+.header a {
+    color: inherit;
+    align-content: center;
+}
+
+.header {
+    padding: 40px;
+}
+
+@media screen and (max-width: 950px) {
+    #work .left {
+	float: none;
+    }
+    #work .right {
+	float: none;
+	margin: 0 0 0 0%;
+    }
+    #hero p {
+	width:60%;
+	font-size: 1.5em;
+	margin: 2px 0 0 0;
+	line-height: 30px;
+	white-space: nowrap;
+	overflow: visible;
+	float: right;
+    }
+    #hero h1 {
+	font-size: 3.5em;
+	line-height: 60px;
+	white-space: nowrap;
+	overflow: visible;
+	float: right;
+    }
+    #hero .profile {
+	float: none;
+    }
+
+    .haiku {
+	-webkit-transition: 0.15s ease;
+	border-radius : 100px;
+    }
+    
+    .haiku:hover{
+	-webkit-transition: 0.15s ease;
+	border-radius : 60px;
+    }
+
+    .haiku {
+	-webkit-transition: 0.4s ease;
+	float: right;
+	padding: 20px;
+	background: var(--secondary);
+	border-radius : 80px;
+    }
+
+    #hero .profile img{
+	-webkit-transition: 0.4s ease;
+	height: 30em;
+	border-radius: 100px;
+	border: 5px solid #FFF;
+    }
+    footer{
+	position: relative;
+	bottom: 0;
+	width: 70%;
+	margin: 5vh 14% 0 0;
+    }
 }

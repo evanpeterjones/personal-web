@@ -26,44 +26,50 @@
 ;; -------------------------
 ;; Page components
 
-(defn haiku [[first second last]]
-  [:div [:h1 first][:p second][:p last]])
-
-(defn home-page []
+(def haiku
   (fn []
-    [:div#hero
-     [:div.profile
-      [:a {:href "https://en.wikipedia.org/wiki/Special:Random"}
-       [:img {:src "evan.png"
-              :alt "Picture of Evan Jones"}]]
+    [:div.haiku
       [:h1 "Hello, " [:br] "I'm Evan."]
       [:p "Developer, Creator,"]
-      [:p "~ this is a haiku"]]]))
+      [:p "~ this is a haiku ~"]]))
 
-
-
-(defn items-page []
+(def image
   (fn []
-    [:span.main
-     [:h1 "The items of cljs-personal-web"]
-     [:ul (map (fn [item-id]
-                 [:li {:name (str "item-" item-id) :key (str "item-" item-id)}
-                  [:a {:href (path-for :item {:item-id item-id})} "Item: " item-id]])
-               (range 1 60))]]))
+    [:div#hero
+     [:div.container
+      [:div.profile
+       [:a {:href "https://en.wikipedia.org/wiki/Special:Random"}
+        [:img {:src "evan.png"
+               :alt "Picture of Evan Jones"}]]]
+      [haiku]]]))
 
+(def links
+  (fn [title id class ul-links]
+    [(keyword (str "div." id))
+     [(keyword (str "span." class))]
+     [:h2 title]
+     [:ul
+      (for [li-link ul-links]
+        [:li [:a (into {:target "_blank"} li-link) (:name li-link)]])]]))
 
-(defn item-page []
+(def work-links [{:href "http://www.github.com/evanpeterjones" :name "GitHub"}
+                 {:href "https://internetizens.net" :name "Internetizens"}])
+(def play-links [{:href "https://twitter.com/evanpeterjones" :name "Twitter"}
+                 {:href "https://linkedin.com/in/evanpeterjones" :name "LinkedIn"}
+                 {:href "https://instagram.com/evanpeterjones" :name "Instagram"}])
+
+(def home-page
   (fn []
-    (let [routing-data (session/get :route)
-          item (get-in routing-data [:route-params :item-id])]
-      [:span.main
-       [:h1 (str "Item " item " of cljs-personal-web")]
-       [:p [:a {:href (path-for :items)} "Back to the list of items"]]])))
-
+    [:div
+     [image]
+     [:div#work
+      [:div.container
+       [links "Work" "left" "border-red" work-links]
+       [links "Play" "right" "border-blue" play-links]]]]))
 
 (defn about-page []
   (fn [] [:span.main
-          [:h1 "About cljs-personal-web"]]))
+          [:h1 "About Me"]]))
 
 
 ;; -------------------------
@@ -72,9 +78,7 @@
 (defn page-for [route]
   (case route
     :index #'home-page
-    :about #'about-page
-    :items #'items-page
-    :item #'item-page))
+    :about #'about-page))
 
 
 ;; -------------------------
@@ -84,13 +88,11 @@
   (fn []
     (let [page (:current-page (session/get :route))]
       [:div
-       [:header
-        [:p [:a {:href (path-for :index)} "Home"] " | " [:a {:href (path-for :about)} "About cljs-personal-web"]]]
-       
+       [:header.header
+        [:p [:a {:href (path-for :index)} "Home"] " | " [:a {:href (path-for :about)} "About Me"]]]
        [page]
-       
        [:footer
-        [:p (str "© " (.getFullYear (new js/Date)) " Design by Evan Jones")]]])))
+        [:p (str "© " (.getFullYear (new js/Date)) " by Evan Jones w/ClojureScript")]]])))
 
 ;; -------------------------
 ;; Initialize app

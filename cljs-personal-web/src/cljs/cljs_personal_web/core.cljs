@@ -28,10 +28,15 @@
 
 (def haiku
   (fn []
-    [:div.haiku
-      [:h1 "Hello, " [:br] "I'm Evan."]
-      [:p "Developer, Creator,"]
-      [:p "~ this is a haiku ~"]]))
+    [:div#hero
+      [:div.haiku-profile
+        [:div.haiku
+          [:h1 "Hello, " [:br] "I'm Evan."]
+          [:p "Designer of this site"];[:a {:href (path-for :about) :style {:color "inherit"}} ]]
+          [:p "…and other things"];[:a {:href (path-for :about) :style {:color "inherit"}} ]]
+          ;[:p "of things like "[:a {:href (path-for :about) :target "_blank" :style {:color "inherit"}} [:b "~this~"]]
+
+          ]]]))
 
 (def image
   (fn []
@@ -40,7 +45,7 @@
       [:div.profile
        [:a {:href "https://en.wikipedia.org/wiki/Special:Random"}
         [:img {:src "evan.png"
-               :alt "Picture of Evan Jones"}]]]
+               :alt "Photo taken by Shandon Anderson"}]]]
       [haiku]]]))
 
 (def links
@@ -52,10 +57,10 @@
       (for [li-link ul-links]
         [:li [:a (into {:target "_blank"} li-link) (:name li-link)]])]]))
 
-(def work-links [{:href "http://www.github.com/evanpeterjones" :name "GitHub"}
-                 {:href "https://internetizens.net" :name "Internetizens"}])
+(def work-links [{:href "https://linkedin.com/in/evanpeterjones" :name "LinkedIn"}
+                 {:href "http://www.github.com/evanpeterjones" :name "GitHub"}
+                 {:href "https://internetizens.net" :name "Yapp"}])
 (def play-links [{:href "https://twitter.com/evanpeterjones" :name "Twitter"}
-                 {:href "https://linkedin.com/in/evanpeterjones" :name "LinkedIn"}
                  {:href "https://instagram.com/evanpeterjones" :name "Instagram"}])
 
 (def home-page
@@ -87,12 +92,14 @@
 (defn current-page []
   (fn []
     (let [page (:current-page (session/get :route))]
-      [:div
+      [:div {:style {:max-width "1000" :padding-top "5%"}}      
+    (comment        
        [:header.header
-        [:p [:a {:href (path-for :index)} "Home"] " | " [:a {:href (path-for :about)} "About Me"]]]
+        [:p [:a {:href (path-for :index)} "Home"] " | " [:a {:href (path-for :about)} "About Me"]]])
        [page]
        [:footer
-        [:p (str "© " (.getFullYear (new js/Date)) " by Evan Jones w/ClojureScript")]]])))
+        [:p (str "© " (.getFullYear (new js/Date))) 
+          [:b " by Evan Jones w/ClojureScript"]]]])))
 
 ;; -------------------------
 ;; Initialize app

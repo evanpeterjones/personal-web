@@ -6,16 +6,15 @@
    [config.core :refer [env]]))
 
 (def mount-target
-  [:div#app
-   [:h2 "Welcome to cljs-personal-web"]
-   [:p "please wait while Figwheel is waking up ..."]
-   [:p "(Check the js console for hints if nothing exciting happens.)"]])
+  [:div#app])
 
 (defn head []
   [:head
+  [:title "Evan Jones"]
    [:meta {:charset "utf-8"}]
    [:meta {:name "viewport"
            :content "width=device-width, initial-scale=1"}]
+  [:link {:rel "icon" :href "favicon.png"}]
    (include-css (if (env :dev) "/css/site.css" "/css/site.min.css"))])
 
 (defn loading-page []

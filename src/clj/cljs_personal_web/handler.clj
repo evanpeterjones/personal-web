@@ -15,7 +15,8 @@
    [:meta {:name "viewport"
            :content "width=device-width, initial-scale=1"}]
   [:link {:rel "icon" :href "favicon.png"}]
-  [:link {:href "https://fonts.googleapis.com/css?family=Work+Sans:300,400,600,700" :rel "stylesheet"}]
+   ;[:link {:rel "stylesheet" :href "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"}]
+   [:link {:href "https://fonts.googleapis.com/css?family=Work+Sans:300,400,600,700" :rel "stylesheet"}]
    (include-css (if (env :dev) "/css/site.css" "/css/site.min.css"))])
 
 (defn loading-page []

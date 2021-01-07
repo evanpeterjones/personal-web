@@ -14,6 +14,7 @@
                  [yogthos/config "1.1.7"]
                  [org.clojure/clojurescript "1.10.773"
                   :scope "provided"]
+                 ;[ol "6.5.0"]
                  [metosin/reitit "0.5.1"]
                  [metosin/jsonista "0.2.6"]
                  [pez/clerk "1.0.0"]
@@ -37,7 +38,7 @@
    [:cljsbuild :builds :app :compiler :output-to]]
 
   :source-paths ["src/clj" "src/cljc" "src/cljs"]
-  :resource-paths ["resources" "target/cljsbuild"]
+  :resource-paths ["resources" "target/cljsbuild" "src/cljs/libs"]
 
   :minify-assets
   [[:css {:source "resources/public/css/site.css"
@@ -62,28 +63,23 @@
               :output-to "target/cljsbuild/public/js/app.js"
               :output-dir "target/cljsbuild/public/js/out"
               :source-map true
+              :foreign-libs [{:file "src/cljs/libs/ol.js"
+                               :provides ["ol"]}]
               :optimizations :none
-              :pretty-print  true}}
-
-
-
-            }
-   }
+              :pretty-print  true}}}}
 
   :figwheel
   {:http-server-root "public"
    :server-port 3449
    :nrepl-port 7002
-   :nrepl-middleware [cider.piggieback/wrap-cljs-repl
-                      ]
+   :nrepl-middleware [cider.piggieback/wrap-cljs-repl]
    :css-dirs ["resources/public/css"]
    :ring-handler cljs-personal-web.handler/app}
-
-
 
   :profiles {:dev {:repl-options {:init-ns cljs-personal-web.repl}
                    :dependencies [[cider/piggieback "0.5.1"]
                                   [binaryage/devtools "1.0.2"]
+                                  [reagent-forms "0.5.44"]
                                   [ring/ring-mock "0.4.0"]
                                   [ring/ring-devel "1.8.1"]
                                   [prone "2020-01-17"]

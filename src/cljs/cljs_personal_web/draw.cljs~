@@ -1,0 +1,17 @@
+(ns cljs-personal-web.draw)
+
+(def draw-circle
+  (fn []
+    (let [canvas (.getElementById js/document "myCanvas")
+          context (.getContext canvas "2d")
+          centerX (/ context.width 2)
+          centerY (/ context.height 2)
+          radius 70]      
+      (js/console.log (str "test: " radius))
+      (.beginPath context)
+      (.arc context centerX centerY radius 0 (* 2 js/Math.PI) false)
+      (set! (. context -fillStyle) "green")      
+      (.fill context)
+      (set! (. context -lineWidth) 5)
+      (set! (. context -strokeStyle) "#003300")
+      (.stroke context))))

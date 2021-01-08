@@ -19,7 +19,7 @@
     ["/items"
      ["" :items]
      ["/:item-id" :item]]
-    ["/about" :about]]))
+    ["/login" :login]]))
 
 (defn path-for [route & [params]]
   (if params
@@ -32,14 +32,11 @@
 (def haiku
   (fn []
     [:div#hero
-      [:div.haiku-profile
-        [:div.haiku
-          [:h1 "Hello, " [:br] "I'm Evan."]
-          [:p "Designer of this site"];[:a {:href (path-for :about) :style {:color "inherit"}} ]]
-          [:p [:a {:href (path-for :about) :style {:color "inherit"}} "…and fun things"]]
-          ;[:p "of things like "[:a {:href (path-for :about) :target "_blank" :style {:color "inherit"}} [:b "~this~"]]
-
-          ]]]))
+     [:div.haiku-profile
+      [:div.haiku
+       [:h1 "Hello, " [:br] "I'm Evan."]
+       [:p "Designer of this site"]
+       [:p "and fun things"]]]]))
 
 (def image
   (fn []
@@ -58,37 +55,32 @@
      [:h2 title]
      [:ul
       (for [li-link ul-links]
-        [:li [:a (into {:target "_blank"} li-link) (:name li-link)]])]]))
-
-(def work-links [{:href "https://linkedin.com/in/evanpeterjones" :name "LinkedIn"}
-                 {:href "http://www.github.com/evanpeterjones" :name "GitHub"}
-                 {:href "https://internetizens.net" :name "Yapp"}])
-(def play-links [{:href "https://twitter.com/evanpeterjones" :name "Twitter"}
-                 {:href "https://instagram.com/evanpeterjones" :name "Instagram"}])
+        [:li [:a li-link (:name li-link)]])]]))
 
 (def home-page
   (fn []
-    [:div
-     [image]
-     [:div#work
-      [:div.container
-       [links "Work" "left" "border-red" work-links]
-       [links "Play" "right" "border-blue" play-links]]]]))
+    (let [work-links [{:href "https://linkedin.com/in/evanpeterjones" :name "LinkedIn"}
+                      {:href "http://www.github.com/evanpeterjones" :name "GitHub"}
+                      {:href (path-for :login) :name "Pwd Manager"}]
+          play-links [{:href "https://twitter.com/evanpeterjones" :name "Twitter"}
+                      {:href "https://instagram.com/evanpeterjones" :name "Instagram"}
+                      {:href "https://internetizens.net" :name "Yapp"}]]
+      [:div
+       [image]
+       [:div#work
+        [:div.container
+         [links "Work" "left" "border-red" work-links]
+         [links "Play" "right" "border-blue" play-links]]]])))
 
-(defn about-page []
+(defn login []
   (fn []
     [form]))
 
-(defn about []
+(defn footer []
   (fn []
-    [:span.main
-     [:h1 "About Me"]
-     [:button {:on-click draw-circle} "Add Circle"]
-     [test-func]
-     (comment  [:canvas {:id     "myCanvas"
-                         :width  (. js/window -innerWidth)
-                         :height (- (. js/window -innerHeight) 50)}])]))
-
+    [:footer
+        [:p (str "© " (.getFullYear (new js/Date)))
+          [:b " by Evan Jones w/ClojureScript"]]]))
 
 ;; -------------------------
 ;; Translate routes -> page components
@@ -96,8 +88,7 @@
 (defn page-for [route]
   (case route
     :index #'home-page
-    :about #'about-page))
-
+    :login #'login))
 
 ;; -------------------------
 ;; Page mounting component
@@ -107,11 +98,10 @@
     (let [page (:current-page (session/get :route))]
       [:div {:style {:max-width "1000" :padding-top "5%"}}
        [:header.header
-        [:p [:a {:href (path-for :index)} "Home"] " | " [:a {:href (path-for :about)} "About Me"]]]
+        (when (= page #'login)
+          [:p [:a {:href (path-for :index)} "Home"]])]
        [page]
-       [:footer
-        [:p (str "© " (.getFullYear (new js/Date)))
-          [:b " by Evan Jones w/ClojureScript"]]]])))
+       [footer]])))
 
 ;; -------------------------
 ;; Initialize app

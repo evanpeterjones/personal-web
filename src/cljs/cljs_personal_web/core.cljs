@@ -55,7 +55,7 @@
      [:h2 title]
      [:ul
       (for [li-link ul-links]
-        [:li [:a li-link (:name li-link)]])]]))
+        ^{:key li-link} [:li [:a li-link (:name li-link)]])]]))
 
 (def home-page
   (fn []
@@ -120,8 +120,7 @@
         (reagent/after-render clerk/after-render!)
         (session/put! :route {:current-page (page-for current-page)
                               :route-params route-params})
-        (clerk/navigate-page! path)
-        ))
+        (clerk/navigate-page! path)))
     :path-exists?
     (fn [path]
       (boolean (reitit/match-by-path router path)))})

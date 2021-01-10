@@ -11,7 +11,7 @@
 
 (defn head []
   [:head
-  [:title "Evan Jones"]
+   [:title "Evan Jones"]
    [:meta {:charset "utf-8"}]
    [:meta {:name "viewport"
            :content "width=device-width, initial-scale=1"}]
@@ -39,6 +39,16 @@
    :headers {"Content-Type" "text/json"}
    :body (json/write-str {:test "asdf"})})
 
+(defn get-user [_request]
+  (let [res (json/write-str {:username (str "user" (clojure.core/rand-int 100))})]
+    (if res
+      {:status 200
+       :header {"Content-Type" "application/json"}
+       :body res}
+      {:status 400
+       :header {"Content-Type" "text/json"}
+       :body "yikes"})))
+
 (def app
   (reitit-ring/ring-handler
    (reitit-ring/router
@@ -47,7 +57,8 @@
       ["" {:get {:handler index-handler}}]
       ["/:item-id" {:get {:handler index-handler
                           :parameters {:path {:item-id int?}}}}]]
-     ["/about" {:get {:handler index-handler}}]
+     ["/login" {:get {:handler index-handler}}]
+     ["/getUser" {:get {:handler get-user}}]
      ["/test" {:get {:handler query}}]])
    (reitit-ring/routes
     (reitit-ring/create-resource-handler {:path "/" :root "/public"})

@@ -1,5 +1,6 @@
 (ns cljs-personal-web.password-manager
   (:require [reagent.core :as r]
+            [cljs-personal-web.db :as db]
             [clojure.string :as str]))
 
 (defn row [label input]
@@ -30,12 +31,12 @@
 (defn error [state]
   "error message text"
   (let [msg (:error @state)]
-    (when msg [:label.error-message {:for "error-message"} msg])
     (for [error-message msg]
-      [:div  [:br]])))
+      [:div [:label.error-message {:for "error-messages"} [:p error-message]]])))
 
 (defn form []
-  (let [state (r/atom {:username "test"
+  (let [user (db/get-user!)
+        state (r/atom {:username user
                        :password ""
                        :error ""})]
     [:div.form-group

@@ -29,10 +29,10 @@
      :else error)))
 
 (defn error [state]
-  "error message text"
-  (let [msg (:error @state)]
-    (for [error-message msg]
-      [:div [:label.error-message {:for "error-messages"} [:p error-message]]])))
+      "error message text"
+      (let [msg (:error @state)]
+           (for [error-message msg]
+                [:div [:label.error-message {:for "error-messages"} [:p error-message]]])))
 
 (defn form []
   (let [user (db/get-user!)

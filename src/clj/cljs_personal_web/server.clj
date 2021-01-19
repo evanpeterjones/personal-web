@@ -3,7 +3,9 @@
       [cljs-personal-web.handler :refer [app]]
       [config.core :refer [env]]
       [ring.adapter.jetty :refer [run-jetty]])
-    (:gen-class) (:import (java.net BindException ServerSocket)))
+  (:import (java.net BindException ServerSocket)
+                          (java.io IOException))
+  (:gen-class))
 
 (defn port-in-use? [p]
       (try

@@ -36,7 +36,7 @@
       [:div.haiku
        [:h1 "Hello, " [:br] "I'm Evan."]
        [:p "Designer of this site"]
-       [:p "and fun things"]]]]))
+       [:p "and other ~fun things~"]]]]))
 
 (def image
   (fn []
@@ -61,7 +61,7 @@
   (fn []
     (let [work-links [{:href "https://linkedin.com/in/evanpeterjones" :name "LinkedIn"}
                       {:href "http://www.github.com/evanpeterjones" :name "GitHub"}
-                      {:href (path-for :login) :name "Pwd Manager"}]
+                      {:href (path-for :login) :name "~fun things~"}]
           play-links [{:href "https://twitter.com/evanpeterjones" :name "Twitter"}
                       {:href "https://instagram.com/evanpeterjones" :name "Instagram"}
                       {:href "https://internetizens.net" :name "Yapp"}]]

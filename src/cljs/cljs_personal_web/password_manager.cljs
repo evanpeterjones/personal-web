@@ -12,33 +12,41 @@
 (defn input [type label state]
   (let [id (keyword (str/lower-case label))
         value (id @state)]
-    (row label [:input {:type type
-                        :id id
-                        :style {:color ""}
-                        :value value
+    (row label [:input {:type      type
+                        :id        id
+                        :style     {:color ""}
+                        :value     value
                         :on-change #(swap! state assoc id (-> % .-target .-value))}])))
 
 (defn e [t] [:div [:b] [:p t]])
 
 (defn validation
-  ([doc] (swap! doc assoc :error (validation @doc [])))
-  ([doc error]
-   (cond
-     (empty? (:username doc)) (validation (assoc doc :username "1") (conj error (e "Username cannot be empty")))
-     (empty? (:password doc)) (validation (assoc doc :password "1") (conj error (e "Password cannot be empty")))
-     :else error)))
+  ([state]
+   (swap! state assoc :error
+          (map (fn [{:keys [username password]} x]
+                 (e (cond
+                      (not username) "Username cannot be empty"
+                      (not password) "Password cannot be empty"))) @state))))
 
 (defn error [state]
   "error message text"
   (let [msg (:error @state)]
-    (for [error-message msg]
-      [:div [:label.error-message {:for "error-messages"} [:p error-message]]])))
+    [:div [:label.error-message {:for "error-messages"}
+           (for [error-message msg] [:p error-message])]]))
+
+;;; I want to make an exif data remover site.
+;;; We could display where the image was taken and all of the data associated with it.
+;;;
+;;; Could also just edit the data in the image, and store messages in the metadata
 
 (defn form []
-  (let [user (db/get-user!)
-        state (r/atom {:username user
-                       :password ""
-                       :error ""})]
+  (let [state (r/atom {:username ""
+                       :password ""})]
+
+    ;; set form data
+    (db/get-user! state)
+
+    ;; form
     [:div.form-group
      [:div.container
       [:h1 "Login"]

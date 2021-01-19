@@ -33,21 +33,14 @@
    :headers {"Content-Type" "text/html"}
    :body (loading-page)})
 
-(defn query
-  [_request]
-  {:status 200
-   :headers {"Content-Type" "text/json"}
-   :body (json/write-str {:test "asdf"})})
+(def request (atom {}))
 
-(defn get-user [_request]
-  (let [res (json/write-str {:username (str "user" (clojure.core/rand-int 100))})]
+(defn get-user [request]
+  (let [res (str "user" (clojure.core/rand-int 100))]
     (if res
       {:status 200
-       :header {"Content-Type" "application/json"}
-       :body res}
-      {:status 400
        :header {"Content-Type" "text/json"}
-       :body "yikes"})))
+       :body res})))
 
 (def app
   (reitit-ring/ring-handler
@@ -58,8 +51,7 @@
       ["/:item-id" {:get {:handler index-handler
                           :parameters {:path {:item-id int?}}}}]]
      ["/login" {:get {:handler index-handler}}]
-     ["/getUser" {:get {:handler get-user}}]
-     ["/test" {:get {:handler query}}]])
+     ["/getUser" {:get {:handler get-user}}]])
    (reitit-ring/routes
     (reitit-ring/create-resource-handler {:path "/" :root "/public"})
     (reitit-ring/create-default-handler))

@@ -2,15 +2,15 @@
   (:require [ajax.core :refer [GET]]
             [ajax.formats :as f]))
 
-(defn handler [response]
-  (.log js/console (str response)))
+(defn handler
+  ([response] response)
+  ([state response]
+   (swap! state assoc :username response)))
 
-(defn error-handler [{:keys [status status-text]}]
-  (.log js/console (str "something bad happened: " status " " status-text)))
-
-(defn get-user [] (str "user" (cljs.core/rand-int 100)))
-
-(defn get-user! []
-  (GET "/getUser" {                                         ;:handler handler
-                   :error-handler   error-handler
-                   :response-format :json}))
+(defn get-user!
+  ([]
+   (let [result (GET "/getUser" {:handler handler})]
+     (println result) result))
+  ([state]
+   (let [result (GET "/getUser" {:handler #(handler state %)})]
+     (println (type result)) result)))

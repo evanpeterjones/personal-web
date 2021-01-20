@@ -26,8 +26,10 @@
 (defn -main
   ([] (-main 3000))
   ([p]
-   (let [port (or (env :port) (available-port))]
-     (try
-       (run-jetty #'app {:port port :join? false})
+   (try
+     (let [port (or (env :port) (available-port))
+           server (run-jetty #'app {:port port :join? false})]
+       (prn (str "Server Started on Port: " port))
+       server)
        (catch BindException e
-         (prn (str "Port " p " in use, trying " (inc p))))))))
+         (prn (str "Port " p " in use, trying " (inc p)))))))

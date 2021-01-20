@@ -18,27 +18,22 @@
                         :value     value
                         :on-change #(swap! state assoc id (-> % .-target .-value))}])))
 
-(defn e [t] [:div [:b] [:p t]])
-
-(defn validation
-  ([state]
-   (swap! state assoc :error
-          (map (fn [{:keys [username password]} x]
-                 (e (cond
-                      (not username) "Username cannot be empty"
-                      (not password) "Password cannot be empty"))) @state))))
+(defn validation [state]
+  (->>
+   (map #(condp = %1
+            :username (when (empty? (%1 @state)) [:p "Username cannot be empty"])
+            :password (when (empty? (%1 @state)) [:p "Password cannot be empty"])) (keys @state))
+   (swap! state assoc :error)))
 
 (defn error [state]
   "error message text"
   (let [msg (:error @state)]
-    [:div [:label.error-message {:for "error-messages"}
-           (for [error-message msg] [:p error-message])]]))
+    [:div (for [error-message msg] [:p error-message])]))
 
 ;;; I want to make an exif data remover site.
 ;;; We could display where the image was taken and all of the data associated with it.
 ;;;
 ;;; Could also just edit the data in the image, and store messages in the metadata
-
 (defn form []
   (let [state (r/atom {:username ""
                        :password ""})]

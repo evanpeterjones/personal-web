@@ -96,7 +96,7 @@
 (defn current-page []
   (fn []
     (let [page (:current-page (session/get :route))]
-      [:div {:style {:max-width "1000" :padding-top "5%"}}
+      [:div {:style {:max-width "1000"}}
        [:header.header
         (when (= page #'login)
           [:p [:a {:href (path-for :index)} "Home"]])]

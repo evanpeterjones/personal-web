@@ -22,7 +22,19 @@
   (->>
    (map #(condp = %1
             :username (when (empty? (%1 @state)) [:p "Username cannot be empty"])
-            :password (when (empty? (%1 @state)) [:p "Password cannot be empty"])) (keys @state))
+            :password (let [pwd (%1 @state)]
+                        (if (empty? pwd)
+                          [:p "Password cannot be empty"]
+                          (if-not (re-matches #"^[a-zA-Z0-9!@#$%^&*()~]{8,20}$" pwd)
+                            [:div
+                             [:p "Password does not match the following:"]
+                             [:p (str
+                                   (when (re-matches #"^[*]{8,20}$" pwd) "at least 8 characters")
+                                   (when (re-matches "^[a-zA-Z]" pwd) "include upper & lower case letters")
+                                   (when (re-matches "^[0-9]" pwd) "include a number")
+                                   (when (re-matches "^[~!@#$%^&*()]" pwd) "include a special character"))]])))
+            :else [:p "Error occurred validating user info"])
+        (keys @state))
    (swap! state assoc :error)))
 
 (defn error [state]
@@ -44,7 +56,7 @@
     ;; form
     [:div.form-group
      [:div.container
-      [:h1 "Login"]
+      [:h1 "Create Account"]
       [:br]
       [:form
        [input :text "Username" state]

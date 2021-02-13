@@ -4716,3 +4716,28 @@ notifying browser that file changed:  target/cljsbuild/public/js/out/cljs_person
 Compiling build :app to "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...
 [32mSuccessfully compiled build :app to "target/cljsbuild/public/js/app.js" in 0.963 seconds.[0m
 notifying browser that file changed:  target/cljsbuild/public/js/out/cljs_personal_web/db.js
+Compiling build :app to "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...
+[36m----  Compiler Warning on   src/cljs/cljs_personal_web/db.cljs   line:8  column:17  ----[0m
+
+  [1mUse of undeclared Var cljs-personal-web.db/asdsoc[0m
+
+  [36m 5[0m  [36m(defn handler[0m
+  [36m 6[0m  [36m  ([response] response)[0m
+  [36m 7[0m  [36m  ([state response][0m
+  [33m 8[0m  [1m   (swap! state asdsoc :username response)))[0m
+  [0m  [0m  [33m                ^--- Use of undeclared Var cljs-personal-web.db/asdsoc[0m
+  [36m 9[0m  [36m[0m
+  [36m10[0m  [36m(defn get-user![0m
+  [36m11[0m  [36m  ([][0m
+  [36m12[0m  [36m   (let [result (GET "/getUser" {:handler handler})][0m
+  [36m13[0m  [36m     (println result) result))[0m
+
+[36m----  Compiler Warning : Please see src/cljs/cljs_personal_web/db.cljs  ----[0m
+[32mSuccessfully compiled build :app to "target/cljsbuild/public/js/app.js" in 1.494 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/goog/deps.js
+notifying browser that file changed:  target/cljsbuild/public/js/out/cljs_deps.js
+notifying browser that file changed:  target/cljsbuild/public/js/out/cljs_personal_web/core.js
+notifying browser that file changed:  target/cljsbuild/public/js/out/cljs_personal_web/db.js
+Compiling build :app to "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...
+[32mSuccessfully compiled build :app to "target/cljsbuild/public/js/app.js" in 1.592 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/cljs_personal_web/db.js

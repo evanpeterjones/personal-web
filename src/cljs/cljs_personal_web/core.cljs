@@ -61,7 +61,8 @@
   (fn []
     (let [work-links [{:href "https://linkedin.com/in/evanpeterjones" :name "LinkedIn"}
                       {:href "http://www.github.com/evanpeterjones" :name "GitHub"}
-                      {:href (path-for :login) :name "~fun things~"}]
+                      ;{:href (path-for :login) :name "~fun things~"}
+                      ]
           play-links [{:href "https://twitter.com/evanpeterjones" :name "Twitter"}
                       {:href "https://instagram.com/evanpeterjones" :name "Instagram"}
                       {:href "https://internetizens.net" :name "Yapp"}]]

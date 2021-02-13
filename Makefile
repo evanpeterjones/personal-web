@@ -4,7 +4,7 @@ run:
 build:
 	lein uberjar
 
-fig:
+dev:
 	lein figwheel
 
 repl:

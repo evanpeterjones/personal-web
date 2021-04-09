@@ -1,10 +1,9 @@
 (ns cljs-personal-web.handler
-  (:require
-   [reitit.ring :as reitit-ring]
-   [clojure.data.json :as json]
-   [cljs-personal-web.middleware :refer [middleware]]
-   [hiccup.page :refer [include-js include-css html5]]
-   [config.core :refer [env]]))
+  (:require [rss :refer [parse-xml req]]
+            [reitit.ring :as reitit-ring]
+            [cljs-personal-web.middleware :refer [middleware]]
+            [hiccup.page :refer [include-js include-css html5]]
+            [config.core :refer [env]]))
 
 (def mount-target
   [:div#app])
@@ -15,10 +14,10 @@
    [:meta {:charset "utf-8"}]
    [:meta {:name "viewport"
            :content "width=device-width, initial-scale=1"}]
-  [:link {:rel "icon" :href "favicon.png"}]
-   ;[:link {:rel "stylesheet" :href "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"}]
+   [:link {:rel "icon" :href "favicon.png"}]
    [:link {:href "https://fonts.googleapis.com/css?family=Work+Sans:300,400,600,700" :rel "stylesheet"}]
-   (include-css (if (env :dev) "/css/site.css" "/css/site.min.css"))])
+   (include-css (if (env :dev) "/css/site.css" "/css/site.min.css")
+                "/css/style.css")])
 
 (defn loading-page []
   (html5
@@ -35,23 +34,34 @@
 
 (def request (atom {}))
 
-(defn get-user [request]
-  (let [res (str "user" (clojure.core/rand-int 100))]
+(defn get-rss-data
+  [request]
+  (let [url "http://encountersthepodcast.libsyn.com/rss"        ;;;; need to get the url from the request here
+        res (when url (-> url req :body get-rss-data))]
+    (println request)
     (if res
       {:status 200
        :header {"Content-Type" "text/json"}
        :body res})))
 
+(defn get-user [request]
+  {:status 200
+   :header {"Content-Type" "text/json"}
+   :body (str "user" (clojure.core/rand-int 100))})
+
+(defn login-handler [request]
+  (println (str request))
+  {:status 200
+   :header {"Content-Type" "text/data"}
+   :body ""})
+
 (def app
   (reitit-ring/ring-handler
    (reitit-ring/router
-    [["/" {:get {:handler index-handler}}]
-     ["/items"
-      ["" {:get {:handler index-handler}}]
-      ["/:item-id" {:get {:handler index-handler
-                          :parameters {:path {:item-id int?}}}}]]
-     ["/login" {:get {:handler index-handler}}]
-     ["/getUser" {:get {:handler get-user}}]])
+     [["/" {:get {:handler index-handler}}]
+      ["/login" {:get {:handler index-handler}}]
+      ["/getUser" {:get {:handler get-user}}]
+      ["/getRssData" {:get {:handler get-rss-data}}]])
    (reitit-ring/routes
     (reitit-ring/create-resource-handler {:path "/" :root "/public"})
     (reitit-ring/create-default-handler))

@@ -9,11 +9,13 @@
                  [org.clojure/clojurescript "1.10.773"
                   :scope "provided"]
                  [cljs-ajax "0.8.1"]
+                 [clj-http "3.12.0"]
                  [ring-server "0.5.0"]
                  [reagent "0.10.0"]
                  [reagent-utils "0.3.3"]
                  [ring "1.8.1"]
                  [ring/ring-defaults "0.3.2"]
+                 [com.cognitect/transit-cljs "0.8.264"]
                  [hiccup "1.0.5"]
                  [yogthos/config "1.1.7"]
                  ;[ol "6.5.0"]

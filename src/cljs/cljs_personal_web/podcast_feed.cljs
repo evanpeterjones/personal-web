@@ -21,8 +21,9 @@
                         :value     (when value value)
                         :on-change #(swap! state assoc id (-> % .-target .-value))}])))
 
-(defn podcast-titles [state]
-  [:div (for [p (:podcasts state)] [:p (:title p)])])
+(defn podcast-titles [pods]
+  [:div (for [ep pods]
+          [:p (get-in ep [:content 0 :content])])])
 
 ;;; I want to make an exif data remover site.
 ;;; We could display where the image was taken and all of the data associated with it.
@@ -44,9 +45,8 @@
                    :value    "Add Feed"
                    :class    "rounded-sm"
                    :on-click #(db/get-feed! (bt-key @state) state)}]]
-
-         [:h1 (bt-key @state)]
-         [:h1 state]
+         [:br]
 
          ;; podcast titles
-         [podcast-titles state]]]])))
+         [:h1 "Episodes"]
+         [podcast-titles (:podcasts @state)]]]])))

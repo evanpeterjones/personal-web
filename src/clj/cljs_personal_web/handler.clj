@@ -49,7 +49,7 @@
     (str "user" (clojure.core/rand-int 100))))
 
 (def get-rss
-  (fn [{{:keys [url]} :params} r]
+  (fn [{{:keys [url]} :params}]
     (pp/pprint (str "Requesting data for: " url))
     (when url
       (let [o (ByteArrayOutputStream. 4096)

@@ -27,6 +27,7 @@
     <orderEntry type="library" name="Leiningen: cheshire:5.10.0" level="project" />
     <orderEntry type="library" name="Leiningen: cider/piggieback:0.5.1" level="project" />
     <orderEntry type="library" name="Leiningen: clj-http:3.12.0" level="project" />
+    <orderEntry type="library" name="Leiningen: clj-rss:0.2.7" level="project" />
     <orderEntry type="library" name="Leiningen: clj-stacktrace:0.2.8" level="project" />
     <orderEntry type="library" name="Leiningen: clj-time:0.10.0" level="project" />
     <orderEntry type="library" name="Leiningen: clj-tuple:0.2.2" level="project" />
@@ -39,9 +40,9 @@
     <orderEntry type="library" name="Leiningen: co.deps/ring-etag-middleware:0.2.1" level="project" />
     <orderEntry type="library" name="Leiningen: com.andrewmcveigh/cljs-time:0.5.1" level="project" />
     <orderEntry type="library" name="Leiningen: com.bhauman/spell-spec:0.1.2" level="project" />
-    <orderEntry type="library" name="Leiningen: com.cognitect/transit-clj:0.8.309" level="project" />
+    <orderEntry type="library" name="Leiningen: com.cognitect/transit-clj:1.0.324" level="project" />
     <orderEntry type="library" name="Leiningen: com.cognitect/transit-cljs:0.8.264" level="project" />
-    <orderEntry type="library" name="Leiningen: com.cognitect/transit-java:0.8.332" level="project" />
+    <orderEntry type="library" name="Leiningen: com.cognitect/transit-java:1.0.343" level="project" />
     <orderEntry type="library" name="Leiningen: com.cognitect/transit-js:0.8.861" level="project" />
     <orderEntry type="library" name="Leiningen: com.fasterxml.jackson.core/jackson-annotations:2.11.0" level="project" />
     <orderEntry type="library" name="Leiningen: com.fasterxml.jackson.core/jackson-core:2.11.0" level="project" />
@@ -132,8 +133,10 @@
     <orderEntry type="library" name="Leiningen: org.clojure/core.memoize:0.5.9" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/core.rrb-vector:0.0.14" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/core.specs.alpha:0.2.44" level="project" />
+    <orderEntry type="library" name="Leiningen: org.clojure/data.codec:0.1.0" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/data.json:1.0.0" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/data.priority-map:0.0.7" level="project" />
+    <orderEntry type="library" name="Leiningen: org.clojure/data.xml:0.2.0-alpha6" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/google-closure-library-third-party:0.0-20191016-6ae1f72f" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/google-closure-library:0.0-20191016-6ae1f72f" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/java.classpath:0.3.0" level="project" />

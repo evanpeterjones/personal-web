@@ -12,18 +12,18 @@ return (new cljs.core.MultiFn(cljs.core.symbol.call(null,"cljs-personal-web.draw
 })();
 }
 cljs_personal_web.draw.two_pi = ((2) * Math.PI);
-cljs.core._add_method.call(null,cljs_personal_web.draw.draw_object,new cljs.core.Keyword(null,"circle","circle",1903212362),(function (p__39560,ctx){
-var map__39561 = p__39560;
-var map__39561__$1 = (((((!((map__39561 == null))))?(((((map__39561.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__39561.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__39561):map__39561);
-var color = cljs.core.get.call(null,map__39561__$1,new cljs.core.Keyword(null,"color","color",1011675173));
-var pos = cljs.core.get.call(null,map__39561__$1,new cljs.core.Keyword(null,"pos","pos",-864607220));
-var size = cljs.core.get.call(null,map__39561__$1,new cljs.core.Keyword(null,"size","size",1098693007));
-var vec__39563 = pos;
-var x = cljs.core.nth.call(null,vec__39563,(0),null);
-var y = cljs.core.nth.call(null,vec__39563,(1),null);
-var vec__39566 = size;
-var x__$1 = cljs.core.nth.call(null,vec__39566,(0),null);
-var h = cljs.core.nth.call(null,vec__39566,(1),null);
+cljs.core._add_method.call(null,cljs_personal_web.draw.draw_object,new cljs.core.Keyword(null,"circle","circle",1903212362),(function (p__40039,ctx){
+var map__40040 = p__40039;
+var map__40040__$1 = (((((!((map__40040 == null))))?(((((map__40040.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__40040.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__40040):map__40040);
+var color = cljs.core.get.call(null,map__40040__$1,new cljs.core.Keyword(null,"color","color",1011675173));
+var pos = cljs.core.get.call(null,map__40040__$1,new cljs.core.Keyword(null,"pos","pos",-864607220));
+var size = cljs.core.get.call(null,map__40040__$1,new cljs.core.Keyword(null,"size","size",1098693007));
+var vec__40042 = pos;
+var x = cljs.core.nth.call(null,vec__40042,(0),null);
+var y = cljs.core.nth.call(null,vec__40042,(1),null);
+var vec__40045 = size;
+var x__$1 = cljs.core.nth.call(null,vec__40045,(0),null);
+var h = cljs.core.nth.call(null,vec__40045,(1),null);
 return null;
 }));
 cljs_personal_web.draw.draw_circle = (function cljs_personal_web$draw$draw_circle(){
@@ -68,4 +68,4 @@ var canvas = document.getElementById(id);
 return new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"canvas","canvas",-1798817489),canvas,new cljs.core.Keyword(null,"width","width",-384071477),canvas.width,new cljs.core.Keyword(null,"height","height",1025178622),canvas.height,new cljs.core.Keyword(null,"ctx","ctx",-493610118),canvas.getContext("2d")], null);
 });
 
-//# sourceMappingURL=draw.js.map?rel=1617925396240
+//# sourceMappingURL=draw.js.map?rel=1618065939156

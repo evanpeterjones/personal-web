@@ -1,5 +1,6 @@
 (ns cljs-personal-web.server
   (:require
+   [cljs-personal-web.handler :refer [app]]
    [config.core :refer [env]]
    [ring.adapter.jetty :refer [run-jetty]])
   (:import (java.net BindException ServerSocket)
@@ -27,7 +28,7 @@
   ([p]
    (try
      (let [port (or (env :port) (available-port))
-           server (run-jetty #'cljs-personal-web.handler/app {:port port :join? false})]
+           server (run-jetty #'app {:port port :join? false})]
        (prn (str "Server Started on Port: " port))
        server)
      (catch BindException e

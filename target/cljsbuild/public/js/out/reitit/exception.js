@@ -3,8 +3,8 @@ goog.provide('reitit.exception');
 goog.require('cljs.core');
 goog.require('clojure.string');
 reitit.exception.fail_BANG_ = (function reitit$exception$fail_BANG_(var_args){
-var G__31825 = arguments.length;
-switch (G__31825) {
+var G__32300 = arguments.length;
+switch (G__32300) {
 case 1:
 return reitit.exception.fail_BANG_.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -62,25 +62,25 @@ cljs.core._add_method.call(null,reitit.exception.format_exception,new cljs.core.
 var resolve_str = (function reitit$exception$resolve_str(path,route_data){
 return [(cljs.core.truth_(new cljs.core.Keyword(null,"conflicting","conflicting",2003828416).cljs$core$IFn$_invoke$arity$1(route_data))?"   ":"-> "),cljs.core.str.cljs$core$IFn$_invoke$arity$1(path)," ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.not_empty.call(null,cljs.core.select_keys.call(null,route_data,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"conflicting","conflicting",2003828416)], null))))].join('');
 });
-return cljs.core.apply.call(null,cljs.core.str,"Router contains conflicting route paths:\n\n",cljs.core.mapv.call(null,(function (p__31827){
-var vec__31828 = p__31827;
-var vec__31831 = cljs.core.nth.call(null,vec__31828,(0),null);
-var path = cljs.core.nth.call(null,vec__31831,(0),null);
-var route_data = cljs.core.nth.call(null,vec__31831,(1),null);
-var vals = cljs.core.nth.call(null,vec__31828,(1),null);
-return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(resolve_str.call(null,path,route_data)),"\n",clojure.string.join.call(null,"\n",cljs.core.mapv.call(null,(function (p__31838){
-var vec__31839 = p__31838;
-var path__$1 = cljs.core.nth.call(null,vec__31839,(0),null);
-var route_data__$1 = cljs.core.nth.call(null,vec__31839,(1),null);
+return cljs.core.apply.call(null,cljs.core.str,"Router contains conflicting route paths:\n\n",cljs.core.mapv.call(null,(function (p__32302){
+var vec__32303 = p__32302;
+var vec__32306 = cljs.core.nth.call(null,vec__32303,(0),null);
+var path = cljs.core.nth.call(null,vec__32306,(0),null);
+var route_data = cljs.core.nth.call(null,vec__32306,(1),null);
+var vals = cljs.core.nth.call(null,vec__32303,(1),null);
+return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(resolve_str.call(null,path,route_data)),"\n",clojure.string.join.call(null,"\n",cljs.core.mapv.call(null,(function (p__32313){
+var vec__32314 = p__32313;
+var path__$1 = cljs.core.nth.call(null,vec__32314,(0),null);
+var route_data__$1 = cljs.core.nth.call(null,vec__32314,(1),null);
 return resolve_str.call(null,path__$1,route_data__$1);
 }),vals)),"\n\n"].join('');
 }),conflicts));
 }));
 cljs.core._add_method.call(null,reitit.exception.format_exception,new cljs.core.Keyword(null,"name-conflicts","name-conflicts",-2016386444),(function (_,___$1,conflicts){
-return cljs.core.apply.call(null,cljs.core.str,"Router contains conflicting route names:\n\n",cljs.core.mapv.call(null,(function (p__31842){
-var vec__31843 = p__31842;
-var name = cljs.core.nth.call(null,vec__31843,(0),null);
-var vals = cljs.core.nth.call(null,vec__31843,(1),null);
+return cljs.core.apply.call(null,cljs.core.str,"Router contains conflicting route names:\n\n",cljs.core.mapv.call(null,(function (p__32317){
+var vec__32318 = p__32317;
+var name = cljs.core.nth.call(null,vec__32318,(0),null);
+var vals = cljs.core.nth.call(null,vec__32318,(1),null);
 return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(name),"\n-> ",clojure.string.join.call(null,"\n-> ",cljs.core.mapv.call(null,cljs.core.first,vals)),"\n"].join('');
 }),conflicts));
 }));
@@ -88,4 +88,4 @@ cljs.core._add_method.call(null,reitit.exception.format_exception,new cljs.core.
 return ["Error merging route-data\n\n",cljs.core.pr_str.call(null,data)].join('');
 }));
 
-//# sourceMappingURL=exception.js.map?rel=1617925390620
+//# sourceMappingURL=exception.js.map?rel=1618065932395

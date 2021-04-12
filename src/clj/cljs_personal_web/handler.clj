@@ -1,9 +1,12 @@
 (ns cljs-personal-web.handler
-  (:require [rss :refer [get-rss-data-from-url]]
-            [reitit.ring :as reitit-ring]
+  (:require [rss :refer [get-data-from-url]]
+            [reitit.ring :as r]
+            [cognitect.transit :as transit]
             [cljs-personal-web.middleware :refer [middleware]]
             [hiccup.page :refer [include-js include-css html5]]
-            [config.core :refer [env]]))
+            [clojure.pprint :as pp]
+            [config.core :refer [env]])
+  (:import (java.io ByteArrayOutputStream)))
 
 (def mount-target
   [:div#app])
@@ -35,31 +38,40 @@
     ([ct fb]
      "defaults to text/html if not provided"
      (fn [r]
+       (pp/pprint (str "request: " @request))
        (swap! request conj r)
        {:status 200
-        :header {"Content-Type" ct}
+        :headers {"Content-Type" ct}
         :body (fb r)}))))
 
 (def get-user
   (fn [r]
     (str "user" (clojure.core/rand-int 100))))
 
-(def h-rss-data (h "data/json" get-rss-data-from-url))
+(def get-rss
+  (fn [{{:keys [url]} :params} r]
+    (pp/pprint (str "Requesting data for: " url))
+    (when url
+      (let [o (ByteArrayOutputStream. 4096)
+            json-writer (transit/writer o :json)]
+        (->> url
+             get-data-from-url
+             (transit/write json-writer))
+        (.toString o)))))
+
+(def h-rss-data (h "data/json" get-rss))
 (def h-user (h "data/json" get-user))
 (def h-index (h loading-page))
-
-(defn index-handler [r]
-  {:status 200
-   :header {"Content-Type" "text/html"}
-   :body (loading-page r)})
+(def url "http://encountersthepodcast.libsyn.com/rss")
 
 (def app
-  (reitit-ring/ring-handler
-   (reitit-ring/router
-     [["/" {:get {:handler index-handler}}]
-      ["/getUser" {:get {:handler h-user}}]
-      ["/getRssData" {:get {:handler h-rss-data}}]])
-   (reitit-ring/routes
-    (reitit-ring/create-resource-handler {:path "/" :root "/public"})
-    (reitit-ring/create-default-handler))
+  (r/ring-handler
+   (r/router
+    [["/" {:get {:handler h-index}}]
+     ["/login" {:get {:handler h-index}}]
+     ["/getUser" {:get {:handler h-user}}]
+     ["/getRssData" {:get {:handler h-rss-data}}]])
+   (r/routes
+    (r/create-resource-handler {:path "/" :root "/public"})
+    (r/create-default-handler))
    {:middleware middleware}))

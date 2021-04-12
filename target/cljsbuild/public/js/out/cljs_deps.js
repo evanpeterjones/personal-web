@@ -218,6 +218,7 @@ goog.addDependency("../cljs_personal_web/db.js", ['cljs_personal_web.db'], ['aja
 goog.addDependency("../clerk/core.js", ['clerk.core'], ['goog.dom', 'goog.Uri', 'cljs.core', 'cljs.core.async', 'goog.events.EventType', 'goog.fx.dom', 'goog.style', 'goog.events']);
 goog.addDependency("../cljs_personal_web/podcast_feed.js", ['cljs_personal_web.podcast_feed'], ['reagent.core', 'cljs.core', 'clojure.string', 'cljs_personal_web.db']);
 goog.addDependency("../reitit/frontend.js", ['reitit.frontend'], ['goog.Uri.QueryData', 'goog.Uri', 'cljs.core', 'clojure.set', 'reitit.core', 'reitit.coercion']);
+goog.addDependency("../cljs_personal_web/login.js", ['cljs_personal_web.login'], ['cljs.core']);
 goog.addDependency("../cljs_personal_web/world_map.js", ['cljs_personal_web.world_map'], ['cljs.core']);
 goog.addDependency("../cljs_personal_web/core.js", ['cljs_personal_web.core'], ['clerk.core', 'reagent.session', 'reagent.core', 'cljs.core', 'reitit.frontend', 'cljs_personal_web.world_map', 'accountant.core', 'cljs_personal_web.podcast_feed', 'reagent.dom', 'cljs_personal_web.draw']);
 goog.addDependency("../cljs_personal_web/dev.js", ['cljs_personal_web.dev'], ['cljs.core', 'devtools.core', 'cljs_personal_web.core']);

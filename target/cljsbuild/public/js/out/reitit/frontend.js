@@ -19,8 +19,8 @@ return cljs.core.vec.call(null,vs);
  */
 reitit.frontend.query_params = (function reitit$frontend$query_params(uri){
 var q = uri.getQueryData();
-return cljs.core.into.call(null,cljs.core.PersistentArrayMap.EMPTY,cljs.core.map.call(null,cljs.core.juxt.call(null,cljs.core.keyword,(function (p1__39510_SHARP_){
-return reitit.frontend.query_param.call(null,q,p1__39510_SHARP_);
+return cljs.core.into.call(null,cljs.core.PersistentArrayMap.EMPTY,cljs.core.map.call(null,cljs.core.juxt.call(null,cljs.core.keyword,(function (p1__39374_SHARP_){
+return reitit.frontend.query_param.call(null,q,p1__39374_SHARP_);
 })),q.getKeys()));
 });
 /**
@@ -52,8 +52,8 @@ return null;
  *   or `nil` (no match).
  */
 reitit.frontend.match_by_name = (function reitit$frontend$match_by_name(var_args){
-var G__39512 = arguments.length;
-switch (G__39512) {
+var G__39376 = arguments.length;
+switch (G__39376) {
 case 2:
 return reitit.frontend.match_by_name.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
 
@@ -83,8 +83,8 @@ return reitit.core.match_by_name.call(null,router,name,path_params);
  *   Enables request coercion. See [[reitit.core/router]] for details on options.
  */
 reitit.frontend.router = (function reitit$frontend$router(var_args){
-var G__39515 = arguments.length;
-switch (G__39515) {
+var G__39379 = arguments.length;
+switch (G__39379) {
 case 1:
 return reitit.frontend.router.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -113,8 +113,8 @@ return reitit.core.router.call(null,raw_routes,cljs.core.merge.call(null,new clj
  * Logs problems using console.warn
  */
 reitit.frontend.match_by_name_BANG_ = (function reitit$frontend$match_by_name_BANG_(var_args){
-var G__39519 = arguments.length;
-switch (G__39519) {
+var G__39383 = arguments.length;
+switch (G__39383) {
 case 2:
 return reitit.frontend.match_by_name_BANG_.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
 
@@ -138,8 +138,8 @@ var temp__5733__auto__ = reitit.frontend.match_by_name.call(null,router,name,pat
 if(cljs.core.truth_(temp__5733__auto__)){
 var match = temp__5733__auto__;
 if(reitit.core.partial_match_QMARK_.call(null,match)){
-if(cljs.core.every_QMARK_.call(null,(function (p1__39517_SHARP_){
-return cljs.core.contains_QMARK_.call(null,path_params,p1__39517_SHARP_);
+if(cljs.core.every_QMARK_.call(null,(function (p1__39381_SHARP_){
+return cljs.core.contains_QMARK_.call(null,path_params,p1__39381_SHARP_);
 }),new cljs.core.Keyword(null,"required","required",1807647006).cljs$core$IFn$_invoke$arity$1(match))){
 return match;
 } else {
@@ -162,4 +162,4 @@ return null;
 (reitit.frontend.match_by_name_BANG_.cljs$lang$maxFixedArity = 3);
 
 
-//# sourceMappingURL=frontend.js.map?rel=1617925396166
+//# sourceMappingURL=frontend.js.map?rel=1618065938172

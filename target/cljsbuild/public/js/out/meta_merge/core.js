@@ -124,8 +124,8 @@ return null;
  * Recursively merge values based on the information in their metadata.
  */
 meta_merge.core.meta_merge = (function meta_merge$core$meta_merge(var_args){
-var G__31817 = arguments.length;
-switch (G__31817) {
+var G__32292 = arguments.length;
+switch (G__32292) {
 case 0:
 return meta_merge.core.meta_merge.cljs$core$IFn$_invoke$arity$0();
 
@@ -140,14 +140,14 @@ return meta_merge.core.meta_merge.cljs$core$IFn$_invoke$arity$2((arguments[(0)])
 break;
 default:
 var args_arr__4757__auto__ = [];
-var len__4736__auto___31819 = arguments.length;
-var i__4737__auto___31820 = (0);
+var len__4736__auto___32294 = arguments.length;
+var i__4737__auto___32295 = (0);
 while(true){
-if((i__4737__auto___31820 < len__4736__auto___31819)){
-args_arr__4757__auto__.push((arguments[i__4737__auto___31820]));
+if((i__4737__auto___32295 < len__4736__auto___32294)){
+args_arr__4757__auto__.push((arguments[i__4737__auto___32295]));
 
-var G__31821 = (i__4737__auto___31820 + (1));
-i__4737__auto___31820 = G__31821;
+var G__32296 = (i__4737__auto___32295 + (1));
+i__4737__auto___32295 = G__32296;
 continue;
 } else {
 }
@@ -204,16 +204,16 @@ return cljs.core.reduce.call(null,meta_merge.core.meta_merge,left,cljs.core.cons
 }));
 
 /** @this {Function} */
-(meta_merge.core.meta_merge.cljs$lang$applyTo = (function (seq31814){
-var G__31815 = cljs.core.first.call(null,seq31814);
-var seq31814__$1 = cljs.core.next.call(null,seq31814);
-var G__31816 = cljs.core.first.call(null,seq31814__$1);
-var seq31814__$2 = cljs.core.next.call(null,seq31814__$1);
+(meta_merge.core.meta_merge.cljs$lang$applyTo = (function (seq32289){
+var G__32290 = cljs.core.first.call(null,seq32289);
+var seq32289__$1 = cljs.core.next.call(null,seq32289);
+var G__32291 = cljs.core.first.call(null,seq32289__$1);
+var seq32289__$2 = cljs.core.next.call(null,seq32289__$1);
 var self__4723__auto__ = this;
-return self__4723__auto__.cljs$core$IFn$_invoke$arity$variadic(G__31815,G__31816,seq31814__$2);
+return self__4723__auto__.cljs$core$IFn$_invoke$arity$variadic(G__32290,G__32291,seq32289__$2);
 }));
 
 (meta_merge.core.meta_merge.cljs$lang$maxFixedArity = (2));
 
 
-//# sourceMappingURL=core.js.map?rel=1617925390575
+//# sourceMappingURL=core.js.map?rel=1618065932326

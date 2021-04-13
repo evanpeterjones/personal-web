@@ -15,6 +15,9 @@
   (GET "/getRssData" {:params  {:url url}
                       ;:response-format :json
                       :handler #(do
-                                  (println (str "test: " (transit-read %)))
-                                  (swap! state assoc :podcasts (conj (:podcasts @state) (transit-read %))))}))
+                                 (let [res (transit-read %)]
+                                   (println (str "test: " res))
+                                   (swap! state assoc :podcasts (conj (:podcasts @state) res))
+                                   (swap! state assoc :titles (conj (:titles @state) (-> first :content first :content first)))))}))
+
 

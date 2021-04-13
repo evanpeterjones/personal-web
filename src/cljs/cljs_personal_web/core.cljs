@@ -3,6 +3,7 @@
    [cljs-personal-web.draw :refer [draw-circle]]
    [cljs-personal-web.world-map :refer [test-func]]
    [cljs-personal-web.podcast-feed :refer [form]]
+   [cljs-personal-web.components :refer [links]]
    [reagent.core :as reagent :refer [atom]]
    [reagent.dom :as rdom]
    [reagent.session :as session]
@@ -19,7 +20,10 @@
     ["/items"
      ["" :items]
      ["/:item-id" :item]]
-    ["/login" :login]]))
+    ;["/login" :login]
+    ["/podcasts"
+     ["" :podcasts]
+     ["/:id" :id]]]))
 
 (defn path-for [route & [params]]
   (if params
@@ -35,7 +39,7 @@
      [:div.haiku-profile
       [:div.haiku
        [:h1 "Hello, " [:br] "I'm Evan."]
-       [:p "Designer of this site"]
+       [:p "Creator of this site"]
        [:p "and other ~fun things~"]]]]))
 
 (def image
@@ -48,21 +52,11 @@
                :alt "Photo taken by Shandon Anderson"}]]]
       [haiku]]]))
 
-(def links
-  (fn [title id class ul-links]
-    [(keyword (str "div." id))
-     [(keyword (str "span." class))]
-     [:h2 title]
-     [:ul
-      (for [li-link ul-links]
-        ^{:key li-link} [:li [:a li-link (:name li-link)]])]]))
-
 (def home-page
   (fn []
     (let [work-links [{:href "https://linkedin.com/in/evanpeterjones" :name "LinkedIn"}
                       {:href "http://www.github.com/evanpeterjones" :name "GitHub"}
-                      {:href (path-for :login) :name "~fun things~"}
-                      ]
+                      {:href (path-for :podcasts) :name "~fun things~" :label "new"}]
           play-links [{:href "https://twitter.com/evanpeterjones" :name "Twitter"}
                       {:href "https://instagram.com/evanpeterjones" :name "Instagram"}
                       {:href "https://internetizens.net" :name "Yapp"}]]
@@ -70,10 +64,10 @@
        [image]
        [:div#work
         [:div.container
-         [links "Me" "left" "border-red" work-links]
+         [links "Work" "left" "border-red" work-links]
          [links "Play" "right" "border-blue" play-links]]]])))
 
-(defn login []
+(defn podcasts []
   (fn []
     [form]))
 
@@ -89,7 +83,7 @@
 (defn page-for [route]
   (case route
     :index #'home-page
-    :login #'login))
+    :podcasts #'podcasts))
 
 ;; -------------------------
 ;; Page mounting component
@@ -99,7 +93,7 @@
     (let [page (:current-page (session/get :route))]
       [:div {:style {:max-width "1000"}}
        [:header.header
-        (when (= page #'login)
+        (when (= page #'podcasts)
           [:p [:a {:href (path-for :index)} "Home"]])]
        [page]
        [footer]])))

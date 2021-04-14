@@ -64,18 +64,18 @@
        [image]
        [:div#work
         [:div.container
-         [links "Work" "left" "border-red" work-links]
+         [links "Me" "left" "border-red" work-links]
          [links "Play" "right" "border-blue" play-links]]]])))
 
-(defn podcasts []
+(def podcasts
   (fn []
     [form]))
 
-(defn footer []
+(def footer
   (fn []
     [:footer
-        [:p (str "© " (.getFullYear (new js/Date)))
-          [:b " by Evan Jones w/ClojureScript"]]]))
+     [:p (str "© " (.getFullYear (new js/Date)))
+      [:b " by Evan Jones w/ClojureScript"]]]))
 
 ;; -------------------------
 ;; Translate routes -> page components
@@ -94,7 +94,7 @@
       [:div {:style {:max-width "1000"}}
        [:header.header
         (when (= page #'podcasts)
-          [:p [:a {:href (path-for :index)} "Home"]])]
+          [:p [:a {:href (path-for :index) :style {:font-size "2em"}} "\uD83C\uDFE0"]])]
        [page]
        [footer]])))
 

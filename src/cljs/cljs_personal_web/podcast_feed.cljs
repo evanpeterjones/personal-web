@@ -26,41 +26,40 @@
   [:div (for [ep pods]
           [:p (get-in ep [:content 0 :content])])])
 
-(defn podcast-titles [pods]
-  [:div (for [ti pods]
-          [:p ti])])
-
-(defn get-titles [ts]
-  (map (fn [x] {:href "asdf" :name x}) ts))
 ;;; I want to make an exif data remover site.
 ;;; We could display where the image was taken and all of the data associated with it.
 ;;;
 ;;; Could also just edit the data in the image, and store messages in the metadata
+(def add-feed-function
+  (fn [state m]
+    (map
+      #(into %
+            {:onclick (fn [url]  (db/get-feed! url state))})
+         m)))
+
 (def form
-  (let [bt "Add Podcast"
-        url (create-label bt)
-        state (r/atom {:podcasts []
-                       :titles ["Encounters Pod" "Savage Lovecast"]
+  (let [add-text "Add Podcast"
+        url (create-label add-text)
+        state (r/atom {:episodes nil
+                       :titles [{:link "http://encountersthepodcast.libsyn.com/rss" :name "Encounters Pod"}
+                                {:link "" :name "Savage Lovecast"}]
                        url ""})]
     (fn []
-      ;; form
       [:div
        [:div#hero
         [:div.container
          [:div.profile
           [:form
-           [input :text "Add Podcast" state]
+           [input :text add-text state]
            [:input {:type     "button"
-                    :value    "Add Feed"
+                    :value    "Add"
                     ;:class    "rounded-sm"
                     :class    "custom-btn"
                     :on-click #(db/get-feed! (url @state) state)}]]]
 
-
-         ;; podcast titles
          [:h1 "Episodes"]
-         [podcast-episodes (:podcasts @state)]]]
+         (:episodes @state)]]
+
        [:div.container
         [:div#work
-         [:div.form-group.col-md-6
-          [links "Podcasts" "left" "border-red" (get-titles (:titles @state))]]]]])))
+         [links "Podcasts" "left" "border-blue" (add-feed-function state (:titles @state))]]]])))

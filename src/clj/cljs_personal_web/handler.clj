@@ -69,7 +69,7 @@
   (r/ring-handler
    (r/router
     [["/" {:get {:handler h-index}}]
-     ["/login" {:get {:handler h-index}}]
+     ["/podcasts" {:get {:handler h-index}}]
      ["/getUser" {:get {:handler h-user}}]
      ["/getRssData" {:get {:handler h-rss-data}}]])
    (r/routes

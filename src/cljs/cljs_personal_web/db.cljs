@@ -19,8 +19,9 @@
   (fn [k r]
     "recursive depth-first search on xml tree to find the content of the given key"
     (if (= cljs.core/PersistentVector (type r))
-      (let [res (get-key-content-from-result k (first k))]
-        (when-not res (get-key-content-from-result k (rest k))))
+      (let [res (get-key-content-from-result k (first r))]
+        (if res res
+          (get-key-content-from-result k (rest r))))
       (when (:tag r)
         (if (= k (:tag r))
           (:content r)
@@ -33,10 +34,9 @@
 
 (defn get-feed! [url state]
   (GET "/getRssData" {:params  {:url url}
-                      :handler #(do
-                                 (let [res (transit-read %)]
+                      :handler #(let [res (transit-read %)]
                                    (js/console.log res)
-                                   (swap! state assoc :titles (get-key-content-from-result :link res))
-                                   (swap! state assoc :episodes res)))}))
+                                   (swap! state assoc :titles (get-title-from-result res))
+                                   (swap! state assoc :episodes res))}))
 
 

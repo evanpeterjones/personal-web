@@ -34,7 +34,7 @@
          (if (= k (:tag r))
            ;; FOUND IT: in this case, since we've found it we only return the content if our count is the same
            ;; Otherwise we want to call the search again with an incremented count
-           (if (= i n)
+           (if (>= i n)
              (:content r)
              (recur k (:content r) (inc i) n))
 

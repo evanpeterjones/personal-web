@@ -2,6 +2,11 @@
 
 (def links
   (fn [title id class ul-links]
+    "example
+
+        [links 'Header' '
+
+    "
     [(keyword (str "div." id))
      [(keyword (str "span." class))]
      [:h2 title]

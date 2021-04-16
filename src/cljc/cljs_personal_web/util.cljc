@@ -44,11 +44,12 @@
     {:link (get-key-content :link r)
      :name (get-key-content :title r)}))
 
-(defn transit-read [x]
+(def transit-read
+  (fn [x]
   #?(:clj
      (let [in (ByteArrayInputStream. (.getBytes x))
            r (t/reader in :json)]
        (t/read r))
      :cljs
      (let [r (t/reader :json)]
-       (t/read r x))))
+       (t/read r x)))))

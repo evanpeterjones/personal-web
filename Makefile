@@ -9,3 +9,7 @@ dev:
 
 repl:
 	lein run
+
+deploy:
+	lein uberjar
+	java -jar target/cljs-personal-web.jar

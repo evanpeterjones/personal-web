@@ -1,5 +1,5 @@
 (ns cljs-personal-web.util
-  (:require [cognitect.transit :as t])
+  (:require [cognitect.transit :as transit])
   #?(:clj (:import [java.io ByteArrayInputStream ByteArrayOutputStream])))
 
 (def get-nth-key-content
@@ -44,19 +44,26 @@
     {:link (get-key-content :link r)
      :name (get-key-content :title r)}))
 
+;;;; Transit read/write functions defaults to json
+
 (def transit-read
-  (fn [x]
-  #?(:clj
-     (let [in (ByteArrayInputStream. (.getBytes x))
-           r (t/reader in :json)]
-       (t/read r))
-     :cljs
-     (let [r (t/reader :json)]
-       (t/read r x)))))
+  (fn
+    ([x] (transit-read x :json))
+    ([x data-type]
+     #?(:clj
+        (let [in (ByteArrayInputStream. (.getBytes x))
+              r (transit/reader in data-type)]
+          (transit/read r))
+        :cljs
+        (let [r (transit/reader data-type)]
+          (transit/read r x))))))
 
 (def transit-write
-  (fn [x]
-    #?(:clj (let [o (ByteArrayOutputStream. 4096)
-                  json-writer (transit/writer o :json)]
-              (transit/write json-writer o)
-              (.toString o)))))
+  (fn
+    ([x] (transit-write x :json))
+    ([x data-type]
+     #?(:clj (let [o (ByteArrayOutputStream. 4096)
+                   json-writer (transit/writer o data-type)]
+               (transit/write json-writer x)
+               (.toString o))
+        :cljs "not yet implemented, yikes"))))

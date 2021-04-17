@@ -1,15 +1,14 @@
 (ns cljs-personal-web.handler
   (:require [rss :refer [get-data-from-url]]
             [reitit.ring :as r]
-            [cognitect.transit :as transit]
             [cljs-personal-web.middleware :refer [middleware]]
-            [cljs-personal-web.util :as [transit-read
-                                         transit-write]]
+            [cljs-personal-web.util :refer [transit-read
+                                            transit-write]]
             [hiccup.page :refer [include-js include-css html5]]
             [clojure.pprint :as pp]
             [config.core :refer [env]])
   (:import (java.io ByteArrayOutputStream)))
-n
+
 (def mount-target
   [:div#app])
 
@@ -21,7 +20,6 @@ n
            :content "width=device-width, initial-scale=1"}]
    [:link {:rel "icon" :href "favicon.png"}]
    [:link {:href "https://fonts.googleapis.com/css?family=Work+Sans:300,400,600,700" :rel "stylesheet"}]
-
    (include-css                                             ;"/css/style.css"
                 (if (env :dev) "/css/site.css" "/css/site.min.css"))])
 

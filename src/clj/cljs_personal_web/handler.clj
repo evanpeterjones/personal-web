@@ -3,11 +3,13 @@
             [reitit.ring :as r]
             [cognitect.transit :as transit]
             [cljs-personal-web.middleware :refer [middleware]]
+            [cljs-personal-web.util :as [transit-read
+                                         transit-write]]
             [hiccup.page :refer [include-js include-css html5]]
             [clojure.pprint :as pp]
             [config.core :refer [env]])
   (:import (java.io ByteArrayOutputStream)))
-
+n
 (def mount-target
   [:div#app])
 
@@ -53,12 +55,9 @@
   (fn [{{:keys [url]} :params}]
     (pp/pprint (str "Requesting data for: " url))
     (when url
-      (let [o (ByteArrayOutputStream. 4096)
-            json-writer (transit/writer o :json)]
-        (->> url
-             get-data-from-url
-             (transit/write json-writer))
-        (.toString o)))))
+      (->> url
+           get-data-from-url
+           transit-write))))
 
 (def h-rss-data (h "data/json" get-rss))
 (def h-user (h "data/json" get-user))

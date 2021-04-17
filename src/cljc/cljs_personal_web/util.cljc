@@ -53,3 +53,10 @@
      :cljs
      (let [r (t/reader :json)]
        (t/read r x)))))
+
+(def transit-write
+  (fn [x]
+    #?(:clj (let [o (ByteArrayOutputStream. 4096)
+                  json-writer (transit/writer o :json)]
+              (transit/write json-writer o)
+              (.toString o)))))

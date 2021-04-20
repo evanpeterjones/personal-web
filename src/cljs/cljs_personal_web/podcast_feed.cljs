@@ -34,7 +34,7 @@
   (fn [state m]
     (map
       #(into %
-            {:onclick (fn [url]  (db/get-feed! url state))})
+            {:onclick (fn [url]  (println (str "Requesting: " url)) (db/get-feed! url state))})
          m)))
 
 (def form
@@ -42,7 +42,7 @@
         url (create-label add-text)
         state (r/atom {:episodes nil
                        :titles [{:link "http://encountersthepodcast.libsyn.com/rss" :name "Encounters Pod"}
-                                {:link "" :name "Savage Lovecast"}]
+                                {:link "https://randomhorror9.libsyn.com/rss" :name "Random Number Generator Horror Podcast No.9"}]
                        url ""})]
     (fn []
       [:div
@@ -62,4 +62,4 @@
 
        [:div.container
         [:div#work
-         [links "Podcasts" "left" "border-blue" (add-feed-function state (:titles @state))]]]])))
+         [links "Podcasts" "left" "border-blue" (add-feed-function @state (:titles @state))]]]])))

@@ -3,9 +3,7 @@
 (def links
   (fn [title id class ul-links]
     "example
-
-        [links 'Header' '
-
+        [links 'Header' '\n']
     "
     [(keyword (str "div." id))
      [(keyword (str "span." class))]
@@ -17,5 +15,5 @@
                          (when (:href li-link)
                            [:a li-link (:name li-link)])
                          (when (:link li-link)
-                           [:p {:on-click (fn [x] (apply (:onclick li-link) (:link li-link)))}
+                           [:p {:on-click (fn [_] (apply (:onclick li-link) (:link li-link)))}
                             (:name li-link)])])]]))

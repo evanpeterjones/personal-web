@@ -16,5 +16,5 @@
   (GET "/getRssData" {:params  {:url url}
                       :handler #(let [res (t/transit-read %)]
                                    (js/console.log res)
-                                   (swap! state assoc :titles (xml/get-title-from-result res))
-                                   (swap! state assoc :episodes res))}))
+                                   (swap! state assoc :titles (xml/get-key-content :title res))
+                                   (swap! state assoc :episodes (xml/get-key-content :title res)))}))

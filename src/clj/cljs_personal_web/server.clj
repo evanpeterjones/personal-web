@@ -1,8 +1,8 @@
 (ns cljs-personal-web.server
   (:require
-   [cljs-personal-web.handler :refer [app]]
-   [config.core :refer [env]]
-   [ring.adapter.jetty :refer [run-jetty]])
+    [cljs-personal-web.handler :refer [app]]
+    [config.core :refer [env]]
+    [ring.adapter.jetty :refer [run-jetty]])
   (:import (java.net BindException ServerSocket)
            (java.io IOException))
   (:gen-class))

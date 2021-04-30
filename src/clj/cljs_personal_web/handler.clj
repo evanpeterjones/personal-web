@@ -2,8 +2,7 @@
   (:require [rss :refer [get-data-from-url]]
             [reitit.ring :as r]
             [cljs-personal-web.middleware :refer [middleware]]
-            [cljs-personal-web.util :refer [transit-read
-                                            transit-write]]
+            [cljs-personal-web.utils.transit :as transit]
             [hiccup.page :refer [include-js include-css html5]]
             [clojure.pprint :as pp]
             [config.core :refer [env]]))
@@ -55,7 +54,7 @@
     (when url
       (->> url
            get-data-from-url
-           transit-write))))
+           transit/transit-write))))
 
 (def h-rss-data (h "data/json" get-rss))
 (def h-user (h "data/json" get-user))

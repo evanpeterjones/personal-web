@@ -67,17 +67,28 @@
 
            (get-nth-key-content k (:content r) i n)))))))
 
-(def get-key-content
+(def get-key
   (fn [k r]
     "recursive depth-first search on xml tree to find the content of the given key"
     (if (not (map? r))
-      (let [res (get-key-content k (first r))]
+      (let [res (get-key k (first r))]
         (if res res
-                (get-key-content k (rest r))))
+                (get-key k (rest r))))
       (when (:tag r)
         (if (= k (:tag r))
-          (:content r)
-          (get-key-content k (:content r)))))))
+          r
+          (get-key k (:content r)))))))
+
+(def -cnv
+  (fn [item]
+    {(:tag item) (:content item)
+     :attrs (:attrs item)}))
+
+(def xml-filter
+  (fn [items-k tree]
+    "returns a list of contiguous item keys"
+    (if (= (:tag tree) items-k)
+      (map :content tree))))
 
 (def get-title-from-result
   (fn [r]

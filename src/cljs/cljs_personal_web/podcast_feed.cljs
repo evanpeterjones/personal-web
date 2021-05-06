@@ -14,35 +14,25 @@
 (defmethod component :title [xml-data]
   (let [title-data (xml-data :content)]
     (if (vector? title-data)
-      (first [:h1 title-data])
+      [:h1 (first title-data)]
       [:h1 title-data])))
 
+(defmethod component :default [_] nil)
+
+(defmethod component :description [xml-data]
+  (let [d (-> xml-data :content :description)]
+    [:p d]))
+
 (defmethod component :item [xml-data]
-  (let [item-data (:content xml-data)
-        episode-title (xml/get-key :title item-data)
-        episode-description (xml/get-key :description item-data)
-        episode-audio-link (xml/get-key :enclosure item-data)]
-    [:div
-     [:h1 [:a {:href (:url episode-audio-link)} episode-title]]
-     [:p (if (vector? episode-description) (first episode-description)  episode-description)]]))
+  [:div (map component (:content xml-data))])
 
 ;;; I want to make an exif data remover site.
 ;;; We could display where the image was taken and all of the data associated with it.
 ;;;
 ;;; Could also just edit the data in the image, and store messages in the metadata
-(def add-feed-function
-  (fn [state m]
-    (map
-      #(into %
-             {:onclick (fn [url]  (println (str "Requesting: " url)) (db/get-feed! url state))})
-      m)))
-
-(def episodes
-  (fn [xml-data]
-    [:div (map component xml-data)]))
 
 (def form
-  (let [state (r/atom {:link-view nil
+  (let [state (r/atom {:add-podcast nil
                        :episodes nil
                        :titles [{:link "http://encountersthepodcast.libsyn.com/rss"
                                  :name "Encounters Pod"}
@@ -57,16 +47,18 @@
            [input :text "Add Podcast" state]
            [:input {:type     "button"
                     :value    "Add"
-                    :class    "custom-btn"
-                    :on-click #(when (:link-view @state)
-                                 (db/get-feed! (:link-view @state) state))}]]]
+                    :on-click #(when (:add-podcast @state)
+                                 (db/get-feed! (:add-podcast @state) state))}]]]
 
-         [:h1 "Episodes"]
-         [episodes (:episodes @state)]]]
+         [:h1 "Episodes"]]]
+ 
+       [:div.episodes
+        (map component (:episodes @state))]
 
+       [:p (:episodes @state)]
        [:div.container
         [:div#work
          [links "Podcasts" "left" "border-blue" (:titles @state) (fn [x]
                                                                    (js/console.log x)
-                                                                   (swap! state assoc :link-view x)
+                                                                   (swap! state assoc :add-podcast x)
                                                                    (db/get-feed! x state))]]]])))

@@ -40,7 +40,7 @@
          (if (= k (:tag r))
            ;; FOUND IT: in this case, since we've found it we only return the content if our count is the same
            ;; Otherwise we want to call the search again with an incremented count
-           (if (>= (count l) i)
+           (if (= (count l) i)
              (conj l (:content r))
              (get-n-keys k (:content r) (conj l (:content r))))
 
@@ -90,9 +90,15 @@
     (if (= (:tag tree) items-k)
       (map :content tree))))
 
+(def find (fn [k r] ))
+
+(def get*
+  (fn [x r]
+    (:content (filter #(= x (:item %)) r))))
+
 (def get-title-from-result
   (fn [r]
-    {:link (get-key-content :link r)
-     :name (get-key-content :title r)}))
+    {:link (get-key :link r)
+     :name (get-key :title r)}))
 
 

@@ -15,6 +15,8 @@
 (defn get-feed! [url state]
   (GET "/getRssData" {:params  {:url url}
                       :handler #(let [res (t/transit-read %)]
-                                   (js/console.log res)
-                                   (swap! state assoc :titles (xml/get-key-content :title res))
-                                   (swap! state assoc :episodes (xml/get-key-content :title res)))}))
+                                  (js/console.log res)
+                                  (swap! state conj (:titles @state) {:link "asdf"
+                                                                      :name "test"})
+                                  (swap! state assoc :episodes res)
+                                  )}))

@@ -45,7 +45,7 @@
         :body (fb r)}))))
 
 (def get-user
-  (fn [r]
+  (fn [_]
     (str "user" (clojure.core/rand-int 100))))
 
 (def get-rss

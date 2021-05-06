@@ -51,11 +51,10 @@
                                  (db/get-feed! (:add-podcast @state) state))}]]]
 
          [:h1 "Episodes"]]]
- 
+
        [:div.episodes
         (map component (:episodes @state))]
 
-       [:p (:episodes @state)]
        [:div.container
         [:div#work
          [links "Podcasts" "left" "border-blue" (:titles @state) (fn [x]

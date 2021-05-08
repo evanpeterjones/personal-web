@@ -1,4 +1,4 @@
-(ns cljs-personal-web.components)
+(ns cljs-personal-web.cljs-components)
 
 (defn row [label input]
   [:div.row

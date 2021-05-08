@@ -38,12 +38,10 @@
 
 (def pod-full-render
   (fn [d]
-    (let [url (p d)]
-      (when {}
-        (pp/pprint (str "Server Rendering podcast for: " url))
-        (-> url
-            get-rss
-            render-podcast)))))
+    (pp/pprint (str "Server Rendering podcast for: " (p d)))
+    (-> d
+        get-rss
+        render-podcast)))
 
 (def h-rss-data (h "data/json" get-rss))
 (def h-user (h "data/json" get-user))

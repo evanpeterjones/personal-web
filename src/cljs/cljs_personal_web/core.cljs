@@ -3,7 +3,7 @@
    [cljs-personal-web.draw :refer [draw-circle]]
    [cljs-personal-web.world-map :refer [test-func]]
    [cljs-personal-web.podcast-feed :refer [form]]
-   [cljs-personal-web.components :refer [links]]
+   [cljs-personal-web.cljs-components :refer [links]]
    [reagent.core :as reagent :refer [atom]]
    [reagent.dom :as rdom]
    [reagent.session :as session]

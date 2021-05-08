@@ -13,8 +13,10 @@
              :content "width=device-width, initial-scale=1"}]
      [:link {:rel "icon" :href "favicon.png"}]
      [:link {:href "https://fonts.googleapis.com/css?family=Work+Sans:300,400,600,700" :rel "stylesheet"}]
-     (include-css                                             ;"/css/style.css"
-       (if (env :dev) "/css/site.css" "/css/site.min.css"))]))
+     (include-css "/css/site.css"
+                      ;"/css/site.min.css"
+                      ;"/css/style.css"(if (env :dev) )
+                      )]))
 
 (def loading-page
   (fn [_]

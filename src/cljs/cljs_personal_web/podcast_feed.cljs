@@ -1,9 +1,9 @@
 (ns cljs-personal-web.podcast-feed
   (:require [reagent.core :as r]
             [cljs-personal-web.db :as db]
-            [cljs-personal-web.utils.xml :as xml]
-            [cljs-personal-web.utils.components :refer [component]]
-            [cljs-personal-web.components :refer [links input]]
+    ;[cljs-personal-web.utils.xml :as xml]
+            [cljs-personal-web.components.components :refer [component]]
+            [cljs-personal-web.cljs-components :refer [links input]]
             [clojure.string :as str]))
 
 (defn podcast-episodes [pods]

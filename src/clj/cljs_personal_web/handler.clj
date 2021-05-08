@@ -2,33 +2,11 @@
   (:require [rss :refer [get-data-from-url]]
             [reitit.ring :as r]
             [cljs-personal-web.middleware :refer [middleware]]
+            [cljs-personal-web.pages.html :refer [loading-page]]
+            [cljs-personal-web.pages.podcast :refer [render-podcast]]
             [cljs-personal-web.utils.transit :as transit]
-            [hiccup.page :refer [include-js include-css html5]]
             [clojure.pprint :as pp]
             [config.core :refer [env]]))
-
-(def mount-target
-  [:div#app])
-
-(def head
-  (fn []
-    [:head
-     [:title "Evan Jones"]
-     [:meta {:charset "utf-8"}]
-     [:meta {:name "viewport"
-             :content "width=device-width, initial-scale=1"}]
-     [:link {:rel "icon" :href "favicon.png"}]
-     [:link {:href "https://fonts.googleapis.com/css?family=Work+Sans:300,400,600,700" :rel "stylesheet"}]
-     (include-css                                             ;"/css/style.css"
-       (if (env :dev) "/css/site.css" "/css/site.min.css"))]))
-
-(def loading-page
-  (fn [_]
-    (html5
-     (head)
-     [:body {:class "body-container"}
-      mount-target
-      (include-js "/js/app.js")])))
 
 (def request (atom []))
 
@@ -48,6 +26,8 @@
   (fn [_]
     (str "user" (clojure.core/rand-int 100))))
 
+(def p (fn [{{:keys [u]} :params}] u))
+
 (def get-rss
   (fn [{{:keys [url]} :params}]
     (pp/pprint (str "Requesting data for: " url))
@@ -56,16 +36,30 @@
            get-data-from-url
            transit/transit-write))))
 
+(def pod-full-render
+  (fn [d]
+    (let [url (p d)]
+      (when {}
+        (pp/pprint (str "Server Rendering podcast for: " url))
+        (-> url
+            get-rss
+            render-podcast)))))
+
 (def h-rss-data (h "data/json" get-rss))
 (def h-user (h "data/json" get-user))
 (def h-index (h loading-page))
 (def url "http://encountersthepodcast.libsyn.com/rss")
+(def h-rss-data (let [r (h-rss-data {:params {:url url}})]
+                  (fn [{{:keys [_]} :params}] r)))
+(def rdata (transit/transit-read (:body (h-rss-data {}))))
+(def h-pod (h pod-full-render))
 
 (def app
   (r/ring-handler
    (r/router
     [["/" {:get {:handler h-index}}]
      ["/podcasts" {:get {:handler h-index}}]
+     ["/pod" {:get {:handler h-pod}}]
      ["/getUser" {:get {:handler h-user}}]
      ["/getRssData" {:get {:handler h-rss-data}}]])
    (r/routes

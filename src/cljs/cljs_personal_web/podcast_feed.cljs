@@ -2,31 +2,13 @@
   (:require [reagent.core :as r]
             [cljs-personal-web.db :as db]
             [cljs-personal-web.utils.xml :as xml]
+            [cljs-personal-web.utils.components :refer [component]]
             [cljs-personal-web.components :refer [links input]]
             [clojure.string :as str]))
 
 (defn podcast-episodes [pods]
   [:div (for [ep pods]
           [:p (get-in ep [:content 0 :content])])])
-
-(defmulti component #(:tag %))
-
-(defmethod component :title [xml-data]
-  (let [title-data (xml-data :content)]
-    (if (vector? title-data)
-      [:h1 (first title-data)]
-      [:h1 title-data])))
-
-(defmethod component :default [_] nil)
-
-(defmethod component :description [xml-data]
-  (let [d (-> xml-data :content :description)]
-    [:p d]))
-
-(defmethod component :item [xml-data]
-  [:div.item
-   (for [c (:content xml-data)]
-     (component c))])
 
 (def form
   (let [state (r/atom {:add-podcast nil
@@ -49,8 +31,7 @@
 
          [:h1 "Episodes"]]]
 
-       [:div.episodes
-        (map component (:episodes @state))]
+       [:div.episodes (map component (:episodes @state))]
 
        [:div.container
         [:div#work

@@ -1,4 +1,3 @@
 (ns cljs-personal-web.username-util)
 
-(defn get-new [request]
-      (str "user" (rand-int)))
+(def get-new (fn [_]  (str "user" (rand-int 1))))

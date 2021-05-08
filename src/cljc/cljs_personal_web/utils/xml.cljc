@@ -90,7 +90,7 @@
     (if (= (:tag tree) items-k)
       (map :content tree))))
 
-(def find (fn [k r] ))
+(def find (fn [k r] [k r]))
 
 (def get*
   (fn [x r]

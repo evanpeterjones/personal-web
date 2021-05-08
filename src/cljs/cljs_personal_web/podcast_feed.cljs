@@ -24,12 +24,9 @@
     [:p d]))
 
 (defmethod component :item [xml-data]
-  [:div (map component (:content xml-data))])
-
-;;; I want to make an exif data remover site.
-;;; We could display where the image was taken and all of the data associated with it.
-;;;
-;;; Could also just edit the data in the image, and store messages in the metadata
+  [:div.item
+   (for [c (:content xml-data)]
+     (component c))])
 
 (def form
   (let [state (r/atom {:add-podcast nil
@@ -61,3 +58,15 @@
                                                                    (js/console.log x)
                                                                    (swap! state assoc :add-podcast x)
                                                                    (db/get-feed! x state))]]]])))
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,10 +1,6 @@
-(ns cljs-personal-web.cljs-components)
-
-(defn row [label input]
-  [:div.row
-   [:div.col-md-2 [:label label]]
-   [:div.col-md-5 input]
-   [:br]])
+(ns cljs-personal-web.cljs-components
+  "collection of components which require javascript *vomit-emoji*"
+  (:require [cljs-personal-web.components.structure :refer [row]]))
 
 (def input
   (fn [type label state]

@@ -31,14 +31,14 @@
 
          [:h1 "Episodes"]]]
 
-       [:div.episodes (map component (:episodes @state))]
-
        [:div.container
         [:div#work
          [links "Podcasts" "left" "border-blue" (:titles @state) (fn [x]
                                                                    (js/console.log x)
                                                                    (swap! state assoc :add-podcast x)
-                                                                   (db/get-feed! x state))]]]])))
+                                                                   (db/get-feed! x state))]]]
+
+       [:div.episodes (map component (:episodes @state))]])))
 
 
 

@@ -1,5 +1,5 @@
 (ns cljs-personal-web.pages.html
-  (:use [hiccup.page :refer [include-js include-css html5]]))
+  #?(:clj (:require [hiccup.page :refer [include-js include-css html5]])))
 
 (def mount-target
   [:div#app])
@@ -9,27 +9,26 @@
     [:head
      [:title "Evan Jones"]
      [:meta {:charset "utf-8"}]
-     [:meta {:name "viewport"
+     [:meta {:name "viewport",
              :content "width=device-width, initial-scale=1"}]
      [:link {:rel "icon" :href "favicon.png"}]
      [:link {:href "https://fonts.googleapis.com/css?family=Work+Sans:300,400,600,700" :rel "stylesheet"}]
-     (include-css "/css/site.css"
-                      ;"/css/site.min.css"
-                      ;"/css/style.css"(if (env :dev) )
-                      )]))
+     #?(:clj (include-css "/css/site.css")
+        :cljs [:link {:type "text/css",
+                      :href "/css/site.css",
+                      :rel  "stylesheet"}])]))
 
 (def loading-page
   (fn [_]
-    (html5
-      (head)
-      [:body {:class "body-container"}
-       mount-target
-       (include-js "/js/app.js")])))
+    #?(:clj (html5
+              (head)
+              [:body.body-container mount-target (include-js "/js/app.js")]))))
 
-(def basic
-  (fn [body]
-    (html5
-      (head)
-      [:body {:class "body-container"}
-       body
-       (include-js "/js/app.js")])))
+(def basic-page
+  (fn
+    ([] (basic-page [:h1 "This page has no content yet"]))
+    ([body]
+     #?(:clj (html5
+               (head)
+               [:body.body-container
+                [:div.body body]])))))

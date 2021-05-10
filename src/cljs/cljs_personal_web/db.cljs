@@ -18,5 +18,4 @@
                                   (js/console.log res)
                                   (swap! state conj (:titles @state) {:link "asdf"
                                                                       :name "test"})
-                                  (swap! state assoc :episodes res)
-                                  )}))
+                                  (swap! state assoc :episodes res))}))

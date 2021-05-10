@@ -1,6 +1,8 @@
 (ns cljs-personal-web.pages.podcast
-  (:require [cljs-personal-web.pages.html :refer [basic]]))
+  (:require [cljs-personal-web.pages.html :refer [basic-page]]
+            [cljs-personal-web.components.components :refer [component]]))
 
 (def render-podcast
-  (fn [_]
-    (basic "<h1>test</h1>")))
+  (fn [d]
+    #?(:clj (basic-page (map component d))
+       :cljs (map component d))))

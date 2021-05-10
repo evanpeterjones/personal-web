@@ -14,10 +14,11 @@
     [:p d]))
 
 (defmethod component :item [xml-data]
-  [:div.item
-   (->> xml-data
-        :content
-        (map component)
-        (remove nil?))])
+  (let []
+    [:div.item
+     (->> xml-data
+          :content
+          (map component)
+          (remove nil?))]))
 
 (defmethod component :default [data] nil)

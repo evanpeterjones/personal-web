@@ -36,30 +36,27 @@
            get-data-from-url
            transit/transit-write))))
 
-(def pod-full-render
+(def pod-render-page
   (fn [d]
     (pp/pprint (str "Server Rendering podcast for: " (p d)))
     (-> d
         get-rss
         render-podcast)))
 
-(def h-rss-data (h "data/json" get-rss))
-(def h-user (h "data/json" get-user))
-(def h-index (h loading-page))
 (def url "http://encountersthepodcast.libsyn.com/rss")
-(def h-rss-data (let [r (h-rss-data {:params {:url url}})]
+(def get-data (h "data/json" get-rss))
+(def h-rss-data (let [r (get-data {:params {:url url}})]
                   (fn [{{:keys [_]} :params}] r)))
 (def rdata (transit/transit-read (:body (h-rss-data {}))))
-(def h-pod (h pod-full-render))
 
 (def app
   (r/ring-handler
    (r/router
-    [["/" {:get {:handler h-index}}]
-     ["/podcasts" {:get {:handler h-index}}]
-     ["/pod" {:get {:handler h-pod}}]
-     ["/getUser" {:get {:handler h-user}}]
-     ["/getRssData" {:get {:handler h-rss-data}}]])
+    [["/" {:get {:handler (h loading-page)}}]
+     ["/podcasts" {:get {:handler (h loading-page)}}]
+     ["/pod" {:get {:handler (h pod-render-page)}}]
+     ["/getUser" {:get {:handler (h "data/json" get-user)}}]
+     ["/getRssData" {:get {:handler (h "data/json" get-rss)}}]])
    (r/routes
     (r/create-resource-handler {:path "/" :root "/public"})
     (r/create-default-handler))

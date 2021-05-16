@@ -9,6 +9,22 @@
 .black-font, .black-font:hover, .black-font:active, .black-font:focus {
     color: #000000;
 }
+
+.scrollable {
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 20px;
+
+}
+
+.scrollable-sm {
+  height: 150px;
+}
+
+.scrollable-half {
+  height: 50%;
+}
+
 .custom-btn {
     margin-top: 50px;
     text-align: center;

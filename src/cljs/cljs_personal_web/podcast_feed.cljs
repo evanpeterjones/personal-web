@@ -2,13 +2,9 @@
   (:require [reagent.core :as r]
             [cljs-personal-web.db :as db]
     ;[cljs-personal-web.utils.xml :as xml]
-            [cljs-personal-web.components.components :refer [component]]
+            [cljs-personal-web.components.components :refer [episode]]
             [cljs-personal-web.cljs-components :refer [links input]]
             [clojure.string :as str]))
-
-(defn podcast-episodes [pods]
-  [:div (for [ep pods]
-          [:p (get-in ep [:content 0 :content])])])
 
 (def form
   (let [state (r/atom {:add-podcast nil
@@ -19,26 +15,29 @@
                                  :name "Random Number Generator Horror Podcast No.9"}]})]
     (fn []
       [:div
-       [:div#hero
-        [:div.container
-         [:div.profile
-          [:form
-           [input :text "Add Podcast" state]
-           [:input {:type     "button"
-                    :value    "Add"
-                    :on-click #(when (:add-podcast @state)
-                                 (db/get-feed! (:add-podcast @state) state))}]]]
-
-         [:h1 "Episodes"]]]
-
        [:div.container
         [:div#work
-         [links "Podcasts" "left" "border-blue" (:titles @state) (fn [x]
-                                                                   (js/console.log x)
-                                                                   (swap! state assoc :add-podcast x)
-                                                                   (db/get-feed! x state))]]]
+         [:div
+          [:ul
+           [:li [:h2 "Podcasts"] [:p {:class "new" :style {:font-size "1.5em"}} "+"]
+            [:a {:href "https://www.google.com"} ]]]]
 
-       [:div.episodes (map component (:episodes @state))]])))
+         [links "left" "border-blue" (:titles @state) (fn [x]
+                                                        (js/console.log x)
+                                                        (swap! state assoc :add-podcast x)
+                                                        (db/get-feed! x state))]]]
+       [:div#hero
+        [:div.container
+         (when (:episodes @state)
+           [:div.container
+            [:div#work
+             [:h1 "Episodes"]
+
+             [:div.scrollable.scrollable-sm
+              [:ul (map episode (:episodes @state))]]]])]]])))
+
+
+
 
 
 

@@ -64,8 +64,8 @@
        [image]
        [:div#work
         [:div.container
-         [links "Me" "left" "border-red" work-links]
-         [links "Play" "right" "border-blue" play-links]]]])))
+         [links "left" "border-red" work-links]
+         [links "right" "border-blue" play-links]]]])))
 
 (def podcasts
   (fn []

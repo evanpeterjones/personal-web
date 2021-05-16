@@ -26,8 +26,6 @@
   (fn [_]
     (str "user" (clojure.core/rand-int 100))))
 
-(def p (fn [{{:keys [u]} :params}] u))
-
 (def get-rss
   (fn [{{:keys [url]} :params}]
     (pp/pprint (str "Requesting data for: " url))
@@ -37,17 +35,22 @@
            transit/transit-write))))
 
 (def pod-render-page
-  (fn [d]
-    (pp/pprint (str "Server Rendering podcast for: " (p d)))
-    (-> d
-        get-rss
-        render-podcast)))
+  (let [p (fn [{{:keys [u]} :params}] u)]
+    (fn [d]
+      (pp/pprint (str "Server Rendering podcast for: " (p d)))
+      (-> d
+          get-rss
+          render-podcast))))
+
+;;; testing server rendering code
 
 (def url "http://encountersthepodcast.libsyn.com/rss")
 (def get-data (h "data/json" get-rss))
 (def h-rss-data (let [r (get-data {:params {:url url}})]
                   (fn [{{:keys [_]} :params}] r)))
 (def rdata (transit/transit-read (:body (h-rss-data {}))))
+
+;;; end test server-rendering code
 
 (def app
   (r/ring-handler

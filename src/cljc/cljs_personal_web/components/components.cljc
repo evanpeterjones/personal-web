@@ -1,24 +1,35 @@
 (ns cljs-personal-web.components.components
   #?(:clj (:import (clojure.lang PersistentArrayMap LazySeq))))
 
-(defmulti component #(:tag %))
+(def xml->map
+  (fn [{:keys [tag content attrs]}]
+    "converts an xml structure to a more clojure-friendly one
+    limits the need for accessor functions"
+    {tag {:content content
+          :attrs attrs}}))
 
-(defmethod component :title [xml-data]
-  (let [title-data (xml-data :content)]
-    (if (vector? title-data)
-      [:h1 (first title-data)]
-      [:h1 title-data])))
+(def episode-component
+  (fn [{:keys [title link
+               itunes:summary
+               itunes:duration
+               itunes:subtitle
+               enclosure]}]
+    [:li
+     #?(:clj [:a {:href (:content link)}
+              (-> title :content first)]
+        :cljs [:a {:href (:content link)}
+               (-> title :content first)])]))
 
-(defmethod component :description [xml-data]
-  (let [d (-> xml-data :content :description)]
-    [:p d]))
+(defmulti episode #(:tag %))
 
-(defmethod component :item [xml-data]
-  (let []
+(defmethod episode :default [_] nil)
+
+(defmethod episode :item [xml-data]
+  (let [item-data (->> xml-data :content
+                       (map xml->map)
+                       (into {}))]
     [:div.item
-     (->> xml-data
-          :content
-          (map component)
-          (remove nil?))]))
+     [:ul
+      [episode-component item-data]]]))
 
-(defmethod component :default [data] nil)
+

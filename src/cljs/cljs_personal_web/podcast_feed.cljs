@@ -1,10 +1,9 @@
 (ns cljs-personal-web.podcast-feed
   (:require [reagent.core :as r]
             [cljs-personal-web.db :as db]
-    ;[cljs-personal-web.utils.xml :as xml]
             [cljs-personal-web.components.components :refer [episode]]
-            [cljs-personal-web.cljs-components :refer [links input]]
-            [clojure.string :as str]))
+            [cljs-personal-web.components.input :refer [input]]
+            [cljs-personal-web.components.links :refer [links]]))
 
 (def form
   (let [state (r/atom {:add-podcast nil
@@ -22,14 +21,19 @@
             [:div#work
              [:h1 "Episodes"]
 
-             [:div.scrollable.scrollable-sm
+             [:div.scrollable-vertical.scrollable-sm
               [:ul (map episode (:episodes @state))]]]])]]
 
        [:div.container
         [:div#work
          [:div
-          [:p {:class "new" :style {:font-size "1.5em"}} "+"]
+          ;[:p {:class "new" :style {:font-size "1.5em"}} "+"]
           [:ul [:li [:h2 "Podcasts"]]]]
+
+         [:div.podcasts
+          ;gotta have some horizontal css
+          ;gotta have some images here
+          ]
 
          [links "left" "border-blue" (:titles @state) (fn [x]
                                                         (js/console.log x)

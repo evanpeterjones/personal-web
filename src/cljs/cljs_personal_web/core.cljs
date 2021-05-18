@@ -3,7 +3,8 @@
    [cljs-personal-web.draw :refer [draw-circle]]
    [cljs-personal-web.world-map :refer [test-func]]
    [cljs-personal-web.podcast-feed :refer [form]]
-   [cljs-personal-web.cljs-components :refer [links]]
+   [cljs-personal-web.components.links :refer [links]]
+   [cljs-personal-web.components.audio-player :refer [player]]
    [reagent.core :as reagent :refer [atom]]
    [reagent.dom :as rdom]
    [reagent.session :as session]
@@ -72,8 +73,8 @@
     [form]))
 
 (def footer
-  (fn []
-    [:footer
+  (fn [playing]
+    [:footer {:style {:class (if playing "player-active" "player-inactive")}}
      [:p (str "© " (.getFullYear (new js/Date)))
       [:b " by Evan Jones w/ClojureScript"]]]))
 
@@ -90,13 +91,15 @@
 
 (defn current-page []
   (fn []
-    (let [page (:current-page (session/get :route))]
+    (let [page (:current-page (session/get :route))
+          link (atom "https://traffic.libsyn.com/secure/encountersthepodcast/402_-_Urban_Legend_Profiles_-_Satanic_Panic_Final.mp3?dest-id=748833")]
       [:div {:style {:max-width "1000"}}
        [:header.header
         (when (= page #'podcasts)
           [:p [:a {:href (path-for :index) :style {:font-size "2em"}} "\uD83C\uDFE0"]])]
        [page]
-       [footer]])))
+       [player @link]
+       [footer @link]])))
 
 ;; -------------------------
 ;; Initialize app

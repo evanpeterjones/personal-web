@@ -12,4 +12,3 @@
                           :id        id
                           :value     (when value value)
                           :on-change #(swap! state assoc id (-> % .-target .-value))}]))))
-

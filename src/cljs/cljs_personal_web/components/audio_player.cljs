@@ -4,12 +4,9 @@
 ;; by default should just display a pause/play button
 
 (def player
-  (let [paused? (-> js/document
-                    (.getElementById "player")
-                    .-paused)
+  (let [                                                    ;paused? (-> js/document (.getElementById "player") .-paused)
         toggle-play (fn [_]
-                      (let [p (-> js/document
-                                  (.getElementById "player"))]
+                      (let [p (-> js/document (.getElementById "player"))]
                         (if (.-paused p)
                           (.play p)
                           (.pause p))))]

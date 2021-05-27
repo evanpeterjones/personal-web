@@ -1,17 +1,10 @@
 (ns cljs-personal-web.components.components
-  #?(:clj (:import (clojure.lang PersistentArrayMap LazySeq))
-     :cljs (:require [cljs-personal-web.components.audio-player ])))
-
-(def xml->map
-  (fn [{:keys [tag content attrs]}]
-    "converts an xml structure to a more clojure-friendly one
-    limits the need for accessor functions"
-    {tag {:content content
-          :attrs attrs}}))
+  #?@(:clj [(:import (clojure.lang PersistentArrayMap LazySeq))(:require [cljs-personal-web.utils.xml])]
+     :cljs [(:require [cljs-personal-web.components.audio-player]
+                      [cljs-personal-web.utils.xml])]))
 
 (def episode-component
   (fn
-    ([x-map] (episode-component x-map (fn [_] (fn []))))
     ([{:keys [title link
               itunes:summary
               itunes:duration
@@ -31,9 +24,11 @@
 (defmethod episode :default [_] nil)
 
 (defmethod episode :item [xml-data]
-  (let [item-data (->> xml-data :content
-                       (map xml->map)
-                       (into {}))]
+  (let [item-data (if (:content xml-data)
+                    (->> xml-data :content
+                         (map xml->map)
+                         (into {}))
+                    xml-data)]
     [:div.item
      [:ul
       [episode-component item-data]]]))

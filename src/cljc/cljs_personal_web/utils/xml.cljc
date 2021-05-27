@@ -79,10 +79,26 @@
           r
           (get-key k (:content r)))))))
 
-(def -cnv
-  (fn [item]
-    {(:tag item) (:content item)
-     :attrs (:attrs item)}))
+(def xml->map
+  (fn [{:keys [tag content attrs]}]
+    "converts an xml structure to a more clojure-friendly one
+    limits the need for accessor functions"
+    {tag {:content content
+          :attrs attrs}}))
+
+(def convert-item
+  (fn [item-attr-list]
+    (if (:content item-attr-list)
+      (convert-item (:content item-attr-list))
+      (->> item-attr-list
+           (map xml->map)
+           (into {})))))
+
+(def convert-items
+  (fn [item-list]
+    (if (:content item-list)
+      (convert-item (:content item-list))
+      (map convert-item item-list))))
 
 (def xml-filter
   (fn [items-k tree]

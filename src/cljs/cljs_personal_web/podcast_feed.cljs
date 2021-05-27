@@ -1,7 +1,7 @@
 (ns cljs-personal-web.podcast-feed
   (:require [reagent.core :as r]
             [cljs-personal-web.db :as db]
-            [cljs-personal-web.components.components :refer [episode]]
+            [cljs-personal-web.components.components :refer [episode-component]]
             [cljs-personal-web.components.input :refer [input]]
             [cljs-personal-web.components.links :refer [links]]))
 
@@ -22,7 +22,7 @@
            [:ul [:li [:h2 "Episodes"]]]
 
            [:div.scrollable-vertical.scrollable-sm
-            [:ul (map episode (:episodes @state))]]]])
+            [:ul (map episode-component (:episodes @state))]]]])
 
 
 

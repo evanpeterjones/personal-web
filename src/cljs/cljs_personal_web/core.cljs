@@ -92,7 +92,9 @@
 (defn current-page []
   (fn []
     (let [page (:current-page (session/get :route))
-          link (atom "https://traffic.libsyn.com/secure/encountersthepodcast/402_-_Urban_Legend_Profiles_-_Satanic_Panic_Final.mp3?dest-id=748833")]
+          link (atom (str "https://traffic.libsyn.com/secure/encountersthepodcast/"
+                          "402_-_Urban_Legend_Profiles_-_Satanic_Panic_Final.mp3?"
+                          "dest-id=748833"))]
       [:div {:style {:max-width "1000"}}
        [:header.header
         (when (= page #'podcasts)

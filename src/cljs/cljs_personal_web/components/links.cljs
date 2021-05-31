@@ -23,9 +23,8 @@
       [:ul
        (for [li-link ul-links]
          ^{:key li-link} [:li
+                          (when (:href li-link)  [:a li-link (str (:name li-link) " ")])
                           (when (:label li-link) [:p {:class "new" :style {:font-size ".7em"}} (:label li-link)])
-                          (when (:href li-link)
-                            [:a li-link (:name li-link)])
                           (when (:link li-link)
                             [:p {:on-click (fn [_] (c-fn (:link li-link)))}
                              (:name li-link)])])]])))

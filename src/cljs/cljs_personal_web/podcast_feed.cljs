@@ -1,30 +1,42 @@
 (ns cljs-personal-web.podcast-feed
   (:require [reagent.core :as r]
             [cljs-personal-web.db :as db]
-            [cljs-personal-web.components.components :refer [episode-component]]
+            [cljs-personal-web.components.components :refer [episodes]]
             [cljs-personal-web.components.input :refer [input]]
             [cljs-personal-web.components.links :refer [links]]))
+
+
+(def overlay
+  (fn [v]
+    (fn []
+      (let [o (.-display (.-style (.getElementById js/document "overlay")))]
+        (js/console.log o)
+        ;(when o (set! o v))
+        ))))
 
 (def form
   (let [state (r/atom {:add-podcast nil
                        :episodes nil
                        :titles [{:link "http://encountersthepodcast.libsyn.com/rss"
-                                 :img "https://cdn.onlinewebfonts.com/svg/img_433041.png"
+                                 :img "https://cdn-profiles.tunein.com/p1174861/images/logoq.png?t=1"
                                  :name "Encounters Pod"}
                                 {:link "https://randomhorror9.libsyn.com/rss"
-                                 :img "https://cdn.onlinewebfonts.com/svg/img_433041.png"
+                                 :img "https://images.squarespace-cdn.com/content/v1/56660bf257eb8dd25948eabe/1597079501461-38B57Q2B9NN68NPZT3D6/ke17ZwdGBToddI8pDm48kNiEM88mrzHRsd1mQ3bxVct7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0topjEaZcWjtmMYdCWL4dkGbxs35J-ZjFa9s1e3LsxrX8g4qcOj2k2AL08mW_Htcgg/Antler+Skull+-+No9+WHITE.png?format=1000w"
                                  :name "Random Number Generator Horror Podcast No.9"}]})]
     (fn []
       [:div
+       [:div
+        {:id "overlay"
+         :on-click (overlay "none")}
+        [:div#text "Popup test"]]
+
        (when (:episodes @state)
          [:div#episodes
           [:div.container
            [:ul [:li [:h2 "Episodes"]]]
 
            [:div.scrollable-vertical.scrollable-sm
-            [:ul (map episode-component (:episodes @state))]]]])
-
-
+            [:ul (episodes (:episodes @state))]]]])
 
        [:div.container
         [:div#work

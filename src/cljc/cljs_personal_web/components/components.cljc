@@ -30,7 +30,7 @@
           link (g url)]
       [:div.podcast-episode
        [:h1 title]
-       [:p {:on-click (fn [_] #?(:cljs (fn [_] (js/alert (str "Playing: " link)))))} (str "Play")]
+       [:p "Play"]
        [:p (html/string->hiccup description)]])))
 
 (def episodes
@@ -40,8 +40,15 @@
      [:div.item
       [:ul
        (for [i xml-data]
-         (let [{:keys [title description link]} i
-               title (g title)]
+         (let [{:keys [title description enclosure guid]} i
+               guid (g guid)
+               title (g title)
+               link (:attrs enclosure)]
+           ^{:key guid}
            [:li
-            [:a {:href     link
-                 :on-click #(click-function link)} title]]))]])))
+            [:p {:class    "new"
+                 :style    {:font-size ".7em"}
+                 :href     link
+                 :on-click #(click-function link)}
+             "▶"]
+            [:a title]]))]])))

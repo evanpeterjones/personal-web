@@ -54,7 +54,7 @@
       [haiku]]]))
 
 (def home-page
-  (fn []
+  (fn [_]
     (let [work-links [{:href "https://linkedin.com/in/evanpeterjones" :name "LinkedIn"}
                       {:href "http://www.github.com/evanpeterjones" :name "GitHub"}
                       {:href (path-for :podcasts) :name "~fun things~" :label "new"}]
@@ -69,8 +69,8 @@
          [links "right" "border-blue" play-links]]]])))
 
 (def podcasts
-  (fn []
-    [form]))
+  (fn [ln]
+    [form ln]))
 
 (def footer
   (fn [playing]
@@ -94,12 +94,15 @@
     (let [page (:current-page (session/get :route))
           link (atom (str "https://traffic.libsyn.com/secure/encountersthepodcast/"
                           "402_-_Urban_Legend_Profiles_-_Satanic_Panic_Final.mp3?"
-                          "dest-id=748833"))]
+                          "dest-id=748833"))
+          update-player-link-fn (fn [l]
+                             (js/console.log (str "CLICKED UPDATE WITH LINK: " l))
+                             (reset! link l))]
       [:div {:style {:max-width "1000"}}
        [:header.header
         (when (= page #'podcasts)
           [:p [:a {:href (path-for :index) :style {:font-size "2em"}} "\uD83C\uDFE0"]])]
-       [page]
+       [page update-player-link-fn]
        [player @link]
        [footer @link]])))
 

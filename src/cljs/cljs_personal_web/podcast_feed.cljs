@@ -14,7 +14,7 @@
         ;(when o (set! o v))
         ))))
 
-(def form
+(def podcasts
   (let [state (r/atom {:add-podcast nil
                        :episodes nil
                        :titles [{:link "http://encountersthepodcast.libsyn.com/rss"
@@ -23,34 +23,36 @@
                                 {:link "https://randomhorror9.libsyn.com/rss"
                                  :img "https://images.squarespace-cdn.com/content/v1/56660bf257eb8dd25948eabe/1597079501461-38B57Q2B9NN68NPZT3D6/ke17ZwdGBToddI8pDm48kNiEM88mrzHRsd1mQ3bxVct7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0topjEaZcWjtmMYdCWL4dkGbxs35J-ZjFa9s1e3LsxrX8g4qcOj2k2AL08mW_Htcgg/Antler+Skull+-+No9+WHITE.png?format=1000w"
                                  :name "Random Number Generator Horror Podcast No.9"}]})]
-    (fn []
-      [:div
+    (fn
+      ([] (form (fn [_] (js/console.log "NO AUDIO SET FUNCTION PROVIDED"))))
+      ([set-audio-link-function]
        [:div
-        {:id "overlay"
-         :on-click (overlay "none")}
-        [:div#text "Popup test"]]
+        [:div
+         {:id "overlay"
+          :on-click (overlay "none")}
+         [:div#text "Popup test"]]
 
-       (when (:episodes @state)
-         [:div#episodes
-          [:div.container
-           [:ul [:li [:h2 "Episodes"]]]
+        (when (:episodes @state)
+          [:div#episodes
+           [:div.container
+            [:ul [:li [:h2 "Episodes"]]]
 
-           [:div.scrollable-vertical.scrollable-sm
-            [:ul (episodes (:episodes @state))]]]])
+            [:div.scrollable-vertical.scrollable-sm
+             [:ul (episodes (:episodes @state) set-audio-link-function)]]]])
 
-       [:div.container
-        [:div#work
-         [:div
-          ;[:p {:class "new" :style {:font-size "1.5em"}} "+"]
-          [:br]
-          [:h2 "Podcasts"]
-          [:br]]
+        [:div.container
+         [:div#work
+          [:div
+           ;[:p {:class "new" :style {:font-size "1.5em"}} "+"]
+           [:br]
+           [:h2 "Podcasts"]
+           [:br]]
 
-         [:div#podcasts.scrollmenu
-            (for [li-link (:titles @state)]
-              ^{:key li-link}
-              [:img
-               (into
+          [:div#podcasts.scrollmenu
+           (for [li-link (:titles @state)]
+             ^{:key li-link}
+             [:img
+              (into
                 {:src (:img li-link)
                  :alt (:alt li-link)}
                 (when (:link li-link)
@@ -58,7 +60,7 @@
                                (swap! state assoc :add-podcast (:link li-link))
                                (db/get-feed! (:link li-link) state))}))])]
 
-         [links "left" "border-blue" (:titles @state) (fn [x]
-                                                        (js/console.log x)
-                                                        (swap! state assoc :add-podcast x)
-                                                        (db/get-feed! x state))]]]])))
+          [links "left" "border-blue" (:titles @state) (fn [x]
+                                                         (js/console.log x)
+                                                         (swap! state assoc :add-podcast x)
+                                                         (db/get-feed! x state))]]]]))))

@@ -12,7 +12,7 @@
     (fn [{:keys [url type length] :as link}]
       (when link
         [:div.player
-         [:button.pause {:on-click toggle-play} "Pause/Play"]
+         [:button.pause {:on-click toggle-play} "▶"]
          [:audio#player {:controls " " :preload "auto"}
           [:source {:src url :type type}]
           "Your browser does not support playing this type of audio file."]]))))

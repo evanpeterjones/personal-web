@@ -2,7 +2,7 @@
   (:require
    [cljs-personal-web.draw :refer [draw-circle]]
    [cljs-personal-web.world-map :refer [test-func]]
-   [cljs-personal-web.podcast-feed :refer [form]]
+   [cljs-personal-web.podcast-feed :refer [podcasts]]
    [cljs-personal-web.components.links :refer [links]]
    [cljs-personal-web.components.audio-player :refer [player]]
    [reagent.core :as reagent :refer [atom]]
@@ -68,10 +68,6 @@
          [links "left" "border-red" work-links]
          [links "right" "border-blue" play-links]]]])))
 
-(def podcasts
-  (fn [ln]
-    [form ln]))
-
 (def footer
   (fn [playing]
     [:footer {:style {:class (if playing "player-active" "player-inactive")}}
@@ -92,12 +88,12 @@
 (defn current-page []
   (fn []
     (let [page (:current-page (session/get :route))
-          link (atom (str "https://traffic.libsyn.com/secure/encountersthepodcast/"
-                          "402_-_Urban_Legend_Profiles_-_Satanic_Panic_Final.mp3?"
-                          "dest-id=748833"))
-          update-player-link-fn (fn [l]
-                             (js/console.log (str "CLICKED UPDATE WITH LINK: " l))
-                             (reset! link l))]
+          link (atom {:url ""})
+          update-player-link-fn (fn [{:keys [url type length]}]
+                                  (let [audio (-> js/document (.getElementById "player"))]
+                                    (set! (.-src audio) url)
+                                    (.load audio)
+                                    (reset! link url)))]
       [:div {:style {:max-width "1000"}}
        [:header.header
         (when (= page #'podcasts)

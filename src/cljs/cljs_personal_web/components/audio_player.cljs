@@ -9,10 +9,10 @@
                         (if (.-paused p)
                           (.play p)
                           (.pause p))))]
-    (fn [link]
+    (fn [{:keys [url type length] :as link}]
       (when link
         [:div.player
          [:button.pause {:on-click toggle-play} "Pause/Play"]
          [:audio#player {:controls " " :preload "auto"}
-          [:source {:src link :type "audio/mpeg"}]
+          [:source {:src url :type type}]
           "Your browser does not support playing this type of audio file."]]))))

@@ -45,10 +45,11 @@
                title (g title)
                link (:attrs enclosure)]
            ^{:key guid}
-           [:li
+           [:li {:href     link
+                 :on-click #(click-function link)
+                 :style {:display "table"}}
             [:p {:class    "new"
-                 :style    {:font-size ".7em"}
-                 :href     link
-                 :on-click #(click-function link)}
-             "▶"]
-            [:a title]]))]])))
+                 :style    {:display "table-cell"
+                            :font-size ".7em"}} "▶"]
+            [:a {:style    {:display "table-cell"
+                            :padding-left "10px"}} title]]))]])))

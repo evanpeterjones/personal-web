@@ -9,10 +9,9 @@
 (def overlay
   (fn [v]
     (fn []
-      (let [o (.-display (.-style (.getElementById js/document "overlay")))]
-        (js/console.log o)
-        ;(when o (set! o v))
-        ))))
+      (set! (.-display (.-style (.getElementById js/document "overlay"))) v))))
+
+(def is-url? (fn [url] url))
 
 (def podcasts
   (let [state (r/atom {:add-podcast nil
@@ -34,9 +33,16 @@
       ([set-audio-link-function]
        [:div
         [:div
-         {:id "overlay"
-          :on-click (overlay "none")}
-         [:div#text "Popup test"]]
+         {:id "overlay"}
+         [:div#text "Enter an RSS Feed"]
+         [:form
+          [:label {:for "url"}][:br][:input {:type "text" :id "URL"}]
+          [:input {:type "button"
+                   :text "+"
+                   :on-click #(let [close (overlay "none")
+                                    url (.-value (.getElementById js/document "URL"))]
+                                (when (is-url? url) (db/get-feed! url state))
+                                (close))}]]]
 
         (when (:episodes @state)
           [:div#episodes
@@ -51,8 +57,10 @@
           [:div
            ;[:p {:class "new" :style {:font-size "1.5em"}} "+"]
            [:br]
-           [:h2 "Podcasts"]
-           [:br]]
+           [:div {:style {:display "table"}}
+            [:h2 {:style {:display "table-cell"}} "Podcasts"]
+            [:h2 {:style {:display "table-cell"}
+                  :on-click (overlay "block")} " +"]]]
 
           [:div#podcasts.scrollmenu
            (for [li-link (:titles @state)]

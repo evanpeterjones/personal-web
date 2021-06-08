@@ -39,16 +39,17 @@
     [:div#hero
      [:div.haiku-profile
       [:div.haiku
-       [:h1 "Hello, " [:br] "I'm Evan."]
-       [:p "Creator of this site"]
-       [:p "and other ~fun things~"]]]]))
+       [:h1 "Hey, " [:br] "I'm Evan."]
+       ;[:p "Creator of this site"]
+       ;[:p "and other ~fun things~"]
+       ]]]))
 
 (def image
   (fn []
     [:div#hero
      [:div.container
       [:div.profile
-       [:a {:href "https://en.wikipedia.org/wiki/Special:Random"}
+       [:a {:href (path-for :podcasts)}
         [:img {:src "evan.png"
                :alt "Photo taken by Shandon Anderson"}]]]
       [haiku]]]))
@@ -57,7 +58,8 @@
   (fn [_]
     (let [work-links [{:href "https://linkedin.com/in/evanpeterjones" :name "LinkedIn"}
                       {:href "http://www.github.com/evanpeterjones" :name "GitHub"}
-                      {:href (path-for :podcasts) :name "~fun things~" :label "new"}]
+                      ;{:href (path-for :podcasts) :name "~fun things~" :label "new"}
+                      ]
           play-links [{:href "https://twitter.com/evanpeterjones" :name "Twitter"}
                       {:href "https://instagram.com/evanpeterjones" :name "Instagram"}
                       {:href "https://internetizens.net" :name "Yapp"}]]
@@ -85,22 +87,25 @@
 ;; -------------------------
 ;; Page mounting component
 
+(defonce player-data (atom nil))
+
+(def update-player-link-fn
+  (fn [{:keys [url type length] :as link}]
+    (reset! player-data link)
+    (let [audio (-> js/document (.getElementById "player"))]
+      (set! (.-src audio) url)
+      (.load audio))))
+
 (defn current-page []
   (fn []
-    (let [page (:current-page (session/get :route))
-          link (atom {:url ""})
-          update-player-link-fn (fn [{:keys [url type length]}]
-                                  (let [audio (-> js/document (.getElementById "player"))]
-                                    (set! (.-src audio) url)
-                                    (.load audio)
-                                    (reset! link url)))]
+    (let [page (:current-page (session/get :route))]
       [:div {:style {:max-width "1000"}}
        [:header.header
         (when (= page #'podcasts)
           [:p [:a {:href (path-for :index) :style {:font-size "2em"}} "\uD83C\uDFE0"]])]
        [page update-player-link-fn]
-       [player @link]
-       [footer @link]])))
+       [player @player-data]
+       [footer @player-data]])))
 
 ;; -------------------------
 ;; Initialize app

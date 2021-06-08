@@ -15,7 +15,8 @@
 (defn get-feed! [url state]
   (GET "/getRssData" {:params  {:url url}
                       :handler #(let [res (t/transit-read %)]
-                                  (js/console.log res)
-                                  (swap! state conj (:titles @state) {:link "asdf"
-                                                                      :name "test"})
+                                  (js/console.log %)
+                                  (comment  (swap! state assoc :titles (conj (:titles @assoc) {:link "asdf"
+                                                                                               :img "https://cdn-profiles.tunein.com/p1174861/images/logoq.png?t=1"
+                                                                                               :name "test"})))
                                   (swap! state assoc :episodes (map xml/convert-items res)))}))

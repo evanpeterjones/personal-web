@@ -13,6 +13,12 @@
 
 (def is-url? (fn [url] url))
 
+(def scroller
+  (fn [text width]
+    (let [p (apply str (repeat width " "))
+          t (str p text p)]
+      (map #(subs t % (+ % width)) (range (+ 1 (count text) width))))))
+
 (def podcasts
   (let [state (r/atom {:add-podcast nil
                        :episodes nil
@@ -27,7 +33,8 @@
                                            "YroOW3ZGjoBKy3azqku80C789l0topjEaZcWjtmMYdCWL4dkGbxs35J-ZjFa9"
                                            "s1e3LsxrX8g4qcOj2k2AL08mW_Htcgg/Antler+Skull+-+No9+WHITE.png?"
                                            "format=1000w")
-                                 :name "Random Number Generator Horror Podcast No.9"}]})]
+                                 :name "Random Number Generator Horror Podcast No.9"}]})
+        current-podcast-view "Episodes"]
     (fn
       ([] (podcasts (fn [_] (js/console.log "NO AUDIO SET FUNCTION PROVIDED"))))
       ([set-audio-link-function]
@@ -38,7 +45,6 @@
          [:form
           [:label {:for "url"}][:br][:input {:type "text" :id "URL"}]
           [:input {:type "button"
-                   :text "+"
                    :on-click #(let [close (overlay "none")
                                     url (.-value (.getElementById js/document "URL"))]
                                 (when (is-url? url) (db/get-feed! url state))
@@ -47,7 +53,7 @@
         (when (:episodes @state)
           [:div#episodes
            [:div.container
-            [:ul [:li [:h2 "Episodes"]]]
+            [:ul [:li [:h2 current-podcast-view]]]
 
             [:div.scrollable-vertical.scrollable-sm
              [:ul (episodes (:episodes @state) set-audio-link-function)]]]])
@@ -59,7 +65,7 @@
            [:br]
            [:div {:style {:display "table"}}
             [:h2 {:style {:display "table-cell"}} "Podcasts"]
-            [:h2 {:style {:display "table-cell"}
+            [:h2 {:style    {:display "table-cell"}
                   :on-click (overlay "block")} " +"]]]
 
           [:div#podcasts.scrollmenu

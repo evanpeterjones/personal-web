@@ -41,7 +41,7 @@
        [:div
         [:div
          {:id "overlay"}
-         [:div#text "Enter an RSS Feed"]
+         [:div#text [:p "Enter an RSS Feed"]]
          [:form
           [:label {:for "url"}][:br][:input {:type "text" :id "URL"}]
           [:input {:type "button"

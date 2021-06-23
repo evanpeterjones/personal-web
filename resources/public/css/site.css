@@ -214,12 +214,10 @@ body {
 }
 
 #work .left {
-    width: 30%;
     float: left;
 }
 
 #work .right {
-    width: 30%;
     float: left;
     margin: 0 0 0 10%;
 }
@@ -305,6 +303,13 @@ footer p{
 
 
 @media screen and (max-width: 950px) {
+#episodes .container {
+width: 95%;
+}
+#episodes #div {
+width: 95%;
+}
+
     #work .left {
         padding-top: 20px;
         float: none;
@@ -317,13 +322,12 @@ footer p{
     }
 
     #hero p {
-        margin: 2px 0 0 0;
+        margin: 0 0 0 0;
         line-height: 30px;
         white-space: nowrap;
         overflow: visible;
     }
     #hero h1 {
-
         line-height: 60px;
     }
     #hero .profile {

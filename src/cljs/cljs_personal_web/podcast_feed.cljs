@@ -61,7 +61,6 @@
         [:div.container
          [:div#work
           [:div
-           ;[:p {:class "new" :style {:font-size "1.5em"}} "+"]
            [:br]
            [:div {:style {:display "table"}}
             [:h2 {:style {:display "table-cell"}} "Podcasts"]
@@ -78,9 +77,4 @@
                 (when (:link li-link)
                   {:on-click (fn [_]
                                (swap! state assoc :add-podcast (:link li-link))
-                               (db/get-feed! (:link li-link) state))}))])]
-
-          [links "left" "border-blue" (:titles @state) (fn [x]
-                                                         (js/console.log x)
-                                                         (swap! state assoc :add-podcast x)
-                                                         (db/get-feed! x state))]]]]))))
+                               (db/get-feed! (:link li-link) state))}))])]]]]))))

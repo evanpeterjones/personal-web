@@ -1,5 +1,5 @@
 (ns cljs-personal-web.handler
-  (:require [rss :refer [get-data-from-url]]
+  (:require [rss :refer [get-rss-data-from-url]]
             [reitit.ring :as r]
             [cljs-personal-web.middleware :refer [middleware]]
             [cljs-personal-web.pages.html :refer [loading-page]]
@@ -31,7 +31,7 @@
     (pp/pprint (str "Requesting data for: " url))
     (when url
       (->> url
-           get-data-from-url
+           get-rss-data-from-url
            transit/transit-write))))
 
 (def pod-render-page

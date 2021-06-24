@@ -10,7 +10,7 @@
 (defn req [u]
   (req/get u))
 
-(defn -get-rss-data-from-url [u]
+(defn get-rss-data-from-url [u]
   (-> u req :body parse-xml))
 
 (def items
@@ -27,9 +27,9 @@
 
 (defn get-data-from-url [url]
   (-> url
-      -get-rss-data-from-url
+      get-rss-data-from-url
       -get-rss-items))
 
 (def url "http://encountersthepodcast.libsyn.com/rss")
-(def res (-get-rss-data-from-url url))
+(def res (get-rss-data-from-url url))
 (def r (-get-rss-items res))

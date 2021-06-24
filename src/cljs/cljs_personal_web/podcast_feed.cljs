@@ -18,10 +18,10 @@
   (let [data {:add-podcast nil
               :episodes nil
               :titles [{:link "http://encountersthepodcast.libsyn.com/rss"
-                        :img "https://cdn-profiles.tunein.com/p1174861/images/logoq.png?t=1"
+                        :img  "https://cdn-profiles.tunein.com/p1174861/images/logoq.png?t=1"
                         :name "Encounters Pod"}
                        {:link "https://randomhorror9.libsyn.com/rss"
-                        :img "https://images.squarespace-cdn.com/content/v1/56660bf257eb8dd25948eabe/1597079501461-38B57Q2B9NN68NPZT3D6/ke17ZwdGBToddI8pDm48kNiEM88mrzHRsd1mQ3bxVct7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0topjEaZcWjtmMYdCWL4dkGbxs35J-ZjFa9s1e3LsxrX8g4qcOj2k2AL08mW_Htcgg/Antler+Skull+-+No9+WHITE.png?format=1000w"
+                        :img  "https://images.squarespace-cdn.com/content/v1/56660bf257eb8dd25948eabe/1597079501461-38B57Q2B9NN68NPZT3D6/ke17ZwdGBToddI8pDm48kNiEM88mrzHRsd1mQ3bxVct7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0topjEaZcWjtmMYdCWL4dkGbxs35J-ZjFa9s1e3LsxrX8g4qcOj2k2AL08mW_Htcgg/Antler+Skull+-+No9+WHITE.png?format=1000w"
                         :name "Random Number Generator Horror Podcast No.9"}]}
         state (local-storage (r/atom data) :podcasts)
         current-podcast-view "Episodes"]

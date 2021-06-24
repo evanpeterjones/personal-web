@@ -112,9 +112,19 @@
   (fn [x r]
     (:content (filter #(= x (:item %)) r))))
 
+(def find
+  (fn [k data]
+    (loop [d (first data)]
+      (if (= (:tag d) k)
+        (:content d)
+        (recur (rest data))))))
+
 (def get-title-from-result
   (fn [r]
-    {:link (get-key :link r)
-     :name (get-key :title r)}))
+    {:link (find :link r)
+     :img  (find :img r)
+     :name (find :title r)}))
+
+
 
 

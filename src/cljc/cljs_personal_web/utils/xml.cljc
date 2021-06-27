@@ -124,7 +124,3 @@
     {:link (find :link r)
      :img  (find :img r)
      :name (find :title r)}))
-
-
-
-

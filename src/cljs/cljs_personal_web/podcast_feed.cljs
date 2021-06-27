@@ -59,16 +59,14 @@
 
           [:div#podcasts.scrollmenu
            (for [li-link (:titles @state)]
+             ^{:key title}
              (let [{:keys [link itunes:image title]} li-link
                    link (-> link :content first)
                    image (-> itunes:image :attrs :href)
                    title (-> title :content first)]
-               ^{:key li-link}
                [:img
-                (into
-                  {:src image
-                   :alt title}
-                  (when link
-                    {:on-click (fn [_]
-                                 (swap! state assoc :add-podcast (:link li-link))
-                                 (db/get-feed! (:link li-link) state))}))]))]]]]))))
+                (into {:src image :alt title}
+                      (when link
+                        {:on-click (fn [_]
+                                     (swap! state assoc :add-podcast (:link li-link))
+                                     (db/get-feed! (:link li-link) state))}))]))]]]]))))

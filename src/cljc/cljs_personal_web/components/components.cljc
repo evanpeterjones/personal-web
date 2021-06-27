@@ -20,18 +20,29 @@
          :cljs [:a {:href link
                     :on-click c-fn} (-> title :content)])])))
 
+;; really should remove this, this is dumb, just throw this in the xml ns
 (def g (fn [i] (let [j (:content i)] (if (vector? j) (first j) i))))
 
 (def episode
-  (fn [episode-data]
-    (let [{:keys [title description url]} episode-data
+  (fn [episode-data click-function]
+    (let [{:keys [title description enclosure guid]} episode-data
           title (g title)
-          description (g description)
-          link (g url)]
-      [:div.podcast-episode
-       [:h1 title]
-       [:p "Play"]
-       [:p (html/string->hiccup description)]])))
+          link (:attrs enclosure)]
+      (:guid episode-data)
+      (comment
+        "this is busted as hell and I'm sure it has to do with
+        the data I'm formatting I just don't know exactly how to fix it yet. Will do it later, lol"
+
+        [:li {:href     link
+              :on-click #(click-function link)
+              :style    {:display "table"}}
+         [:p {:class "new"
+              :style {:display   "table-cell"
+                      :font-size ".7em"}} "▶"]
+         [:a {:style {:display      "table-cell"
+                      :padding-left "10px"}} title]
+         ;[:p (html/string->hiccup description)]
+         ]))))
 
 (def episodes
   (fn
@@ -39,17 +50,8 @@
     ([xml-data click-function]
      [:div.item
       [:ul
-       (for [i xml-data]
-         (let [{:keys [title description enclosure guid]} i
-               guid (g guid)
-               title (g title)
-               link (:attrs enclosure)]
-           ^{:key guid}
-           [:li {:href     link
-                 :on-click #(click-function link)
-                 :style {:display "table"}}
-            [:p {:class    "new"
-                 :style    {:display "table-cell"
-                            :font-size ".7em"}} "▶"]
-            [:a {:style    {:display "table-cell"
-                            :padding-left "10px"}} title]]))]])))
+       (for [i xml-data
+             :let [episode-data (xml/convert-items i)]]
+         ^{:key (:guid episode-data)}                       ;(episode episode-data click-function)
+         (:guid episode-data)
+         )]])))

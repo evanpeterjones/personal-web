@@ -13,6 +13,7 @@
       (set! (.-display (.-style (.getElementById js/document "overlay"))) v))))
 
 (def is-url? (fn [url] url))
+(def url "http://encountersthepodcast.libsyn.com/rss")
 
 (def podcasts
   (let [data {:add-podcast nil
@@ -43,10 +44,12 @@
         (when (:episodes @state)
           [:div#episodes
            [:div.container
-            [:ul [:li [:h2 current-podcast-view]]]
+            [:ul
+             [:li [:p (str (nth (-> @state :episodes :item :content) 5))]]
+             [:li [:h2 current-podcast-view]]]
 
             [:div.scrollable-vertical.scrollable-sm
-             [:ul (episodes (:episodes @state) set-audio-link-function)]]]])
+             [:ul (episodes @state set-audio-link-function)]]]])
 
         [:div.container
          [:div#work

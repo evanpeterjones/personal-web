@@ -28,30 +28,23 @@
     (let [{:keys [title description enclosure guid]} episode-data
           title (g title)
           link (:attrs enclosure)]
-      (:guid episode-data)
-      (comment
-        "this is busted as hell and I'm sure it has to do with
-        the data I'm formatting I just don't know exactly how to fix it yet. Will do it later, lol"
-
-        [:li {:href     link
-              :on-click #(click-function link)
-              :style    {:display "table"}}
-         [:p {:class "new"
-              :style {:display   "table-cell"
-                      :font-size ".7em"}} "▶"]
-         [:a {:style {:display      "table-cell"
-                      :padding-left "10px"}} title]
-         ;[:p (html/string->hiccup description)]
-         ]))))
+      ;(:guid episode-data)
+      [:li {:href     link
+            :on-click #(click-function link)
+            :style    {:display "table"}}
+       [:p {:class "new"
+            :style {:display   "table-cell"
+                    :font-size ".7em"}} "▶"]
+       [:a {:style {:display      "table-cell"
+                    :padding-left "10px"}} title]
+       ;[:p (html/string->hiccup description)]
+       ])))
 
 (def episodes
   (fn
     ([xd] (episodes xd (fn [url] #?(:cljs (js/alert (str "NO CLICK FUNCTION CONFIGURED to handle url: " url))))))
-    ([xml-data click-function]
+    ([{:keys [eps]} click-function]
      [:div.item
       [:ul
-       (for [i xml-data
-             :let [episode-data (xml/convert-items i)]]
-         ^{:key (:guid episode-data)}                       ;(episode episode-data click-function)
-         (:guid episode-data)
-         )]])))
+       (for [ep eps]
+         ^{:key (:guid ep)} (episode ep))]])))

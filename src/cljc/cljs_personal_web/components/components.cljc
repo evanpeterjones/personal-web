@@ -43,5 +43,5 @@
     ([{:keys [episodes]} click-function]
      [:div.item
       [:ul
-       (for [ep episodes]
-         ^{:key ep} (episode ep click-function))]])))
+       (for [[i ep] (map-indexed vector episodes)]
+         ^{:key i} (episode ep click-function))]])))

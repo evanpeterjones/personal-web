@@ -73,6 +73,7 @@
 (def footer
   (fn [playing]
     [:footer {:style {:class (if playing "player-active" "player-inactive")}}
+     (when player [player playing])
      [:p (str "© " (.getFullYear (new js/Date)))
       [:b " by Evan Jones w/ClojureScript"]]]))
 
@@ -104,7 +105,6 @@
         (when (= page #'podcasts)
           [:p [:a {:href (path-for :index) :style {:font-size "2em"}} "\uD83C\uDFE0"]])]
        [page update-player-link-fn]
-       [player @player-data]
        [footer @player-data]])))
 
 ;; -------------------------

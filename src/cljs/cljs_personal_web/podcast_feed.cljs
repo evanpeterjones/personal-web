@@ -71,5 +71,6 @@
                 (into {:src image :alt title}
                       (when link
                         {:on-click (fn [_]
-                                     (swap! state assoc :add-podcast (:link li-link))
-                                     (db/get-feed! (:link li-link) state))}))]))]]]]))))
+                                     (js/console.log (str "Getting: " link))
+                                     (swap! state assoc :add-podcast link)
+                                     (db/get-feed! link state))}))]))]]]]))))

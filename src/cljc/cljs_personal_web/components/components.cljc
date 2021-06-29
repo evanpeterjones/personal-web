@@ -28,7 +28,6 @@
     (let [{:keys [title description enclosure guid]} episode-data
           title (g title)
           link (:attrs enclosure)]
-      ;(:guid episode-data)
       [:li {:href     link
             :on-click #(click-function link)
             :style    {:display "table"}}
@@ -36,15 +35,13 @@
             :style {:display   "table-cell"
                     :font-size ".7em"}} "▶"]
        [:a {:style {:display      "table-cell"
-                    :padding-left "10px"}} title]
-       ;[:p (html/string->hiccup description)]
-       ])))
+                    :padding-left "10px"}} title]])))
 
 (def episodes
   (fn
     ([xd] (episodes xd (fn [url] #?(:cljs (js/alert (str "NO CLICK FUNCTION CONFIGURED to handle url: " url))))))
-    ([{:keys [eps]} click-function]
+    ([{:keys [episodes]} click-function]
      [:div.item
       [:ul
-       (for [ep eps]
-         ^{:key (:guid ep)} (episode ep))]])))
+       (for [ep episodes]
+         ^{:key ep} (episode ep click-function))]])))

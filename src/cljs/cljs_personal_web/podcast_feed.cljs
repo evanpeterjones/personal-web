@@ -28,7 +28,8 @@
         state (local-storage (r/atom data) :podcasts)]
     (fn
       ([] (podcasts (fn [_] (js/console.log "NO AUDIO SET FUNCTION PROVIDED"))))
-      ([set-audio-link-function]
+      ([audio-function] (podcasts audio-function nil))
+      ([audio-function home-button]
        [:div
         [:div
          {:id "overlay"}
@@ -46,7 +47,7 @@
            [:div.container
             [:ul [:li [:h2 (:current-podcast @state)]]]
             [:div.scrollable-vertical.scrollable-sm
-             [:ul (episodes @state set-audio-link-function)]]]])
+             [:ul (episodes @state audio-function)]]]])
 
         [:div.container
          [:div#work
@@ -56,6 +57,8 @@
             [:h2 {:style {:display "table-cell"}} "Podcasts"]]]
 
           [:div
+           (when home-button [:button [:a {:href home-button} "home" ;"\uD83C\uDFE0"
+                                       ]])
            [:button {:on-click (overlay "block")} "add"]
            [:button {:on-click clear-local-storage!} "reset"]
            (when (:episodes @state)

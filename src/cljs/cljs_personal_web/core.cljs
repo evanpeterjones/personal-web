@@ -101,10 +101,7 @@
   (fn []
     (let [page (:current-page (session/get :route))]
       [:div {:style {:max-width "1000"}}
-       [:header.header
-        (when (= page #'podcasts)
-          [:p [:a {:href (path-for :index) :style {:font-size "2em"}} "\uD83C\uDFE0"]])]
-       [page update-player-link-fn]
+       [page update-player-link-fn (path-for :index)]
        [footer @player-data]])))
 
 ;; -------------------------

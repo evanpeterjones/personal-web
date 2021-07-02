@@ -19,10 +19,10 @@
   (let [data {:add-podcast     nil
               :episodes        nil
               :current-podcast "Episodes"
-              :titles          #{{:link         {:content ["http://encountersthepodcast.libsyn.com/rss"]}
+              :titles          #{{:atom:link    {:attrs {:href "http://encountersthepodcast.libsyn.com/rss"}}
                                   :itunes:image {:attrs {:href "https://cdn-profiles.tunein.com/p1174861/images/logoq.png?t=1"}}
                                   :title        {:content ["Encounters Pod"]}}
-                                 {:link         {:content ["https://randomhorror9.libsyn.com/rss"]}
+                                 {:atom:link    {:attrs {:href "https://randomhorror9.libsyn.com/rss"}}
                                   :itunes:image {:attrs {:href "https://images.squarespace-cdn.com/content/v1/56660bf257eb8dd25948eabe/1597079501461-38B57Q2B9NN68NPZT3D6/ke17ZwdGBToddI8pDm48kNiEM88mrzHRsd1mQ3bxVct7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0topjEaZcWjtmMYdCWL4dkGbxs35J-ZjFa9s1e3LsxrX8g4qcOj2k2AL08mW_Htcgg/Antler+Skull+-+No9+WHITE.png?format=1000w"}}
                                   :title        {:content ["Random Number Generator Horror Podcast No.9"]}}}}
         state (local-storage (r/atom data) :podcasts)]
@@ -48,21 +48,23 @@
             [:div.scrollable-vertical.scrollable-sm
              [:ul (episodes @state set-audio-link-function)]]]])
 
-        [:button {:on-click clear-local-storage!} "reset"]
-
         [:div.container
          [:div#work
           [:div
            [:br]
            [:div {:style {:display "table"}}
-            [:h2 {:style {:display "table-cell"}} "Podcasts"]
-            [:h2 {:style    {:display "table-cell"}
-                  :on-click (overlay "block")} " +"]]]
+            [:h2 {:style {:display "table-cell"}} "Podcasts"]]]
+
+          [:div
+           [:button {:on-click (overlay "block")} "add"]
+           [:button {:on-click clear-local-storage!} "reset"]
+           (when (:episodes @state)
+             [:button {:on-click #(swap! state dissoc :episodes)} "close"])]
 
           [:div#podcasts.scrollmenu
            (for [li-link (:titles @state)
-                 :let [{:keys [atom:link link itunes:image title]} li-link
-                       link (-> (if atom:link atom:link link) :content first)
+                 :let [{:keys [atom:link itunes:image title]} li-link
+                       link (-> atom:link :attrs :href)
                        image (-> itunes:image :attrs :href)
                        title (-> title :content first)]]
              ^{:key title} [:img

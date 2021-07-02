@@ -30,6 +30,6 @@
       get-rss-data-from-url
       -get-rss-items))
 
-(def url "http://encountersthepodcast.libsyn.com/rss")
-(def res (get-rss-data-from-url url))
-(def r (-get-rss-items res))
+;(def url "http://encountersthepodcast.libsyn.com/rss")
+;(def res (get-rss-data-from-url url))
+;(def r (-get-rss-items res))

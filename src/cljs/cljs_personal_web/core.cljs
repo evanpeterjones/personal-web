@@ -93,7 +93,7 @@
 (def update-player-link-fn
   (fn [{:keys [url type length] :as link}]
     (reset! player-data link)
-    (let [audio (-> js/document (.getElementById "player"))]
+    (let [audio (.getElementById js/document "player")]
       (set! (.-src audio) url)
       (.load audio))))
 

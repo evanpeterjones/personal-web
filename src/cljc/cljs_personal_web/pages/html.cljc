@@ -12,6 +12,7 @@
      [:meta {:name "viewport",
              :content "width=device-width, initial-scale=1"}]
      [:link {:rel "icon" :href "favicon.png"}]
+     [:link {:rel "manifest" :href "webmanifest.webmanifest"}]
      [:link {:href "https://fonts.googleapis.com/css?family=Work+Sans:300,400,600,700" :rel "stylesheet"}]
      #?(:clj (include-css "/css/site.css")
         :cljs [:link {:type "text/css",

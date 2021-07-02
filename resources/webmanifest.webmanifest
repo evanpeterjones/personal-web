@@ -1,0 +1,15 @@
+{
+  "background_color": "black",
+  "description": "Podcasts and my personal website, lmao, there's fucking nothing else",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "resources/public/favicon.png",
+      "sizes": "68x68",
+      "type": "image/png"
+    }
+  ],
+  "name": "podcasts",
+  "short_name": "pods",
+  "start_url": "/podcasts"
+}

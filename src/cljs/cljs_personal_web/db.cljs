@@ -8,12 +8,17 @@
   (GET "/login" {:params {:user user}
                  :handler #(swap! state assoc :username %)}))
 
+(def filter-titles
+  (fn [data]
+    (->> data (filter
+                #(contains? #{:link :itunes:image :title} (:tag %))))))
+
 (defn add-podcast! [url state]
   (GET "/getRssData" {:params {:url url}
                      :handler #(let [res (t/transit-read %)
                                      data (-> res :content first :content)
                                      ;; this can be more efficient if we did this in one sweep. I think we can do that
-                                     titles   (xml/convert-items (->> data (filter (fn [x] (not= (:tag x) :item)))))
+                                     titles   (xml/convert-items (->> data (filter (fn [x] (not= (:tag x) :item))) filter-titles))
                                      episodes (xml/convert-items (->> data (filter (fn [x] (=    (:tag x) :item)))))]
                                  (js/console.log titles)
                                  (swap! state assoc :titles (conj (:titles @state) titles))

@@ -19,12 +19,12 @@
   (let [data {:add-podcast     nil
               :episodes        nil
               :current-podcast "Episodes"
-              :titles          [{:link         {:content ["http://encountersthepodcast.libsyn.com/rss"]}
-                                 :itunes:image {:attrs {:href "https://cdn-profiles.tunein.com/p1174861/images/logoq.png?t=1"}}
-                                 :title        {:content ["Encounters Pod"]}}
-                                {:link         "https://randomhorror9.libsyn.com/rss"
-                                 :itunes:image {:attrs {:href "https://images.squarespace-cdn.com/content/v1/56660bf257eb8dd25948eabe/1597079501461-38B57Q2B9NN68NPZT3D6/ke17ZwdGBToddI8pDm48kNiEM88mrzHRsd1mQ3bxVct7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0topjEaZcWjtmMYdCWL4dkGbxs35J-ZjFa9s1e3LsxrX8g4qcOj2k2AL08mW_Htcgg/Antler+Skull+-+No9+WHITE.png?format=1000w"}}
-                                 :title        {:content ["Random Number Generator Horror Podcast No.9"]}}]}
+              :titles          #{{:link         {:content ["http://encountersthepodcast.libsyn.com/rss"]}
+                                  :itunes:image {:attrs {:href "https://cdn-profiles.tunein.com/p1174861/images/logoq.png?t=1"}}
+                                  :title        {:content ["Encounters Pod"]}}
+                                 {:link         {:content ["https://randomhorror9.libsyn.com/rss"]}
+                                  :itunes:image {:attrs {:href "https://images.squarespace-cdn.com/content/v1/56660bf257eb8dd25948eabe/1597079501461-38B57Q2B9NN68NPZT3D6/ke17ZwdGBToddI8pDm48kNiEM88mrzHRsd1mQ3bxVct7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0topjEaZcWjtmMYdCWL4dkGbxs35J-ZjFa9s1e3LsxrX8g4qcOj2k2AL08mW_Htcgg/Antler+Skull+-+No9+WHITE.png?format=1000w"}}
+                                  :title        {:content ["Random Number Generator Horror Podcast No.9"]}}}}
         state (local-storage (r/atom data) :podcasts)]
     (fn
       ([] (podcasts (fn [_] (js/console.log "NO AUDIO SET FUNCTION PROVIDED"))))

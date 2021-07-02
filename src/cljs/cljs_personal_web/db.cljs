@@ -18,10 +18,16 @@
                      :handler #(let [res (t/transit-read %)
                                      data (-> res :content first :content)
                                      ;; this can be more efficient if we did this in one sweep. I think we can do that
-                                     titles   (xml/convert-items (->> data (filter (fn [x] (not= (:tag x) :item))) filter-titles))
-                                     episodes (xml/convert-items (->> data (filter (fn [x] (=    (:tag x) :item)))))]
+                                     titles   (->> data
+                                                   filter-titles
+                                                   xml/convert-item
+                                                   (conj (:titles @state)))
+                                     episodes (->> data
+                                                   (filter (fn [x] (=    (:tag x) :item)))
+                                                   xml/convert-items)]
                                  (js/console.log titles)
-                                 (swap! state assoc :titles (conj (:titles @state) titles))
+                                 (swap! state assoc :data data)
+                                 (swap! state assoc :titles titles)
                                  (swap! state assoc :episodes episodes))}))
 
 (defn get-feed! [url state]

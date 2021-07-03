@@ -84,33 +84,32 @@ body {
     margin: 0 auto;
 }
 
+#podcasts {
+    bottom: 0;
+    width: 100%;
+
+    white-space:nowrap;
+}
+
 #podcasts .scrollmenu {
-    background-color: #333;
     overflow: auto;
-    white-space: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
     white-space: nowrap;
 }
 
 #podcasts img {
-    border-radius: 10%;
+    border-radius: 25%;
     transition: .1s ease;
     display: inline-block;
-    border-radius: 10px;
     color: white;
-    padding: 14px;
-    height: 40px;
-    width: 40px;
+    padding: 10px;
+    width: 20%;
     text-decoration: none;
 }
 
 #podcasts img:hover {
-    border-radius: 10%;
+    border-radius: 20%;
     cursor: pointer;
     transition: .3s ease;
-    height: 45px;
-    width: 45px;
 }
 
 #episodes h1{
@@ -366,14 +365,14 @@ width: 95%;
         z-index: -1;
     }
     footer{
-        bottom: 0;
-        width: 70%;
-        white-space:nowrap;
-        margin: 5vh 14% 0 0;
-        position: relative;
-        white-space:nowrap;
-        right: 0;
-    }
+            bottom: 0;
+            width: 70%;
+            white-space:nowrap;
+            margin: 5vh 14% 0 0;
+            position: relative;
+            white-space:nowrap;
+            right: 0;
+        }
     footer p{
         font-size: 0.9em;
         color: var(--grey);

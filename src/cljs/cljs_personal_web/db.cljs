@@ -11,7 +11,7 @@
 (def filter-titles
   (fn [data]
     (->> data (filter
-                #(contains? #{:atom:link :itunes:image :title} (:tag %))))))
+                #(contains? #{:atom:link :itunes:image :itunes:title :title :link} (:tag %))))))
 
 (defn add-podcast! [url state]
   (GET "/getRssData" {:params {:url url}

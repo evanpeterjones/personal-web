@@ -45,9 +45,10 @@
         (when (:episodes @state)
           [:div#episodes
            [:div.container
-            [:ul [:li [:h2 (:current-podcast @state)]]]
+            [:h1 (:current-podcast @state)]
+            ;[:ul [:li ]]
             [:div.scrollable-vertical.scrollable-sm
-             [:ul (episodes @state audio-function)]]]])
+             (episodes @state audio-function)]]])
 
         [:div.container
          [:div#work
@@ -66,14 +67,16 @@
 
           [:div#podcasts.scrollmenu
            (for [li-link (:titles @state)
-                 :let [{:keys [atom:link itunes:image itunes:title]} li-link
+                 :let [{:keys [atom:link itunes:image itunes:title title]} li-link
                        link (-> atom:link :attrs :href)
                        image (-> itunes:image :attrs :href)
-                       title (-> itunes:title :content first)]]
+                       title (-> (or title itunes:title) :content first)]]
              ^{:key title} [:img
                             (into {:src image :alt title}
                                   (when link
                                     {:on-click (fn [_]
                                                  (js/console.log (str "Getting: " link))
+                                                 (swap! state assoc :current-podcast title)
+                                                 (swap! state assoc :episodes nil)
                                                  (swap! state assoc :add-podcast link)
                                                  (db/get-feed! link state))}))])]]]]))))

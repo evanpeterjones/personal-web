@@ -67,8 +67,8 @@
 
           [:div#podcasts.scrollmenu
            (for [li-link (:titles @state)
-                 :let [{:keys [atom:link itunes:image itunes:title title]} li-link
-                       link (-> atom:link :attrs :href)
+                 :let [{:keys [atom:link link itunes:image itunes:title title]} li-link
+                       link (-> (or atom:link link) :attrs :href)
                        image (-> itunes:image :attrs :href)
                        title (-> (or title itunes:title) :content first)]]
              ^{:key title} [:img

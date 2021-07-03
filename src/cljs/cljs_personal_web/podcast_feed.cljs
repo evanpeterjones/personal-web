@@ -45,9 +45,10 @@
         (when (:episodes @state)
           [:div#episodes
            [:div.container
-            [:ul [:li [:h2 (:current-podcast @state)]]]
+            [:h1 (:current-podcast @state)]
+            ;[:ul [:li ]]
             [:div.scrollable-vertical.scrollable-sm
-             [:ul (episodes @state audio-function)]]]])
+             (episodes @state audio-function)]]])
 
         [:div.container
          [:div#work

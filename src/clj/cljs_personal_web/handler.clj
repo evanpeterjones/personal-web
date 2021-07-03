@@ -44,11 +44,12 @@
 
 ;;; testing server rendering code
 
-(def url "http://encountersthepodcast.libsyn.com/rss")
-(def get-data (h "data/json" get-rss))
-(def h-rss-data (let [r (get-data {:params {:url url}})]
-                  (fn [{{:keys [_]} :params}] r)))
-(def rdata (transit/transit-read (:body (h-rss-data {}))))
+(comment
+  (def url "http://encountersthepodcast.libsyn.com/rss")
+  (def get-data (h "data/json" get-rss))
+  (def h-rss-data (let [r (get-data {:params {:url url}})]
+                    (fn [{{:keys [_]} :params}] r)))
+  (def rdata (transit/transit-read (:body (h-rss-data {})))))
 
 ;;; end test server-rendering code
 

@@ -36,6 +36,9 @@ testem.log
 /typings
 figwheel_server.log
 .lein-env
+.nrepl-port
+.rebel_readline_history
+cljs-personal-web.iml
 
 # System Files
 .DS_Store

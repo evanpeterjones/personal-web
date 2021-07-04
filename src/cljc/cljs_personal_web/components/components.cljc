@@ -6,20 +6,6 @@
                       [cljs-personal-web.utils.xml :as xml]
                       [cljs-personal-web.utils.html :as html])]))
 
-(def episode-component
-  (fn
-    ([ep] (episode-component ep (fn [_] nil)))
-    ([{:keys [title link
-              itunes:summary
-              itunes:duration
-              itunes:subtitle
-              enclosure]}
-      c-fn]
-     [:li
-      #?(:clj [:a {:href (:content link)} (-> title :content first)]
-         :cljs [:a {:href link
-                    :on-click c-fn} (-> title :content)])])))
-
 ;; really should remove this, this is dumb, just throw this in the xml ns
 (def g (fn [i] (let [j (:content i)] (if (vector? j) (first j) i))))
 

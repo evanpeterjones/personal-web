@@ -1,5 +1,6 @@
 (ns cljs-personal-web.pages.html
-  #?(:clj (:require [hiccup.page :refer [include-js include-css html5]])))
+  #?(:clj (:require [hiccup.page :refer [include-js include-css html5]]
+                    [environ.core :refer [env]])))
 
 (def mount-target
   [:div#app])
@@ -14,9 +15,9 @@
      [:link {:rel "icon" :href "favicon.png"}]
      [:link {:rel "manifest" :href "webmanifest.webmanifest"}]
      [:link {:href "https://fonts.googleapis.com/css?family=Work+Sans:300,400,600,700" :rel "stylesheet"}]
-     #?(:clj (include-css "/css/site.css")
+     #?(:clj (include-css (if (env :dev) "/css/site.css" "/css/site.min.css"))
         :cljs [:link {:type "text/css",
-                      :href "/css/site.css",
+                      :href "/css/site.css"                 ;; this needs to dynamically pull minified in production
                       :rel  "stylesheet"}])]))
 
 (def loading-page

@@ -76,7 +76,7 @@
                                   (when link
                                     {:on-click (fn [_]
                                                  (js/console.log (str "Getting: " link))
+                                                 (swap! state dissoc :episodes)
                                                  (swap! state assoc :current-podcast title)
-                                                 (swap! state assoc :episodes nil)
                                                  (swap! state assoc :add-podcast link)
                                                  (db/get-feed! link state))}))])]]]]))))

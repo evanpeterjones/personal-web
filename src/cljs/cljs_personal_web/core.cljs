@@ -39,10 +39,7 @@
     [:div#hero
      [:div.haiku-profile
       [:div.haiku
-       [:h1 "Hey, " [:br] "I'm Evan."]
-       ;[:p "Creator of this site"]
-       ;[:p "and other ~fun things~"]
-       ]]]))
+       [:h1 "Hey, " [:br] "I'm Evan."]]]]))
 
 (def image
   (fn []
@@ -56,19 +53,16 @@
 
 (def home-page
   (fn [_]
-    (let [work-links [{:href "https://linkedin.com/in/evanpeterjones" :name "LinkedIn"}
-                      {:href "http://www.github.com/evanpeterjones" :name "GitHub"}
-                      ;{:href (path-for :podcasts) :name "~fun things~" :label "new"}
-                      ]
-          play-links [{:href "https://twitter.com/evanpeterjones" :name "Twitter"}
+    (let [link-data [{:href "http://www.github.com/evanpeterjones" :name "GitHub"}
+                      {:href "https://twitter.com/evanpeterjones" :name "Twitter"}
                       {:href "https://instagram.com/evanpeterjones" :name "Instagram"}
-                      {:href "https://internetizens.net" :name "Yapp"}]]
+                      {:href "https://internetizens.net" :name "Yapp"}
+                      {:href "https://linkedin.com/in/evanpeterjones" :name "LinkedIn"}
+                      {:href (path-for :podcasts) :name "~fun things~" :label "new"}]]
       [:div
        [image]
-       [:div#work
-        [:div.container
-         [links "left" "border-red" work-links]
-         [links "right" "border-blue" play-links]]]])))
+       [:div.container
+        [links link-data]]])))
 
 (def footer
   (fn [playing]

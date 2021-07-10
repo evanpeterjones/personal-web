@@ -13,16 +13,18 @@
   (fn
     ([xd] (episodes xd (fn [url] #?(:cljs (js/alert (str "NO CLICK FUNCTION CONFIGURED to handle url: " url))))))
     ([{:keys [episodes]} click-function]
-     [:div.item
-      [:ul
-       (for [[i episode-data] (map-indexed vector episodes)
-             :let [{:keys [title description enclosure guid]} episode-data
-                   title (g title)
-                   link (:attrs enclosure)]]
-         ^{:key i} [:li {:on-click #(click-function link)
-                         :style    {:display "table"}}
-                    [:p {:class "new"
-                         :style {:display   "table-cell"
-                                 :font-size ".7em"}} "▶"]
-                    [:a {:style {:display      "table-cell"
-                                 :padding-left "10px"}} title]])]])))
+     [:ul
+      (for [[i episode-data] (map-indexed vector episodes)
+            :let [{:keys [title description enclosure guid]} episode-data
+                  title (g title)
+                  description (g description)
+                  link (:attrs enclosure)]]
+        ^{:key i} [:li {:on-click #(click-function link)
+                        :style    {:display "table"}}
+                   [:p {:class "new"
+                        :style {:display   "table-cell"
+                                :font-size ".7em"}} (str "▶   " title)]
+                   [:a {:style {:display      "table-cell"
+                                :padding-left "10px"}} description]
+                   ;[:p #js{:dangerouslySetInnerHTML #js{:__html description}}]
+                   ])])))

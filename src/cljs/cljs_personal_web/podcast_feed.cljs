@@ -4,8 +4,8 @@
             [alandipert.storage-atom :refer [local-storage clear-local-storage!]]
             [cljs-personal-web.components.components :refer [episodes]]
             [cljs-personal-web.components.input :refer [input]]
-            [cljs-personal-web.components.links :refer [links]]))
-
+            [cljs-personal-web.components.links :refer [links]]
+            [cljs-personal-web.utils.xml :as xml]))
 
 (def overlay
   (fn [v]
@@ -18,7 +18,7 @@
 (def podcasts
   (let [data {:add-podcast     nil
               :episodes        nil
-              :current-podcast "Episodes"
+              :current-podcast {:title {:content ["Episodes"]}}
               :titles          #{{:atom:link    {:attrs {:href "http://encountersthepodcast.libsyn.com/rss"}}
                                   :itunes:image {:attrs {:href "https://cdn-profiles.tunein.com/p1174861/images/logoq.png?t=1"}}
                                   :title        {:content ["Encounters Pod"]}}
@@ -43,40 +43,45 @@
                                 (close))}]]]
 
         (when (:episodes @state)
-          [:div#episodes
-           [:div.container
-            [:h1 (:current-podcast @state)]
-            ;[:ul [:li ]]
-            [:div.scrollable-vertical.scrollable-sm
-             (episodes @state audio-function)]]])
+          [:div
+           [:div#hero
+            [:div.container
+             [:div.profile
+              [:a {:href ""}
+               [:img {:src (if (:current-podcast @state) (-> @state :current-podcast :itunes:image :attrs :href) "evan.png")
+                      :alt "Cover Art Resource Not Found"}]]]
+             [:div#episodes
+              [:div.scrollable-vertical.scrollable-sm
+               (episodes @state audio-function)]]]]])
 
         [:div.container
          [:div#work
-          [:div
-           [:br]
-           [:div {:style {:display "table"}}
-            [:h2 {:style {:display "table-cell"}} "Podcasts"]]]
-
-          [:div
+          [:div#podcasts
+           [:h2 {:style {:display "table-cell"}} "Podcasts"]
            (when home-button [:button [:a {:href home-button} "home" ;"\uD83C\uDFE0"
                                        ]])
            [:button {:on-click (overlay "block")} "add"]
            [:button {:on-click clear-local-storage!} "reset"]
            (when (:episodes @state)
-             [:button {:on-click #(swap! state dissoc :episodes)} "close"])]
+             [:button {:on-click #(swap! state dissoc :episodes)} "close"])
 
-          [:div#podcasts.scrollmenu
-           (for [li-link (:titles @state)
-                 :let [{:keys [atom:link link itunes:image itunes:title title]} li-link
-                       link (-> (or atom:link link) :attrs :href)
-                       image (-> itunes:image :attrs :href)
-                       title (-> (or title itunes:title) :content first)]]
-             ^{:key title} [:img
-                            (into {:src image :alt title}
-                                  (when link
-                                    {:on-click (fn [_]
-                                                 (js/console.log (str "Getting: " link))
-                                                 (swap! state dissoc :episodes)
-                                                 (swap! state assoc :current-podcast title)
-                                                 (swap! state assoc :add-podcast link)
-                                                 (db/get-feed! link state))}))])]]]]))))
+           [:div.scroll-horizontal
+            (for [li-link (:titles @state)
+                  :let [{:keys [atom:link link
+                                itunes:image image
+                                itunes:title title]} li-link
+                        link (-> (or atom:link link) :attrs :href)
+                        image (-> (if itunes:image
+                                    (-> itunes:image :attrs :href)
+                                    (-> image :content xml/convert-item :content first)))
+                        title (-> (or title itunes:title) :content first)]]
+              (do (js/console.log (str title ":\n" (-> li-link)))
+                  ^{:key title} [:img
+                                 (into {:src image :alt title}
+                                       (when link
+                                         {:on-click (fn [_]
+                                                      (js/console.log (str "Getting: " link))
+                                                      (swap! state dissoc :episodes)
+                                                      (swap! state assoc :current-podcast li-link)
+                                                      (swap! state assoc :add-podcast link)
+                                                      (db/get-feed! link state))}))]))]]]]]))))

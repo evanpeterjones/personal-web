@@ -2,12 +2,13 @@
 
 (def links
   (fn
+    ([link-list] (links link-list (fn [_])))
     ([link-list c-fn]
      [:ul
       (for [li-link link-list]
         ^{:key li-link}
         [:li
-         (when (:label li-link) [:p {:class "new" :style {:font-size ".7em"}} (:label li-link)])
+         (when (:label li-link) [:p {:class "new"} (:label li-link)])
          (when (:href li-link)
            [:a li-link (:name li-link)])
          (when (:link li-link)

@@ -21,9 +21,7 @@
                   link (:attrs enclosure)]]
         ^{:key i} [:li {:on-click #(click-function link)
                         :style    {:display "table"}}
-                   [:p {:class "new"
-                        :style {:display   "table-cell"
-                                :font-size ".7em"}} (str "▶   " title)]
+                   [:p.new.sm-width {:style {:display   "table-cell"}} (str "▶   " title)]
                    [:a {:style {:display      "table-cell"
                                 :padding-left "10px"}} description]
                    ;[:p #js{:dangerouslySetInnerHTML #js{:__html description}}]

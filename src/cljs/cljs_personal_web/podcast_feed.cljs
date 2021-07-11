@@ -51,21 +51,20 @@
                [:img {:src (if (:current-podcast @state) (-> @state :current-podcast :itunes:image :attrs :href) "evan.png")
                       :alt "Cover Art Resource Not Found"}]]]
              [:div#episodes
-              [:div.scrollable-vertical.scrollable-sm
+              [:div.scrollable-vertical.half-height
                (episodes @state audio-function)]]]]])
 
         [:div.container
          [:div#work
           [:div#podcasts
            [:h2 {:style {:display "table-cell"}} "Podcasts"]
-           (when home-button [:button [:a {:href home-button} "home" ;"\uD83C\uDFE0"
-                                       ]])
+           (when home-button [:button [:a {:href home-button} "home"]])
            [:button {:on-click (overlay "block")} "add"]
            [:button {:on-click clear-local-storage!} "reset"]
            (when (:episodes @state)
              [:button {:on-click #(swap! state dissoc :episodes)} "close"])
 
-           [:div.scroll-horizontal
+           [:div.scrollable-horizontal
             (for [li-link (:titles @state)
                   :let [{:keys [atom:link link
                                 itunes:image image
